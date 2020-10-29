@@ -6,25 +6,27 @@ import { usePostDataToFetchResult } from '../customHooks/usePostDataToFetchResul
 const DisplayFinalResult = () => {
 	const { finalData } = useContext(PlanetDetailsContext);
 	const [backendResponse, setBackendResponse] = useState({});
-    const [status, setStatus] = useState(false);
-    const [error, setError] = useState({});
-    const [displayMessage, setDisplayMessage] = useState("");
+	const [status, setStatus] = useState(false);
+	const [error, setError] = useState({});
+	const [displayMessage, setDisplayMessage] = useState('');
 
-	usePostDataToFetchResult(finalData,setBackendResponse, backendResponse,setError,error);
+	usePostDataToFetchResult(finalData, setBackendResponse, backendResponse, setError, error);
 
 	useEffect(() => {
 		if (Object.keys(backendResponse).length > 0) {
-            const { status, planet_name } = backendResponse;
-            status ? setDisplayMessage(`CONGRATULATIONS . YOU FOUND AL FALCONE ON ${planet_name.toUpperCase()}.`) :  setDisplayMessage('MISSION FAILED.. KEEP LOOKING FOR AL FALCONE')
+			const { status, planet_name } = backendResponse;
+			planet_name
+				? setDisplayMessage(`CONGRATULATIONS . YOU FOUND AL FALCONE ON ${planet_name.toUpperCase()}.`)
+				: setDisplayMessage('MISSION FAILED.. KEEP LOOKING FOR AL FALCONE');
 			setStatus(status);
 		} else if (Object.keys(error).length > 0) {
-            error.response.status===400 && setDisplayMessage(`START THE MISSION ALL OVER AGAIN...`)
-        }
-        return ()=>{
-            localStorage.clear()
-        }
-    }, [backendResponse,error]);
-    
+			error.response.status === 400 && setDisplayMessage(`START THE MISSION ALL OVER AGAIN...`);
+		}
+		return () => {
+			localStorage.clear();
+		};
+	}, [backendResponse, error]);
+
 	return (
 		<React.Fragment>
 			<SelectedPlanetWrapper>
