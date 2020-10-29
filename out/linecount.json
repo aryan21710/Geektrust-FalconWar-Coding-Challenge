@@ -1,0 +1,901 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "/Users/aryansharma/Desktop/CODING/MyProjects/Geektrust/falcon-war",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2020-10-20 23:39:16",
+            "filesum": 45,
+            "codesum": 15914,
+            "commentsum": 40,
+            "blanksum": 106,
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 18,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 15200,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 58,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 20,
+                    "comment": 23,
+                    "filename": "public/index.html"
+                },
+                {
+                    "filename": "public/logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public/logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "public/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "public/robots.txt"
+                },
+                {
+                    "blank": 31,
+                    "code": 37,
+                    "comment": 12,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/common/axiosHeader.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/common/constants.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/common/myenv.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/common/util.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/components/common/axiosHeader.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/components/common/ErrorBoundaryComp.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/components/common/Footer.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/components/common/Header.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "src/components/common/StarGrid.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 173,
+                    "comment": 0,
+                    "filename": "src/components/common/StyledComponent.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/components/index.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "src/components/LandingPage.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src/components/SelectBot.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/components/SelectPlanet.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/context/appContext.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "src/customHooks/useFetchDataFromBackend.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 9,
+                    "comment": 2,
+                    "filename": "src/index.js"
+                },
+                {
+                    "filename": "src/public/fonts/nasalization-free.regular.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/4.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/5.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/6.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/minijet.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/modiji.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/solar system.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/star 1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/star 2 .png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/star 3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/sun.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/xi jhi.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 8,
+                    "code": 53,
+                    "comment": 1,
+                    "filename": "src/routers/Approutes.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/routers/PrivateRoute.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 84,
+                    "comment": 0,
+                    "filename": "src/styles/base/index.css"
+                }
+            ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2020-10-20 23:39:39",
+            "filesum": 45,
+            "codesum": 15911,
+            "commentsum": 40,
+            "blanksum": 106,
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 18,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 15200,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 58,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 20,
+                    "comment": 23,
+                    "filename": "public/index.html"
+                },
+                {
+                    "filename": "public/logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public/logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "public/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "public/robots.txt"
+                },
+                {
+                    "blank": 31,
+                    "code": 37,
+                    "comment": 12,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/common/axiosHeader.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/common/constants.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/common/myenv.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/common/util.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/components/common/axiosHeader.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/components/common/ErrorBoundaryComp.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/components/common/Footer.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/components/common/Header.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src/components/common/StarGrid.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 173,
+                    "comment": 0,
+                    "filename": "src/components/common/StyledComponent.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/components/index.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "src/components/LandingPage.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src/components/SelectBot.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/components/SelectPlanet.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/context/appContext.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "src/customHooks/useFetchDataFromBackend.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 9,
+                    "comment": 2,
+                    "filename": "src/index.js"
+                },
+                {
+                    "filename": "src/public/fonts/nasalization-free.regular.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/4.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/5.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/6.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/minijet.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/modiji.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/solar system.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/star 1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/star 2 .png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/star 3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/sun.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/xi jhi.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 8,
+                    "code": 53,
+                    "comment": 1,
+                    "filename": "src/routers/Approutes.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/routers/PrivateRoute.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 84,
+                    "comment": 0,
+                    "filename": "src/styles/base/index.css"
+                }
+            ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2020-10-20 23:39:43",
+            "filesum": 45,
+            "codesum": 15911,
+            "commentsum": 40,
+            "blanksum": 106,
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 18,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 15200,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 58,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 20,
+                    "comment": 23,
+                    "filename": "public/index.html"
+                },
+                {
+                    "filename": "public/logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public/logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "public/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "public/robots.txt"
+                },
+                {
+                    "blank": 31,
+                    "code": 37,
+                    "comment": 12,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/common/axiosHeader.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/common/constants.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/common/myenv.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/common/util.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/components/common/axiosHeader.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/components/common/ErrorBoundaryComp.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/components/common/Footer.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/components/common/Header.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src/components/common/StarGrid.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 173,
+                    "comment": 0,
+                    "filename": "src/components/common/StyledComponent.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/components/index.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "src/components/LandingPage.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src/components/SelectBot.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/components/SelectPlanet.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/context/appContext.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "src/customHooks/useFetchDataFromBackend.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 9,
+                    "comment": 2,
+                    "filename": "src/index.js"
+                },
+                {
+                    "filename": "src/public/fonts/nasalization-free.regular.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/4.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/5.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/6.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/minijet.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/modiji.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/solar system.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/star 1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/star 2 .png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/star 3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/sun.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/public/images/xi jhi.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 8,
+                    "code": 53,
+                    "comment": 1,
+                    "filename": "src/routers/Approutes.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/routers/PrivateRoute.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 84,
+                    "comment": 0,
+                    "filename": "src/styles/base/index.css"
+                }
+            ]
+        }
+    ]
+}

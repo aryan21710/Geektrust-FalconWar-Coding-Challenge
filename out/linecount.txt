@@ -1,0 +1,171 @@
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2020-10-20 23:39:16
+count workspace : /Users/aryansharma/Desktop/CODING/MyProjects/Geektrust/falcon-war
+total files : 45
+total code lines : 15914
+total comment lines : 40
+total blank lines : 106
+
+.gitignore, code is 18, comment is 1, blank is 6.
+package-lock.json, code is 15200, comment is 0, blank is 0.
+package.json, code is 58, comment is 0, blank is 3.
+public/favicon.ico, it is a binary file.
+public/index.html, code is 20, comment is 23, blank is 0.
+public/logo192.png, it is a binary file.
+public/logo512.png, it is a binary file.
+public/manifest.json, code is 25, comment is 0, blank is 0.
+public/robots.txt, code is 3, comment is 1, blank is 0.
+README.md, code is 37, comment is 12, blank is 31.
+src/common/axiosHeader.js, code is 0, comment is 0, blank is 0.
+src/common/constants.js, code is 0, comment is 0, blank is 0.
+src/common/myenv.js, code is 4, comment is 0, blank is 0.
+src/common/util.js, code is 0, comment is 0, blank is 0.
+src/components/common/axiosHeader.js, code is 0, comment is 0, blank is 0.
+src/components/common/ErrorBoundaryComp.js, code is 0, comment is 0, blank is 0.
+src/components/common/Footer.js, code is 12, comment is 0, blank is 2.
+src/components/common/Header.js, code is 10, comment is 0, blank is 2.
+src/components/common/StarGrid.js, code is 37, comment is 0, blank is 7.
+src/components/common/StyledComponent.js, code is 173, comment is 0, blank is 14.
+src/components/index.js, code is 0, comment is 0, blank is 0.
+src/components/LandingPage.js, code is 68, comment is 0, blank is 7.
+src/components/SelectBot.js, code is 5, comment is 0, blank is 2.
+src/components/SelectPlanet.js, code is 40, comment is 0, blank is 4.
+src/context/appContext.js, code is 3, comment is 0, blank is 2.
+src/customHooks/useFetchDataFromBackend.js, code is 55, comment is 0, blank is 6.
+src/index.js, code is 9, comment is 2, blank is 4.
+src/public/fonts/nasalization-free.regular.ttf, it is a binary file.
+src/public/images/1.png, it is a binary file.
+src/public/images/2.png, it is a binary file.
+src/public/images/3.png, it is a binary file.
+src/public/images/4.png, it is a binary file.
+src/public/images/5.png, it is a binary file.
+src/public/images/6.png, it is a binary file.
+src/public/images/minijet.png, it is a binary file.
+src/public/images/modiji.png, it is a binary file.
+src/public/images/solar system.png, it is a binary file.
+src/public/images/star 1.png, it is a binary file.
+src/public/images/star 2 .png, it is a binary file.
+src/public/images/star 3.png, it is a binary file.
+src/public/images/sun.png, it is a binary file.
+src/public/images/xi jhi.png, it is a binary file.
+src/routers/Approutes.js, code is 53, comment is 1, blank is 8.
+src/routers/PrivateRoute.js, code is 0, comment is 0, blank is 0.
+src/styles/base/index.css, code is 84, comment is 0, blank is 8.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2020-10-20 23:39:39
+count workspace : /Users/aryansharma/Desktop/CODING/MyProjects/Geektrust/falcon-war
+total files : 45
+total code lines : 15911
+total comment lines : 40
+total blank lines : 106
+
+.gitignore, code is 18, comment is 1, blank is 6.
+package-lock.json, code is 15200, comment is 0, blank is 0.
+package.json, code is 58, comment is 0, blank is 3.
+public/favicon.ico, it is a binary file.
+public/index.html, code is 20, comment is 23, blank is 0.
+public/logo192.png, it is a binary file.
+public/logo512.png, it is a binary file.
+public/manifest.json, code is 25, comment is 0, blank is 0.
+public/robots.txt, code is 3, comment is 1, blank is 0.
+README.md, code is 37, comment is 12, blank is 31.
+src/common/axiosHeader.js, code is 0, comment is 0, blank is 0.
+src/common/constants.js, code is 0, comment is 0, blank is 0.
+src/common/myenv.js, code is 4, comment is 0, blank is 0.
+src/common/util.js, code is 0, comment is 0, blank is 0.
+src/components/common/axiosHeader.js, code is 0, comment is 0, blank is 0.
+src/components/common/ErrorBoundaryComp.js, code is 0, comment is 0, blank is 0.
+src/components/common/Footer.js, code is 12, comment is 0, blank is 2.
+src/components/common/Header.js, code is 10, comment is 0, blank is 2.
+src/components/common/StarGrid.js, code is 34, comment is 0, blank is 7.
+src/components/common/StyledComponent.js, code is 173, comment is 0, blank is 14.
+src/components/index.js, code is 0, comment is 0, blank is 0.
+src/components/LandingPage.js, code is 68, comment is 0, blank is 7.
+src/components/SelectBot.js, code is 5, comment is 0, blank is 2.
+src/components/SelectPlanet.js, code is 40, comment is 0, blank is 4.
+src/context/appContext.js, code is 3, comment is 0, blank is 2.
+src/customHooks/useFetchDataFromBackend.js, code is 55, comment is 0, blank is 6.
+src/index.js, code is 9, comment is 2, blank is 4.
+src/public/fonts/nasalization-free.regular.ttf, it is a binary file.
+src/public/images/1.png, it is a binary file.
+src/public/images/2.png, it is a binary file.
+src/public/images/3.png, it is a binary file.
+src/public/images/4.png, it is a binary file.
+src/public/images/5.png, it is a binary file.
+src/public/images/6.png, it is a binary file.
+src/public/images/minijet.png, it is a binary file.
+src/public/images/modiji.png, it is a binary file.
+src/public/images/solar system.png, it is a binary file.
+src/public/images/star 1.png, it is a binary file.
+src/public/images/star 2 .png, it is a binary file.
+src/public/images/star 3.png, it is a binary file.
+src/public/images/sun.png, it is a binary file.
+src/public/images/xi jhi.png, it is a binary file.
+src/routers/Approutes.js, code is 53, comment is 1, blank is 8.
+src/routers/PrivateRoute.js, code is 0, comment is 0, blank is 0.
+src/styles/base/index.css, code is 84, comment is 0, blank is 8.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2020-10-20 23:39:43
+count workspace : /Users/aryansharma/Desktop/CODING/MyProjects/Geektrust/falcon-war
+total files : 45
+total code lines : 15911
+total comment lines : 40
+total blank lines : 106
+
+.gitignore, code is 18, comment is 1, blank is 6.
+package-lock.json, code is 15200, comment is 0, blank is 0.
+package.json, code is 58, comment is 0, blank is 3.
+public/favicon.ico, it is a binary file.
+public/index.html, code is 20, comment is 23, blank is 0.
+public/logo192.png, it is a binary file.
+public/logo512.png, it is a binary file.
+public/manifest.json, code is 25, comment is 0, blank is 0.
+public/robots.txt, code is 3, comment is 1, blank is 0.
+README.md, code is 37, comment is 12, blank is 31.
+src/common/axiosHeader.js, code is 0, comment is 0, blank is 0.
+src/common/constants.js, code is 0, comment is 0, blank is 0.
+src/common/myenv.js, code is 4, comment is 0, blank is 0.
+src/common/util.js, code is 0, comment is 0, blank is 0.
+src/components/common/axiosHeader.js, code is 0, comment is 0, blank is 0.
+src/components/common/ErrorBoundaryComp.js, code is 0, comment is 0, blank is 0.
+src/components/common/Footer.js, code is 12, comment is 0, blank is 2.
+src/components/common/Header.js, code is 10, comment is 0, blank is 2.
+src/components/common/StarGrid.js, code is 34, comment is 0, blank is 7.
+src/components/common/StyledComponent.js, code is 173, comment is 0, blank is 14.
+src/components/index.js, code is 0, comment is 0, blank is 0.
+src/components/LandingPage.js, code is 68, comment is 0, blank is 7.
+src/components/SelectBot.js, code is 5, comment is 0, blank is 2.
+src/components/SelectPlanet.js, code is 40, comment is 0, blank is 4.
+src/context/appContext.js, code is 3, comment is 0, blank is 2.
+src/customHooks/useFetchDataFromBackend.js, code is 55, comment is 0, blank is 6.
+src/index.js, code is 9, comment is 2, blank is 4.
+src/public/fonts/nasalization-free.regular.ttf, it is a binary file.
+src/public/images/1.png, it is a binary file.
+src/public/images/2.png, it is a binary file.
+src/public/images/3.png, it is a binary file.
+src/public/images/4.png, it is a binary file.
+src/public/images/5.png, it is a binary file.
+src/public/images/6.png, it is a binary file.
+src/public/images/minijet.png, it is a binary file.
+src/public/images/modiji.png, it is a binary file.
+src/public/images/solar system.png, it is a binary file.
+src/public/images/star 1.png, it is a binary file.
+src/public/images/star 2 .png, it is a binary file.
+src/public/images/star 3.png, it is a binary file.
+src/public/images/sun.png, it is a binary file.
+src/public/images/xi jhi.png, it is a binary file.
+src/routers/Approutes.js, code is 53, comment is 1, blank is 8.
+src/routers/PrivateRoute.js, code is 0, comment is 0, blank is 0.
+src/styles/base/index.css, code is 84, comment is 0, blank is 8.
+===============================================================================
