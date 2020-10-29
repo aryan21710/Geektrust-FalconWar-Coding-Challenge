@@ -5,7 +5,7 @@ import { SpaceBotImgArr } from '../customHooks/useDefineConstants';
 import { CustomButton } from '../components/common/CustomButton';
 
 const DisplayAllSpaceVehicles = () => {
-	const [SpaceRocket,SpacePod,SpaceShip,SpaceShuttle] = SpaceBotImgArr;
+	const [SpacePod,SpaceRocket,SpaceShuttle,SpaceShip] = SpaceBotImgArr;
 
 	return (
 		<React.Fragment>

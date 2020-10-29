@@ -24,4 +24,4 @@ export const MinijetImage={
     Minijet
 }
 
-export const SpaceBotImgArr=[SpaceRocket,SpacePod,SpaceShip,SpaceShuttle];
+export const SpaceBotImgArr=[SpacePod,SpaceRocket,SpaceShuttle,SpaceShip];

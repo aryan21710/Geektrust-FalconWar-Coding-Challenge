@@ -62,6 +62,8 @@ const Approutes = () => {
 				speed: data.speed,
 				totalUnits: data.total_no,
 			}));
+
+			console.log(`updatedVehData ${JSON.stringify(updatedVehData,null,4)}`)
 			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
 			setFinalData({ ...finalData, token });
 
