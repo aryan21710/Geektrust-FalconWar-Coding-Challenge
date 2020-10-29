@@ -5,7 +5,7 @@ import { SpaceBotImgArr } from '../customHooks/useDefineConstants';
 import { CustomButton } from '../components/common/CustomButton';
 
 const DisplayAllSpaceVehicles = () => {
-	const [Spacebot1, Spacebot2, Spacebot3, Spacebot4] = SpaceBotImgArr;
+	const [SpaceRocket,SpacePod,SpaceShip,SpaceShuttle] = SpaceBotImgArr;
 
 	return (
 		<React.Fragment>
@@ -14,6 +14,7 @@ const DisplayAllSpaceVehicles = () => {
 					Space Vehicles at King Shan's disposal
 				</Heading>
 				<SolarSystemWrapper height="65vh" width="100vw" flexDirection="row">
+			
 					<BadgeWrapper height="50vh" flexDirection="column">
 						<ImageWrapper
 							rotateBy="25deg"
@@ -22,7 +23,7 @@ const DisplayAllSpaceVehicles = () => {
 							width="30vw"
 							height="40vh"
 							marginBottom="3vh"
-							src={Spacebot1}
+							src={SpaceRocket}
 						/>
 						<Heading fontSize="1.2rem" color="#FAD107">
 							SPACE ROCKET
@@ -45,7 +46,7 @@ const DisplayAllSpaceVehicles = () => {
 							width="30vw"
 							height="40vh"
 							marginBottom="3vh"
-							src={Spacebot2}
+							src={SpacePod}
 						/>
 						<Heading fontSize="1.2rem" color="#FAD107">
 							SPACE POD
@@ -68,7 +69,7 @@ const DisplayAllSpaceVehicles = () => {
 							width="30vw"
 							height="40vh"
 							marginBottom="3vh"
-							src={Spacebot3}
+							src={SpaceShip}
 						/>
 						<Heading fontSize="1.2rem" color="#FAD107">
 							SPACE SHIP
@@ -91,7 +92,7 @@ const DisplayAllSpaceVehicles = () => {
 							width="30vw"
 							height="40vh"
 							marginBottom="3vh"
-							src={Spacebot4}
+							src={SpaceShuttle}
 						/>
 						<Heading fontSize="1.2rem" color="#FAD107">
 							SPACE SHUTTLE

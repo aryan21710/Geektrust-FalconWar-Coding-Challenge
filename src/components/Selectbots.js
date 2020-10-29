@@ -12,14 +12,12 @@ import {
 import { CustomButton } from '../components/common/CustomButton';
 import uuid from 'react-uuid';
 import { PlanetDetailsContext } from '../context/appContext';
-import { useHistory } from 'react-router';
 
 const SelectBots = () => {
-	const { selectedPlanet, setFinalData, finalData } = useContext(PlanetDetailsContext);
+	const {  setFinalData, finalData } = useContext(PlanetDetailsContext);
 	const [selectedPlanetIndex, setSelectedPlanetIndex] = useState(-1);
 	const [selectedVehicle, setSelectedVehicle] = useState('');
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
-	const history = useHistory();
 
 	useEffect(() => {
 		setPlanetAndBotsData(populatePlanetAndBotsData());
@@ -37,6 +35,7 @@ const SelectBots = () => {
 				speed: data.speed,
 				travelTime: 0,
 				totalUnits: data.totalUnits,
+				error: true
 			})),
 		}));
 	};
@@ -76,25 +75,26 @@ const SelectBots = () => {
 							if (distanceToPlanet > vehicleData.distance) {
 								alert(`OOPS!! YOU CANNOT TRAVEL TO ${planetData.planetname} USING ${vehicleData.name}`);
 								error = true;
-								return { ...vehicleData };
+								return { ...vehicleData,error: true };
 							} else {
 								if (vehicleData.totalUnits === 0) {
 									error = true;
 									alert(
 										`OOPS!! YOU RAN OUT OF ${vehicleData.name}. PLEASE USE SOME OTHER BOT FOR INVASION.`
 									);
-									return { ...vehicleData };
+									return { ...vehicleData,error: true };
 								} else {
 									planetName = planetData.planetname;
 									vehicleName = vehicleData.name;
 									return {
 										...vehicleData,
 										travelTime: Math.round(distanceToPlanet / parseInt(vehicleData.speed)),
+										error: false
 									};
 								}
 							}
 						} else {
-							return { ...vehicleData };
+							return { ...vehicleData};
 						}
 					});
 					return { ...planetData, vehicleDataArray: temp };
@@ -151,7 +151,7 @@ const SelectBots = () => {
 							</Heading>
 							<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${distance} megamiles`}</Heading>
 							<Select name="planetName" onChange={onSelectedVehicleIdx}>
-								{selectedPlanetIndex !== idx && vehicleDataArray[0].travelTime === 0 && (
+								{vehicleDataArray[0].error && (
 									<option key={uuid()} defaultValue="Choose A Space Vehicle">
 										Choose A Space Vehicle
 									</option>

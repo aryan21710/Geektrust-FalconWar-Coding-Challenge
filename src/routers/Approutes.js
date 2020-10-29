@@ -55,12 +55,12 @@ const Approutes = () => {
 
 	useEffect(() => {
 		if (token.length > 0) {
-			const updatedVehData = vehicleData.map((vehicleData, idx) => ({
+			const updatedVehData = vehicleData.map((data, idx) => ({
 				imgName: SpaceBotImgArr[idx],
-				name: vehicleData.name.toUpperCase(),
-				distance: vehicleData.max_distance,
-				speed: vehicleData.speed,
-				totalUnits: vehicleData.total_no,
+				name: data.name.toUpperCase(),
+				distance: data.max_distance,
+				speed: data.speed,
+				totalUnits: data.total_no,
 			}));
 			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
 			setFinalData({ ...finalData, token });

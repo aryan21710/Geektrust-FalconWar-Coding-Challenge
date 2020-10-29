@@ -7,10 +7,10 @@ import Planet6 from '../assets/images/6.png';
 import KingShan from '../assets/images/modiji.png';
 import ALFALCONE from '../assets/images/xi jhi.png';
 import Minijet from '../assets/images/minijet.png';
-import SpacePod from '../assets/images/Spaceship1.png';
-import SpaceRocket from '../assets/images/spaceship2.png';
-import SpaceShuttle from '../assets/images/Spaceship3.png';
-import SpaceShip from '../assets/images/spaceship4.png';
+import SpaceRocket from '../assets/images/Spaceship1.png';
+import SpacePod from '../assets/images/spaceship2.png';
+import SpaceShip from '../assets/images/Spaceship3.png';
+import  SpaceShuttle from '../assets/images/spaceship4.png';
 
 
 export const PlanetImageArr = [Planet1, Planet2, Planet3, Planet4, Planet5, Planet6];
@@ -24,4 +24,4 @@ export const MinijetImage={
     Minijet
 }
 
-export const SpaceBotImgArr=[SpacePod,SpaceRocket,SpaceShuttle,SpaceShip];
+export const SpaceBotImgArr=[SpaceRocket,SpacePod,SpaceShip,SpaceShuttle];
