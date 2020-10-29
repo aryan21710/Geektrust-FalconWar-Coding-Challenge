@@ -49,6 +49,7 @@ const SelectBots = () => {
 	}, [selectedVehicle, selectedPlanetIndex]);
 
 	const calcTimeTravelAndBotsLeft = () => {
+
 		let error = false;
 		let planetName = '';
 		let vehicleName = '';
@@ -151,7 +152,7 @@ const SelectBots = () => {
 							</Heading>
 							<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${distance} megamiles`}</Heading>
 							<Select name="planetName" onChange={onSelectedVehicleIdx}>
-								{vehicleDataArray[0].error && (
+								{vehicleDataArray[0].error  && (
 									<option key={uuid()} defaultValue="Choose A Space Vehicle">
 										Choose A Space Vehicle
 									</option>
@@ -188,6 +189,7 @@ const SelectBots = () => {
 				leftpos="0vh"
 				width="15vw"
 				TextForButton="Mission Find Falcone"
+				opacity= {finalData.planet_names.length === 4 ? 1 : 0.6}
 			/>
 		</SelectedPlanetWrapper>
 	);

@@ -96,6 +96,7 @@ export const Button = styled.div`
 	align-items: center;
 	color: white;
 	outline: none;
+	opacity: ${props=>props.opacity || 1};
 	cursor: pointer;
 	position: relative;
 	margin: ${(props) => props.margin || '0 auto'};
