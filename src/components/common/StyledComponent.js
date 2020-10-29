@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { animated } from 'react-spring';
-import solarSystem from '../../public/images/sunWithOrbit.png';
+import solarSystem from '../../assets/images/sunWithOrbit.png';
 
 export const Wrapper = styled.div`
 	width: 100vw;

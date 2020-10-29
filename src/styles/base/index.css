@@ -17,7 +17,7 @@ code {
 
 @font-face {
 	font-family: 'Nasalisation';
-	src: url('../../public/fonts/nasalization-free.regular.ttf') format('truetype');
+	src: url('../../assets/fonts/nasalization-free.regular.ttf') format('truetype');
 }
 
 .starGridWrapper {
@@ -75,7 +75,7 @@ code {
 }
 
 .star {
-	background-image: url('../../public/images/star1.png');
+	background-image: url('../../assets/images/star1.png');
 	background-repeat: no-repeat;
 	background-position: center;
 	transform: rotate(40deg);
