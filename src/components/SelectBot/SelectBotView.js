@@ -25,9 +25,16 @@ const SelectBotView = ({
 					Choose Space Vehicles to Invade the Planets.
 				</Heading>
 				<PlanetWrapper justifyContent="flex-start" flexDirection="row" height="60vh">
-					{planetAndBotsData.map(({ planet, index, vehicleDataArray }, idx) => (
-						<BadgeWrapper justifyContent="flex-start" key={uuid()} height="60vh" flexDirection="column">
-							<Select width="15vw" name="planetName" onChange={onSelectedVehicleIdx}>
+					{planetAndBotsData.map(({ planet, planetname, vehicleDataArray }, idx) => (
+						<BadgeWrapper justifyContent="flex-start" key={uuid()} height="40vh" flexDirection="column">
+							<Select
+								width="15vw"
+								name="planetName"
+								value={
+									planetAndBotsData[idx].planetIdx === idx ? planetValue : 'Choose A Space Vehicle'
+								}
+								onChange={onSelectedVehicleIdx}
+							>
 								{planetAndBotsData[idx].planetIdx === -1 && (
 									<option key={uuid()} defaultValue="Choose A Space Vehicle">
 										Choose A Space Vehicle
@@ -41,93 +48,35 @@ const SelectBotView = ({
 								))}
 							</Select>
 
-							<Heading margin="2vh 0vw" color="#FAD107" fontSize="1.1rem">
+							<Heading margin="3vh 0vw" color="#FAD107" fontSize="1.1rem">
 								Please select the Space Vehicle:
 							</Heading>
-							<BadgeWrapper
-								flex="0"
-								height="20vh"
-								width="20vw"
-								alignItems="start"
-								justifyContent="center"
-								key={uuid()}
-								flexDirection="column"
-							>
-								<BadgeWrapper
-									flex="1"
-									width="20vw"
-									alignItems="start"
-									justifyContent="flex-start"
-									key={uuid()}
-									flexDirection="row"
-								>
-									<input
-										onChange={onRadioChange(idx)}
-										type="radio"
-										name="spacevehicle"
-										value="spacepod"
-									/>
-									<label style={{ color: 'white', marginLeft: '0.5vw' }} for="spacepod">
-										Space-Pod
-									</label>
-								</BadgeWrapper>
-								<BadgeWrapper
-									flex="1"
-									width="20vw"
-									alignItems="start"
-									justifyContent="flex-start"
-									key={uuid()}
-									flexDirection="row"
-								>
-									<input
-										onChange={onRadioChange(idx)}
-										type="radio"
-										name="spacevehicle"
-										value="spacerocket"
-									/>
-									<label style={{ color: 'white', marginLeft: '0.5vw' }} for="spacerocket">
-										Space-Rocket
-									</label>
-								</BadgeWrapper>
-
-								<BadgeWrapper
-									flex="1"
-									width="20vw"
-									alignItems="start"
-									justifyContent="flex-start"
-									key={uuid()}
-									flexDirection="row"
-								>
-									<input
-										onChange={onRadioChange(idx)}
-										type="radio"
-										name="spacevehicle"
-										value="spaceshuttle"
-									/>
-									<label style={{ color: 'white', marginLeft: '0.5vw' }} for="spaceshuttle">
-										Space-Shuttle
-									</label>
-								</BadgeWrapper>
-
-								<BadgeWrapper
-									flex="1"
-									width="20vw"
-									alignItems="start"
-									justifyContent="flex-start"
-									key={uuid()}
-									flexDirection="row"
-								>
-									<input
-										onChange={onRadioChange(idx)}
-										type="radio"
-										name="spacevehicle"
-										value="spaceship"
-									/>
-									<label style={{ color: 'white', marginLeft: '0.5vw' }} for="spaceship">
-										Space-Ship
-									</label>
-								</BadgeWrapper>
-							</BadgeWrapper>
+							{vehicleDataArray.map((vehicleData, vehicleIdx) => {
+								return (
+									<BadgeWrapper
+										flex="1"
+										width="20vw"
+										height="1.5vh"
+										alignItems="start"
+										justifyContent="flex-start"
+										key={uuid()}
+										flexDirection="row"
+									>
+										<input
+											onChange={onRadioChange(idx)}
+											type="radio"
+											name="spacevehicle"
+											value="spacepod"
+										/>
+										<label
+											style={{ fontSize: '0.9rem', color: 'white', marginLeft: '0.5vw' }}
+											for="spacepod"
+										>
+											{vehicleData.name}
+										</label>
+									</BadgeWrapper>
+								);
+							})}
 						</BadgeWrapper>
 					))}
 				</PlanetWrapper>

@@ -52,6 +52,10 @@ const SelectBotContainer = () => {
         setPlanetAndBotsData(_)
     }
 
+    useEffect(()=>{
+        planetIndex > -1 && calcTimeTravelAndBotsLeft()
+    },[planetAndBotsData,planetIndex])
+
 	useEffect(() => {
 		if (planetValue.length > 0 && planetIndex > -1) {
             updatePlanetIdx()
@@ -63,7 +67,7 @@ const SelectBotContainer = () => {
 		}
 	}, [planetValue, planetIndex]);
 
-    const calcTimeTravelAndBotsLeft = () => {};
+    const calcTimeTravelAndBotsLeft = () => {}
     
     const onRadioChange=(idx)=>(e)=>{
         console.log(`onRadioChange ${e.target.value} :: ${idx}`)
