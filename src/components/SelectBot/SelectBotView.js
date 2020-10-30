@@ -25,25 +25,25 @@ const SelectBotView = ({
 					Choose Space Vehicles to Invade the Planets.
 				</Heading>
 				<PlanetWrapper justifyContent="flex-start" flexDirection="row" height="60vh">
-					{planetAndBotsData.map(({ planet, planetname, vehicleDataArray }, idx) => (
+					{planetAndBotsData.map(({ planetIdx, planetname, vehicleDataArray }, idx) => (
 						<BadgeWrapper justifyContent="flex-start" key={uuid()} height="40vh" flexDirection="column">
 							<Select
 								width="15vw"
 								name="planetName"
 								value={
-									planetAndBotsData[idx].planetIdx === idx ? planetValue : 'Choose A Space Vehicle'
+									planetIdx === idx ? planetValue : 'Choose A Space Vehicle'
 								}
 								onChange={onSelectedVehicleIdx}
 							>
-								{planetAndBotsData[idx].planetIdx === -1 && (
+								{planetIdx === -1 && (
 									<option key={uuid()} defaultValue="Choose A Space Vehicle">
 										Choose A Space Vehicle
 									</option>
 								)}
 
-								{planetAndBotsData.map((planet) => (
-									<option key={uuid()} data-index={idx} value={planet.planetname}>
-										{`${planet.planetname}`}
+								{planetAndBotsData.map(({planetname }) => (
+									<option key={uuid()} data-index={idx} value={planetname}>
+										{`${planetname}`}
 									</option>
 								))}
 							</Select>
