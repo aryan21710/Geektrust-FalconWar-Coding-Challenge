@@ -281,6 +281,7 @@ export const Select = styled.select`
 	background: white;
 	outline: none;
 	display: block;
+	width: ${props=>props.width};
 	font-size: 0.8rem;
 	font-family: sans-serif;
 	color: black;

@@ -10,9 +10,14 @@ import {
 import { CustomButton } from '../common/CustomButton';
 import uuid from 'react-uuid';
 
-const SelectBotView = ({ planetAndBotsData, onSelectedVehicleIdx, finalData, onRadioChange }) => {
-
-	
+const SelectBotView = ({
+	planetAndBotsData,
+	onSelectedVehicleIdx,
+	finalData,
+	onRadioChange,
+	planetIndex,
+	planetValue,
+}) => {
 	return (
 		<SelectedPlanetWrapper justifyContent="center">
 			<SolarSystemWrapper height="75vh" width="100vw" flexDirection="column">
@@ -20,19 +25,22 @@ const SelectBotView = ({ planetAndBotsData, onSelectedVehicleIdx, finalData, onR
 					Choose Space Vehicles to Invade the Planets.
 				</Heading>
 				<PlanetWrapper justifyContent="flex-start" flexDirection="row" height="60vh">
-					{planetAndBotsData.map((planet, idx) => (
+					{planetAndBotsData.map(({ planet, index, vehicleDataArray }, idx) => (
 						<BadgeWrapper justifyContent="flex-start" key={uuid()} height="60vh" flexDirection="column">
-							<Select name="planetName" onChange={onSelectedVehicleIdx}>
+							<Select width="15vw" name="planetName" onChange={onSelectedVehicleIdx}>
+								{planetAndBotsData[idx].planetIdx === -1 && (
 									<option key={uuid()} defaultValue="Choose A Space Vehicle">
 										Choose A Space Vehicle
 									</option>
-						
+								)}
+
 								{planetAndBotsData.map((planet) => (
 									<option key={uuid()} data-index={idx} value={planet.planetname}>
 										{`${planet.planetname}`}
 									</option>
 								))}
 							</Select>
+
 							<Heading margin="2vh 0vw" color="#FAD107" fontSize="1.1rem">
 								Please select the Space Vehicle:
 							</Heading>
@@ -53,8 +61,13 @@ const SelectBotView = ({ planetAndBotsData, onSelectedVehicleIdx, finalData, onR
 									key={uuid()}
 									flexDirection="row"
 								>
-									<input onChange={onRadioChange(idx)} type="radio" name="spacevehicle" value="spacepod" />
-									<label style={{ color: 'white', marginLeft: "0.5vw" }} for="spacepod">
+									<input
+										onChange={onRadioChange(idx)}
+										type="radio"
+										name="spacevehicle"
+										value="spacepod"
+									/>
+									<label style={{ color: 'white', marginLeft: '0.5vw' }} for="spacepod">
 										Space-Pod
 									</label>
 								</BadgeWrapper>
@@ -66,8 +79,13 @@ const SelectBotView = ({ planetAndBotsData, onSelectedVehicleIdx, finalData, onR
 									key={uuid()}
 									flexDirection="row"
 								>
-									<input onChange={onRadioChange(idx)} type="radio" name="spacevehicle" value="spacerocket" />
-									<label style={{ color: 'white', marginLeft: "0.5vw" }} for="spacerocket">
+									<input
+										onChange={onRadioChange(idx)}
+										type="radio"
+										name="spacevehicle"
+										value="spacerocket"
+									/>
+									<label style={{ color: 'white', marginLeft: '0.5vw' }} for="spacerocket">
 										Space-Rocket
 									</label>
 								</BadgeWrapper>
@@ -80,8 +98,13 @@ const SelectBotView = ({ planetAndBotsData, onSelectedVehicleIdx, finalData, onR
 									key={uuid()}
 									flexDirection="row"
 								>
-									<input onChange={onRadioChange(idx)} type="radio" name="spacevehicle" value="spaceshuttle" />
-									<label style={{ color: 'white', marginLeft: "0.5vw" }} for="spaceshuttle">
+									<input
+										onChange={onRadioChange(idx)}
+										type="radio"
+										name="spacevehicle"
+										value="spaceshuttle"
+									/>
+									<label style={{ color: 'white', marginLeft: '0.5vw' }} for="spaceshuttle">
 										Space-Shuttle
 									</label>
 								</BadgeWrapper>
@@ -94,8 +117,13 @@ const SelectBotView = ({ planetAndBotsData, onSelectedVehicleIdx, finalData, onR
 									key={uuid()}
 									flexDirection="row"
 								>
-									<input onChange={onRadioChange(idx)} type="radio" name="spacevehicle" value="spaceship" />
-									<label style={{ color: 'white', marginLeft: "0.5vw" }} for="spaceship">
+									<input
+										onChange={onRadioChange(idx)}
+										type="radio"
+										name="spacevehicle"
+										value="spaceship"
+									/>
+									<label style={{ color: 'white', marginLeft: '0.5vw' }} for="spaceship">
 										Space-Ship
 									</label>
 								</BadgeWrapper>
@@ -117,3 +145,10 @@ const SelectBotView = ({ planetAndBotsData, onSelectedVehicleIdx, finalData, onR
 };
 
 export default SelectBotView;
+
+/*
+
+
+
+
+							*/

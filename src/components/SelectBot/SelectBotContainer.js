@@ -19,23 +19,42 @@ const SelectBotContainer = () => {
 	const populatePlanetAndBotsData = () => {
 		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet'));
 		return filteredArrOfSelectedPlanet.map((data) => ({
-			...data,
+            ...data,
+            planetIdx: -1,
 			finalStatus: false,
 			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
 				name: data.name,
 				botImageName: data.imgName,
 				distance: data.distance,
 				speed: data.speed,
-				travelTime: 0,
+                travelTime: 0,
 				totalUnits: data.totalUnits,
 				error: true,
 			})),
 		}));
-	};
+    };
+
+    useEffect(() => {
+		setPlanetAndBotsData(populatePlanetAndBotsData());
+	}, []);
+    
+
+    const updatePlanetIdx=()=>{
+        const _=planetAndBotsData.map((data,idx)=>{
+            if (idx===planetIndex) return ({
+                ...data,
+                planetIdx: planetIndex
+            })
+
+            return ({...data, planetIdx: -1})
+        })
+
+        setPlanetAndBotsData(_)
+    }
 
 	useEffect(() => {
 		if (planetValue.length > 0 && planetIndex > -1) {
-			calcTimeTravelAndBotsLeft();
+            updatePlanetIdx()
 		} else {
 			setSelectedPlanet({
 				planetIndex: -1,
@@ -65,6 +84,8 @@ const SelectBotContainer = () => {
 				onSelectedVehicleIdx={onSelectedVehicleIdx}
                 finalData={finalData}
                 onRadioChange={onRadioChange}
+                planetIndex={planetIndex}
+                planetValue={planetValue}
 			/>
 		</React.Fragment>
 	);
