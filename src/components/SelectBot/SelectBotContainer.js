@@ -67,10 +67,20 @@ const SelectBotContainer = () => {
 		}
 	}, [planetValue, planetIndex]);
 
-    const calcTimeTravelAndBotsLeft = () => {}
+    const calcTimeTravelAndBotsLeft = () => {
+      
+    }
     
-    const onRadioChange=(idx)=>(e)=>{
-        console.log(`onRadioChange ${e.target.value} :: ${idx}`)
+    const onRadioChange=(planetidx)=>(e)=>{
+        console.log(`onRadioChange ${e.target.value} :: ${planetidx}`)
+          /* PLANETIDX = planetidx and vehicle = e.target.value IS SELECTED IN DROPDOWN.
+         if planetidx is same as planetAndBotsData.planetIdx
+            then
+                
+
+            else
+        
+        */
     }
 
 	const onSelectedVehicleIdx = (e) => {

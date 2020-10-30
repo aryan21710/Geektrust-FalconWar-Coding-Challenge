@@ -67,7 +67,7 @@ const SelectBotView = ({
 											type="radio"
 											name="spacevehicle"
 											value="spacepod"
-											disabled={false}
+											disabled={planetIdx===idx && planetValue.length > 0 ? false : true}
 										/>
 										<label
 											style={{ fontSize: '0.9rem', color: 'white', marginLeft: '0.5vw' }}
