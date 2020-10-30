@@ -297,3 +297,9 @@ export const Select = styled.select`
 	background-position: right 0.7em top 50%, 0 0;
 	background-size: 0.65em auto, 100%;
 `;
+
+export const Label=styled.label`
+	font-size: 0.9rem;
+	color: white;
+	margin-left: 0.5vw;
+`;

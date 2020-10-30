@@ -6,6 +6,7 @@ import {
 	Heading,
 	PlanetWrapper,
 	SelectedPlanetImg,
+	Label,
 } from '../common/StyledComponent';
 import { CustomButton } from '../common/CustomButton';
 import uuid from 'react-uuid';
@@ -15,7 +16,9 @@ const SelectBotView = ({
 	finalData,
 	onRadioChange,
 	vehicleIndex,
+	planetIndex,
 }) => {
+
 	return (
 		<SelectedPlanetWrapper justifyContent="center">
 			<SolarSystemWrapper height="75vh" width="100vw" flexDirection="column">
@@ -34,7 +37,7 @@ const SelectBotView = ({
 							<Heading margin="3vh 0vw" color="#FAD107" fontSize="1.1rem">
 								Please select the Space Vehicle:
 							</Heading>
-							{vehicleDataArray.map((vehicleData,vehicleidx) => {
+							{vehicleDataArray.map((vehicleData, vehicleidx) => {
 								return (
 									<BadgeWrapper
 										flex="1"
@@ -46,27 +49,25 @@ const SelectBotView = ({
 										flexDirection="row"
 									>
 										<input
-											onChange={onRadioChange(idx)}
-											data-vehicleidx={vehicleidx}
+											onChange={onRadioChange}
+											id={`rad${vehicleidx}${idx}`}
 											type="radio"
-											name="spacevehicle"
+											checked={idx===planetIndex && vehicleidx===vehicleIndex}
+											data-vehicleidx={vehicleidx}
+											data-planetidx={idx}
 											value={vehicleData.name}
+											name={`spacevehicle${idx}`}
 										/>
-										<label
-											style={{
-												fontSize: '0.9rem',
-												color: 'white',
-												marginLeft: '0.5vw',
-											}}
-											htmlFor={vehicleData.name}
-										>
+										<Label htmlFor={`rad${vehicleidx}${idx}`}>
 											{`${vehicleData.name} (${vehicleData.totalUnits.current})`}
-										</label>
+										</Label>
 									</BadgeWrapper>
 								);
 							})}
 							<Heading margin="3vh 0vw" fontSize="1rem" color="#FAD107">
-								{vehicleIndex > -1 ? `Time Taken:- ${vehicleDataArray[vehicleIndex].travelTime}` : `Time Taken:- 0`}
+								{vehicleIndex > -1
+									? `Time Taken:- ${vehicleDataArray[vehicleIndex].travelTime}`
+									: `Time Taken:- 0`}
 							</Heading>
 						</BadgeWrapper>
 					))}
