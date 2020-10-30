@@ -24,7 +24,7 @@ const SelectBotContainer = () => {
 			finalStatus: false,
 			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
 				name: data.name,
-				botImageName: data.imgName,
+				botImageName: "data.imgName",
 				distance: data.distance,
 				speed: data.speed,
                 travelTime: 0,
@@ -74,13 +74,48 @@ const SelectBotContainer = () => {
     const onRadioChange=(planetidx)=>(e)=>{
         console.log(`onRadioChange ${e.target.value} :: ${planetidx}`)
           /* PLANETIDX = planetidx and vehicle = e.target.value IS SELECTED IN DROPDOWN.
-         if planetidx is same as planetAndBotsData.planetIdx
-            then
-                
+                if planetDistance <= vehicleDistance && vehicleTotalUnits > 0
+                    then 
+                        vehicleTotalUnits=vehicleTotalUnits-1
+                        calc travelTime
+                    else 
+                        travelTime=0;
+                        vehicleTotalUnits=vehicleMaxUnits
 
-            else
+
+                    
+
         
         */
+
+        const updatedPlanetAndBotsData=planetAndBotsData[planetidx].vehicleDataArray.map((vehicleData,vehicleIdx)=>{
+                if (vehicleData.name===e.target.value && parseInt(planetAndBotsData[planetidx].distance) <= vehicleData.distance && vehicleData.totalUnits > 0) {
+                    return {
+                        ...vehicleData,
+                        totalUnits: vehicleData.totalUnits - 1,
+                        travelTime: Math.round(planetAndBotsData[planetidx].distance / parseInt(vehicleData.speed)),
+                    }
+                } else {
+                    return {
+                        ...vehicleData,
+                        totalUnits: vehicleData.totalUnits,
+                        travelTime: 0,
+                    }
+                }
+
+        })
+
+        console.log(`updatedPlanetAndBotsData ${JSON.stringify(updatedPlanetAndBotsData,null,4)}`);
+
+        const unchangedPlanetAndBotsData=planetAndBotsData.map((planetData,idx)=>{
+            if (idx!==planetIndex) {
+                return {...planetData}
+            } else {
+                return {updatedPlanetAndBotsData}
+            }
+        })
+
+        setPlanetAndBotsData([...unchangedPlanetAndBotsData])
     }
 
 	const onSelectedVehicleIdx = (e) => {

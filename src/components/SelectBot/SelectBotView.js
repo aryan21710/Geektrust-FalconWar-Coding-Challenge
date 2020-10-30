@@ -4,8 +4,8 @@ import {
 	SolarSystemWrapper,
 	BadgeWrapper,
 	Heading,
-	Select,
 	PlanetWrapper,
+	SelectedPlanetImg
 } from '../common/StyledComponent';
 import { CustomButton } from '../common/CustomButton';
 import uuid from 'react-uuid';
@@ -25,26 +25,13 @@ const SelectBotView = ({
 					Choose Space Vehicles to Invade the Planets.
 				</Heading>
 				<PlanetWrapper justifyContent="flex-start" flexDirection="row" height="60vh">
-					{planetAndBotsData.map(({ planetIdx, planetname, vehicleDataArray }, idx) => (
+					{planetAndBotsData.map(({ planetIdx, planetname, imgname, distance, vehicleDataArray }, idx) => (
 						<BadgeWrapper justifyContent="flex-start" key={uuid()} height="40vh" flexDirection="column">
-							<Select
-								width="15vw"
-								name="planetName"
-								value={planetIdx === idx ? planetValue : 'Choose A Space Vehicle'}
-								onChange={onSelectedVehicleIdx}
-							>
-								{planetIdx === -1 && (
-									<option key={uuid()} defaultValue="Choose A Space Vehicle">
-										Choose A Space Vehicle
-									</option>
-								)}
-
-								{planetAndBotsData.map(({ planetname }) => (
-									<option key={uuid()} data-index={idx} value={planetname}>
-										{`${planetname}`}
-									</option>
-								))}
-							</Select>
+						<SelectedPlanetImg margin="1vh 0vw" imgname={imgname} />
+						<Heading color="#FAD107" fontSize="1.2rem">
+							{planetname}
+						</Heading>
+						<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${distance} megamiles`}</Heading>
 
 							<Heading margin="3vh 0vw" color="#FAD107" fontSize="1.1rem">
 								Please select the Space Vehicle:
@@ -64,7 +51,7 @@ const SelectBotView = ({
 											onChange={onRadioChange(idx)}
 											type="radio"
 											name="spacevehicle"
-											value="spacepod"
+											value={vehicleData.name}
 											disabled={planetIdx === idx && planetValue.length > 0 ? false : true}
 										/>
 										<label
@@ -73,7 +60,7 @@ const SelectBotView = ({
 												color: planetIdx === idx && planetValue.length > 0 ? 'white' : 'grey',
 												marginLeft: '0.5vw',
 											}}
-											for="spacepod"
+											htmlFor={vehicleData.name}
 										>
 											{`${vehicleData.name} (${vehicleData.totalUnits})`}
 										</label>

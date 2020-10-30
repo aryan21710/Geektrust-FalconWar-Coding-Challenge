@@ -41,7 +41,7 @@ const Approutes = () => {
 		PlanetImageArr.map((planetImg) => ({
 			imgname: planetImg,
 			planetname: '',
-			distance: '',
+			distance: 0,
 			isAnimated: false,
 			index: -1,
 		}))
