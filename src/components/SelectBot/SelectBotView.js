@@ -30,9 +30,7 @@ const SelectBotView = ({
 							<Select
 								width="15vw"
 								name="planetName"
-								value={
-									planetIdx === idx ? planetValue : 'Choose A Space Vehicle'
-								}
+								value={planetIdx === idx ? planetValue : 'Choose A Space Vehicle'}
 								onChange={onSelectedVehicleIdx}
 							>
 								{planetIdx === -1 && (
@@ -41,7 +39,7 @@ const SelectBotView = ({
 									</option>
 								)}
 
-								{planetAndBotsData.map(({planetname }) => (
+								{planetAndBotsData.map(({ planetname }) => (
 									<option key={uuid()} data-index={idx} value={planetname}>
 										{`${planetname}`}
 									</option>
@@ -67,10 +65,14 @@ const SelectBotView = ({
 											type="radio"
 											name="spacevehicle"
 											value="spacepod"
-											disabled={planetIdx===idx && planetValue.length > 0 ? false : true}
+											disabled={planetIdx === idx && planetValue.length > 0 ? false : true}
 										/>
 										<label
-											style={{ fontSize: '0.9rem', color: 'white', marginLeft: '0.5vw' }}
+											style={{
+												fontSize: '0.9rem',
+												color: planetIdx === idx && planetValue.length > 0 ? 'white' : 'grey',
+												marginLeft: '0.5vw',
+											}}
 											for="spacepod"
 										>
 											{`${vehicleData.name} (${vehicleData.totalUnits})`}
@@ -95,10 +97,3 @@ const SelectBotView = ({
 };
 
 export default SelectBotView;
-
-/*
-
-
-
-
-							*/
