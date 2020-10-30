@@ -8,133 +8,117 @@ const SelectBotContainer = () => {
 	const [selectedPlanet, setSelectedPlanet] = useState({
 		planetIndex: -1,
 		planetValue: '',
+		vehicleIndex: -1,
 	});
-	const { planetIndex, planetValue } = selectedPlanet;
+
+	const { planetIndex, planetValue, vehicleIndex } = selectedPlanet;
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
 
 	useEffect(() => {
 		setPlanetAndBotsData(populatePlanetAndBotsData());
 	}, []);
 
-	const populatePlanetAndBotsData = () => {
-		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet'));
-		return filteredArrOfSelectedPlanet.map((data) => ({
-            ...data,
-            planetIdx: -1,
-			finalStatus: false,
-			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
-				name: data.name,
-				botImageName: "data.imgName",
-				distance: data.distance,
-				speed: data.speed,
-                travelTime: 0,
-				totalUnits: data.totalUnits,
-				error: true,
-			})),
-		}));
-    };
 
-    useEffect(() => {
-		setPlanetAndBotsData(populatePlanetAndBotsData());
-	}, []);
-    
-
-    const updatePlanetIdx=()=>{
-        const _=planetAndBotsData.map((data,idx)=>{
-            if (idx===planetIndex) return ({
-                ...data,
-                planetIdx: planetIndex
-            })
-
-            return ({...data, planetIdx: -1})
-        })
-
-        setPlanetAndBotsData(_)
-    }
-
-    useEffect(()=>{
-        planetIndex > -1 && calcTimeTravelAndBotsLeft()
-    },[planetAndBotsData,planetIndex])
 
 	useEffect(() => {
-		if (planetValue.length > 0 && planetIndex > -1) {
-            updatePlanetIdx()
+		if (planetValue.length > 0 && planetIndex > -1 && vehicleIndex > -1) {
+			calcTimeTravelAndBotsLeft();
 		} else {
 			setSelectedPlanet({
 				planetIndex: -1,
-				planetValue: '',
+                planetValue: '',
+                vehicleIndex: -1
 			});
 		}
-	}, [planetValue, planetIndex]);
-
-    const calcTimeTravelAndBotsLeft = () => {
-      
-    }
+    }, [planetValue, planetIndex,vehicleIndex]);
     
-    const onRadioChange=(planetidx)=>(e)=>{
-        console.log(`onRadioChange ${e.target.value} :: ${planetidx}`)
-          /* PLANETIDX = planetidx and vehicle = e.target.value IS SELECTED IN DROPDOWN.
-                if planetDistance <= vehicleDistance && vehicleTotalUnits > 0
-                    then 
-                        vehicleTotalUnits=vehicleTotalUnits-1
-                        calc travelTime
-                    else 
-                        travelTime=0;
-                        vehicleTotalUnits=vehicleMaxUnits
 
+	const populatePlanetAndBotsData = () => {
+		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet'));
+		return filteredArrOfSelectedPlanet.map((data) => ({
+			...data,
+			planetIdx: -1,
+			finalStatus: false,
+			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
+				name: data.name,
+				botImageName: 'data.imgName',
+				distance: data.distance,
+				speed: data.speed,
+				travelTime: 0,
+				totalUnits: {
+					original: data.totalUnits,
+					current: data.totalUnits,
+				},
+				error: true,
+			})),
+		}));
+	};
 
-                    
-
-        
-        */
-
-        const updatedPlanetAndBotsData=planetAndBotsData[planetidx].vehicleDataArray.map((vehicleData,vehicleIdx)=>{
-                if (vehicleData.name===e.target.value && parseInt(planetAndBotsData[planetidx].distance) <= vehicleData.distance && vehicleData.totalUnits > 0) {
-                    return {
-                        ...vehicleData,
-                        totalUnits: vehicleData.totalUnits - 1,
-                        travelTime: Math.round(planetAndBotsData[planetidx].distance / parseInt(vehicleData.speed)),
-                    }
-                } else {
-                    return {
-                        ...vehicleData,
-                        totalUnits: vehicleData.totalUnits,
-                        travelTime: 0,
-                    }
-                }
-
-        })
-
-        console.log(`updatedPlanetAndBotsData ${JSON.stringify(updatedPlanetAndBotsData,null,4)}`);
-
-        const unchangedPlanetAndBotsData=planetAndBotsData.map((planetData,idx)=>{
-            if (idx!==planetIndex) {
-                return {...planetData}
-            } else {
-                return {updatedPlanetAndBotsData}
-            }
-        })
-
-        setPlanetAndBotsData([...unchangedPlanetAndBotsData])
-    }
-
-	const onSelectedVehicleIdx = (e) => {
-		e.preventDefault();
+	const onRadioChange = (planetidx) => (e) => {
+		console.log(`onRadioChange ${e.target.value} :: ${planetidx} :: ${e.target.dataset.vehicleidx}`);
 		setSelectedPlanet({
-			planetIndex: parseInt(e.target.options[e.target.selectedIndex].dataset.index),
+			planetIndex: planetidx,
 			planetValue: e.target.value,
+			vehicleIndex: e.target.dataset.vehicleidx,
 		});
+	};
+
+	// const updatePlanetIdx = () => {
+	// 	const updatedPlanetAndBotsData = planetAndBotsData.map((data, idx) => {
+	// 		return idx === planetIndex ? { ...data, planetIdx: planetIndex } : { ...data, planetIdx: -1 };
+	// 	});
+	// 	setPlanetAndBotsData(updatedPlanetAndBotsData);
+	// };
+
+	const calcTimeTravelAndBotsLeft = () => {
+		const updatedPlanetAndBotsData = planetAndBotsData[planetIndex].vehicleDataArray.map(
+			(vehicleData, vehicleIdx) => {
+				if (
+					vehicleData.name === planetValue &&
+					parseInt(planetAndBotsData[planetIndex].distance) <= vehicleData.distance &&
+					vehicleData.totalUnits.current > 0
+				) {
+					return {
+						...vehicleData,
+						totalUnits: {
+							original: vehicleData.totalUnits.original,
+							current: vehicleData.totalUnits.current - 1,
+						},
+						travelTime: Math.round(planetAndBotsData[planetIndex].distance / parseInt(vehicleData.speed)),
+					};
+				} else {
+					return {
+						...vehicleData,
+						totalUnits: {
+							original: vehicleData.totalUnits.original,
+							current: vehicleData.totalUnits.original,
+						},
+						travelTime: 0,
+					};
+				}
+			}
+		);
+
+		console.log(`updatedPlanetAndBotsData ${JSON.stringify(updatedPlanetAndBotsData, null, 4)}`);
+
+		const unchangedPlanetAndBotsData = planetAndBotsData.map((planetData, idx) => {
+			if (idx !== planetIndex) {
+				return { ...planetData };
+			} else {
+				return { ...planetData, vehicleDataArray: updatedPlanetAndBotsData };
+			}
+		});
+
+		setPlanetAndBotsData([...unchangedPlanetAndBotsData]);
 	};
 
 	return (
 		<React.Fragment>
 			<SelectBotView
 				planetAndBotsData={planetAndBotsData}
-				onSelectedVehicleIdx={onSelectedVehicleIdx}
-                finalData={finalData}
-                onRadioChange={onRadioChange}
-                planetIndex={planetIndex}
-                planetValue={planetValue}
+				finalData={finalData}
+				onRadioChange={onRadioChange}
+				vehicleIndex={vehicleIndex}
 			/>
 		</React.Fragment>
 	);

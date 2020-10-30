@@ -5,18 +5,16 @@ import {
 	BadgeWrapper,
 	Heading,
 	PlanetWrapper,
-	SelectedPlanetImg
+	SelectedPlanetImg,
 } from '../common/StyledComponent';
 import { CustomButton } from '../common/CustomButton';
 import uuid from 'react-uuid';
 
 const SelectBotView = ({
 	planetAndBotsData,
-	onSelectedVehicleIdx,
 	finalData,
 	onRadioChange,
-	planetIndex,
-	planetValue,
+	vehicleIndex,
 }) => {
 	return (
 		<SelectedPlanetWrapper justifyContent="center">
@@ -26,47 +24,50 @@ const SelectBotView = ({
 				</Heading>
 				<PlanetWrapper justifyContent="flex-start" flexDirection="row" height="60vh">
 					{planetAndBotsData.map(({ planetIdx, planetname, imgname, distance, vehicleDataArray }, idx) => (
-						<BadgeWrapper justifyContent="flex-start" key={uuid()} height="40vh" flexDirection="column">
-						<SelectedPlanetImg margin="1vh 0vw" imgname={imgname} />
-						<Heading color="#FAD107" fontSize="1.2rem">
-							{planetname}
-						</Heading>
-						<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${distance} megamiles`}</Heading>
+						<BadgeWrapper justifyContent="flex-start" key={uuid()} height="50vh" flexDirection="column">
+							<SelectedPlanetImg margin="1vh 0vw" imgname={imgname} />
+							<Heading color="#FAD107" fontSize="1.2rem">
+								{planetname}
+							</Heading>
+							<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${distance} megamiles`}</Heading>
 
 							<Heading margin="3vh 0vw" color="#FAD107" fontSize="1.1rem">
 								Please select the Space Vehicle:
 							</Heading>
-							{vehicleDataArray.map((vehicleData, vehicleIdx) => {
+							{vehicleDataArray.map((vehicleData,vehicleidx) => {
 								return (
 									<BadgeWrapper
 										flex="1"
 										width="20vw"
 										height="1.5vh"
-										alignItems="start"
+										alignItems="center"
 										justifyContent="flex-start"
 										key={uuid()}
 										flexDirection="row"
 									>
 										<input
 											onChange={onRadioChange(idx)}
+											data-vehicleidx={vehicleidx}
 											type="radio"
 											name="spacevehicle"
 											value={vehicleData.name}
-											disabled={planetIdx === idx && planetValue.length > 0 ? false : true}
 										/>
 										<label
 											style={{
 												fontSize: '0.9rem',
-												color: planetIdx === idx && planetValue.length > 0 ? 'white' : 'grey',
+												color: 'white',
 												marginLeft: '0.5vw',
 											}}
 											htmlFor={vehicleData.name}
 										>
-											{`${vehicleData.name} (${vehicleData.totalUnits})`}
+											{`${vehicleData.name} (${vehicleData.totalUnits.current})`}
 										</label>
 									</BadgeWrapper>
 								);
 							})}
+							<Heading margin="3vh 0vw" fontSize="1rem" color="#FAD107">
+								{vehicleIndex > -1 ? `Time Taken:- ${vehicleDataArray[vehicleIndex].travelTime}` : `Time Taken:- 0`}
+							</Heading>
 						</BadgeWrapper>
 					))}
 				</PlanetWrapper>

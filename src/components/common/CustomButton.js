@@ -14,12 +14,12 @@ export const CustomButton = (props) => {
 	const { Minijet } = MinijetImage;
 
 	const jetAnimatedProp = useSpring({
-		transform: isHover ? 'translateX(6vw)' : 'translateX(-30vw)',
+		transform: isHover && !disabled ? 'translateX(6vw)' : 'translateX(-30vw)',
 		config: config.stiff,
 	});
 
 	const btnTextProp = useSpring({
-		opacity: isHover ? 0 : 1,
+		opacity: isHover && !disabled ? 0 : 1,
 		config: config.stiff,
 	});
 
@@ -28,8 +28,8 @@ export const CustomButton = (props) => {
 			<Button
 				disabled={disabled}
 				width={width}
-				onMouseEnter={!disabled && animateJet}
-				onMouseLeave={!disabled && unAnimateJet}
+				onMouseEnter={animateJet}
+				onMouseLeave={unAnimateJet}
 				onClick={changePageOnClick}
 				opacity={opacity}
 			>
