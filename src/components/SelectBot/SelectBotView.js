@@ -67,12 +67,13 @@ const SelectBotView = ({
 											type="radio"
 											name="spacevehicle"
 											value="spacepod"
+											disabled={false}
 										/>
 										<label
 											style={{ fontSize: '0.9rem', color: 'white', marginLeft: '0.5vw' }}
 											for="spacepod"
 										>
-											{vehicleData.name}
+											{`${vehicleData.name} (${vehicleData.totalUnits})`}
 										</label>
 									</BadgeWrapper>
 								);
