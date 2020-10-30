@@ -39,7 +39,7 @@ export const Heading = styled.h1`
 	font-family: ${(props) => props.fontFamily || 'Nasalisation'};
 	z-index: 1000;
 	font-weight: 100;
-	margin: 2.5px auto;
+	margin: ${props=>props.margin || "2.5px auto"};
 	@media (max-width: 768px) {
 		font-size: 1rem;
 	}
@@ -48,18 +48,19 @@ export const Heading = styled.h1`
 export const BadgeWrapper = styled.div`
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: ${(props) => props.alignItems || 'center'};
 	justify-content: ${(props) => props.justifyContent || 'center'};
 	flex-direction: ${(props) => props.flexDirection || 'row'};
 	height: ${(props) => props.height || '75vh'};
 	width: ${(props) => props.width || '25vw'};
 	flex: ${(props) => props.flex || '1'};
+	flex-wrap: ${props=>props.flexWrap};
 	z-index: 2;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 30vh;
 	}
-`;
+`
 
 export const ButtonWrapper = styled.div`
 	width: 100vw;
@@ -278,7 +279,6 @@ export const Select = styled.select`
 	border-radius: 20px;
 	padding: 0.5vh 2vw;
 	background: white;
-	color: white;
 	outline: none;
 	display: block;
 	font-size: 0.8rem;

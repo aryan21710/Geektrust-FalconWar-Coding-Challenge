@@ -1,20 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {
-	SelectedPlanetWrapper,
-	SolarSystemWrapper,
-	BadgeWrapper,
-	SelectedPlanetImg,
-	Heading,
-	Select,
-	PlanetWrapper,
-	ImageWrapper,
-} from './common/StyledComponent';
-import { CustomButton } from '../components/common/CustomButton';
-import uuid from 'react-uuid';
-import { PlanetDetailsContext } from '../context/appContext';
+import SelectBotView from './SelectBotView'
+import { PlanetDetailsContext } from '../../context/appContext';
 
-const SelectBots = () => {
-	const {  setFinalData, finalData } = useContext(PlanetDetailsContext);
+
+ const SelectBotContainer = () => {
+    const { setFinalData, finalData } = useContext(PlanetDetailsContext);
 	const [selectedPlanetIndex, setSelectedPlanetIndex] = useState(-1);
 	const [selectedVehicle, setSelectedVehicle] = useState('');
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
@@ -24,7 +14,7 @@ const SelectBots = () => {
 	}, []);
 
 	const populatePlanetAndBotsData = () => {
-		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet')) ;
+		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet'));
 		return filteredArrOfSelectedPlanet.map((data) => ({
 			...data,
 			finalStatus: false,
@@ -35,7 +25,7 @@ const SelectBots = () => {
 				speed: data.speed,
 				travelTime: 0,
 				totalUnits: data.totalUnits,
-				error: true
+				error: true,
 			})),
 		}));
 	};
@@ -49,7 +39,6 @@ const SelectBots = () => {
 	}, [selectedVehicle, selectedPlanetIndex]);
 
 	const calcTimeTravelAndBotsLeft = () => {
-
 		let error = false;
 		let planetName = '';
 		let vehicleName = '';
@@ -76,26 +65,26 @@ const SelectBots = () => {
 							if (distanceToPlanet > vehicleData.distance) {
 								alert(`OOPS!! YOU CANNOT TRAVEL TO ${planetData.planetname} USING ${vehicleData.name}`);
 								error = true;
-								return { ...vehicleData,error: true };
+								return { ...vehicleData, error: true };
 							} else {
 								if (vehicleData.totalUnits === 0) {
 									error = true;
 									alert(
 										`OOPS!! YOU RAN OUT OF ${vehicleData.name}. PLEASE USE SOME OTHER BOT FOR INVASION.`
 									);
-									return { ...vehicleData,error: true };
+									return { ...vehicleData, error: true };
 								} else {
 									planetName = planetData.planetname;
 									vehicleName = vehicleData.name;
 									return {
 										...vehicleData,
 										travelTime: Math.round(distanceToPlanet / parseInt(vehicleData.speed)),
-										error: false
+										error: false,
 									};
 								}
 							}
 						} else {
-							return { ...vehicleData};
+							return { ...vehicleData };
 						}
 					});
 					return { ...planetData, vehicleDataArray: temp };
@@ -137,62 +126,11 @@ const SelectBots = () => {
 		setSelectedVehicle(e.target.value);
 	};
 
-	return (
-		<SelectedPlanetWrapper justifyContent="center">
-			<SolarSystemWrapper height="75vh" width="100vw" flexDirection="column">
-				<Heading color="#FAD107" fontSize="1.2rem" fontFamily="Avenir">
-					Choose Space Vehicles to Invade the Planets.
-				</Heading>
-				<PlanetWrapper justifyContent="flex-start" flexDirection="row" height="60vh">
-					{planetAndBotsData.map(({ planetname, imgname, vehicleDataArray, distance }, idx) => (
-						<BadgeWrapper justifyContent="flex-start" key={uuid()} height="60vh" flexDirection="column">
-							<SelectedPlanetImg margin="1vh 0vw" imgname={imgname} />
-							<Heading color="#FAD107" fontSize="1.2rem">
-								{planetname}
-							</Heading>
-							<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${distance} megamiles`}</Heading>
-							<Select name="planetName" onChange={onSelectedVehicleIdx}>
-								{vehicleDataArray[0].error  && (
-									<option key={uuid()} defaultValue="Choose A Space Vehicle">
-										Choose A Space Vehicle
-									</option>
-								)}
-								{vehicleDataArray.map((bot) => (
-									<option key={uuid()} data-index={idx} value={bot.name}>
-										{`${bot.name} (${bot.totalUnits})`}
-									</option>
-								))}
-							</Select>
-							{vehicleDataArray[0].travelTime > 0 && (
-								<React.Fragment>
-									<ImageWrapper
-										rotateBy="25deg"
-										objectFit="contain"
-										borderRad="0px"
-										width="20vw"
-										height="20vh"
-										marginBottom="3vh"
-										src={vehicleDataArray[0].botImageName}
-									/>
-									<Heading fontSize="1rem" color="#FAD107">
-										{`Time Taken:- ${vehicleDataArray[0].travelTime}`}
-									</Heading>
-								</React.Fragment>
-							)}
-						</BadgeWrapper>
-					))}
-				</PlanetWrapper>
-			</SolarSystemWrapper>
-			<CustomButton
-				redirectPath="/displayfinalresult"
-				disabled={finalData.planet_names.length === 4 ? false : true}
-				leftpos="0vh"
-				width="15vw"
-				TextForButton="Mission Find Falcone"
-				opacity= {finalData.planet_names.length === 4 ? 1 : 0.6}
-			/>
-		</SelectedPlanetWrapper>
-	);
-};
+    return (
+        <React.Fragment>
+            <SelectBotView planetAndBotsData={planetAndBotsData} onSelectedVehicleIdx={onSelectedVehicleIdx} finalData={finalData}/>
+        </React.Fragment>
+    )
+}
 
-export default SelectBots;
+export default SelectBotContainer
