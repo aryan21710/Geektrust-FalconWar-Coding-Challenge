@@ -14,7 +14,7 @@ import uuid from 'react-uuid';
 import { PlanetDetailsContext } from '../context/appContext';
 
 const SelectBots = () => {
-	const {  setFinalData, finalData } = useContext(PlanetDetailsContext);
+	const { setFinalData, finalData } = useContext(PlanetDetailsContext);
 	const [selectedPlanetIndex, setSelectedPlanetIndex] = useState(-1);
 	const [selectedVehicle, setSelectedVehicle] = useState('');
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
@@ -24,9 +24,9 @@ const SelectBots = () => {
 	}, []);
 
 	const populatePlanetAndBotsData = () => {
-		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet')) ;
-		return filteredArrOfSelectedPlanet.map((data) => ({
-			...data,
+		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet'));
+		return filteredArrOfSelectedPlanet.map((planetData) => ({
+			...planetData,
 			finalStatus: false,
 			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
 				name: data.name,
@@ -34,8 +34,12 @@ const SelectBots = () => {
 				distance: data.distance,
 				speed: data.speed,
 				travelTime: 0,
-				totalUnits: data.totalUnits,
-				error: true
+				totalUnits: {
+					original: data.totalUnits,
+					current: data.totalUnits,
+					planetIdx: planetData.index,
+				},
+				error: true,
 			})),
 		}));
 	};
@@ -49,7 +53,6 @@ const SelectBots = () => {
 	}, [selectedVehicle, selectedPlanetIndex]);
 
 	const calcTimeTravelAndBotsLeft = () => {
-
 		let error = false;
 		let planetName = '';
 		let vehicleName = '';
@@ -76,26 +79,26 @@ const SelectBots = () => {
 							if (distanceToPlanet > vehicleData.distance) {
 								alert(`OOPS!! YOU CANNOT TRAVEL TO ${planetData.planetname} USING ${vehicleData.name}`);
 								error = true;
-								return { ...vehicleData,error: true };
+								return { ...vehicleData, error: true };
 							} else {
 								if (vehicleData.totalUnits === 0) {
 									error = true;
 									alert(
 										`OOPS!! YOU RAN OUT OF ${vehicleData.name}. PLEASE USE SOME OTHER BOT FOR INVASION.`
 									);
-									return { ...vehicleData,error: true };
+									return { ...vehicleData, error: true };
 								} else {
 									planetName = planetData.planetname;
 									vehicleName = vehicleData.name;
 									return {
 										...vehicleData,
 										travelTime: Math.round(distanceToPlanet / parseInt(vehicleData.speed)),
-										error: false
+										error: false,
 									};
 								}
 							}
 						} else {
-							return { ...vehicleData};
+							return { ...vehicleData };
 						}
 					});
 					return { ...planetData, vehicleDataArray: temp };
@@ -105,17 +108,23 @@ const SelectBots = () => {
 					};
 				}
 			})
-			.map((planetData) => {
+			.map((planetData, idx) => {
 				const { vehicleDataArray } = planetData;
 				return {
 					...planetData,
 					vehicleDataArray: vehicleDataArray.map((vehicleData) => {
 						return {
 							...vehicleData,
-							totalUnits:
-								vehicleData.name === selectedVehicle && vehicleData.totalUnits > 0 && !error
-									? vehicleData.totalUnits - 1
-									: vehicleData.totalUnits,
+							totalUnits: {
+								original: vehicleData.totalUnits.original,
+								planetIdx: idx,
+								current:
+									vehicleData.name === selectedVehicle && vehicleData.totalUnits.current > 0 && !error
+										? vehicleData.totalUnits.current - 1
+										: vehicleData.totalUnits.planetIdx === selectedPlanetIndex
+										? vehicleData.totalUnits.original
+										: vehicleData.totalUnits.current,
+							},
 						};
 					}),
 				};
@@ -152,14 +161,14 @@ const SelectBots = () => {
 							</Heading>
 							<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${distance} megamiles`}</Heading>
 							<Select name="planetName" onChange={onSelectedVehicleIdx}>
-								{vehicleDataArray[0].error  && (
+								{vehicleDataArray[0].error && (
 									<option key={uuid()} defaultValue="Choose A Space Vehicle">
 										Choose A Space Vehicle
 									</option>
 								)}
 								{vehicleDataArray.map((bot) => (
 									<option key={uuid()} data-index={idx} value={bot.name}>
-										{`${bot.name} (${bot.totalUnits})`}
+										{`${bot.name} (${bot.totalUnits.current})`}
 									</option>
 								))}
 							</Select>
@@ -189,7 +198,7 @@ const SelectBots = () => {
 				leftpos="0vh"
 				width="15vw"
 				TextForButton="Mission Find Falcone"
-				opacity= {finalData.planet_names.length === 4 ? 1 : 0.6}
+				opacity={finalData.planet_names.length === 4 ? 1 : 0.6}
 			/>
 		</SelectedPlanetWrapper>
 	);
