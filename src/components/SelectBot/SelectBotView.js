@@ -11,7 +11,14 @@ import {
 import { CustomButton } from '../common/CustomButton';
 import uuid from 'react-uuid';
 
-const SelectBotView = ({ planetAndBotsData, finalData, onRadioChange, vehicleIndex, planetIndex }) => {
+const SelectBotView = ({
+	planetAndBotsData,
+	finalData,
+	onRadioChange,
+	vehicleIndex,
+	planetIndex,
+}) => {
+
 	return (
 		<SelectedPlanetWrapper justifyContent="center">
 			<SolarSystemWrapper height="75vh" width="100vw" flexDirection="column">
@@ -19,7 +26,7 @@ const SelectBotView = ({ planetAndBotsData, finalData, onRadioChange, vehicleInd
 					Choose Space Vehicles to Invade the Planets.
 				</Heading>
 				<PlanetWrapper justifyContent="flex-start" flexDirection="row" height="60vh">
-					{planetAndBotsData.map(({ planetIdx, planetname, imgname, distance, vehicleDataArray }, idx) => (
+					{planetAndBotsData.map(({ planetIndexArr, planetname, imgname, distance, vehicleDataArray }, idx) => (
 						<BadgeWrapper justifyContent="flex-start" key={uuid()} height="50vh" flexDirection="column">
 							<SelectedPlanetImg margin="1vh 0vw" imgname={imgname} />
 							<Heading color="#FAD107" fontSize="1.2rem">
@@ -45,7 +52,7 @@ const SelectBotView = ({ planetAndBotsData, finalData, onRadioChange, vehicleInd
 											onChange={onRadioChange}
 											id={`rad${vehicleidx}${idx}`}
 											type="radio"
-											checked={idx === planetIndex && vehicleidx === vehicleIndex}
+											checked={(idx===planetIndex && vehicleidx===vehicleIndex)}
 											data-vehicleidx={vehicleidx}
 											data-planetidx={idx}
 											value={vehicleData.name}
@@ -58,7 +65,9 @@ const SelectBotView = ({ planetAndBotsData, finalData, onRadioChange, vehicleInd
 								);
 							})}
 							<Heading margin="3vh 0vw" fontSize="1rem" color="#FAD107">
-								{`Time Taken:- ${planetAndBotsData[idx].travelTime}`}
+									{planetIndexArr.includes(idx) ? `Time Taken:- ${planetAndBotsData[idx].travelTime}`
+									: `Time Taken:- 0`
+									}
 							</Heading>
 						</BadgeWrapper>
 					))}
@@ -77,6 +86,7 @@ const SelectBotView = ({ planetAndBotsData, finalData, onRadioChange, vehicleInd
 };
 
 export default SelectBotView;
+
 
 /*
 
@@ -100,3 +110,5 @@ planetIndexArr":0,"vehicleIndexArr":0
 "speed":10,"travelTime":0,"totalUnits":{"original":2,"current":2},"error":true}]
 [{"0":[],"1":[],"2":[],"3":[]}]
 */
+
+

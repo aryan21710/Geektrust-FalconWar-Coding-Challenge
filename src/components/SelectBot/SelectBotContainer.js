@@ -54,7 +54,8 @@ const SelectBotContainer = () => {
 		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet'));
 		return filteredArrOfSelectedPlanet.map((data) => ({
 			...data,
-			planetIdx: -1,
+			planetIndexArr: [],
+			travelTime: 0,
 			finalStatus: false,
 			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
 				name: data.name,
@@ -81,9 +82,13 @@ const SelectBotContainer = () => {
 
 	const syncBotUnitsAndTravelTime = () => {
 		// alert('called');
-		const updatedPlanetAndBotsData = planetAndBotsData.map((data) => {
+		const updatedPlanetAndBotsData = planetAndBotsData.map((planetData,idx) => {
+			const _=leftUnitsAndTravelTime.filter((data)=> data.planetIndexArr.includes(idx))
+			console.log(`updatedPlanetAndBotsData ${JSON.stringify(_)}`)
 			return {
-				...data,
+				...planetData,
+				planetIndexArr: [...planetData.planetIndexArr, planetIndex],
+				travelTime: _.length > 0 ? _[0].travelTime : planetData.travelTime,
 				vehicleDataArray: [...leftUnitsAndTravelTime],
 			};
 		});
