@@ -13,7 +13,22 @@ const SelectBotContainer = () => {
 
 	const { planetIndex, planetValue, vehicleIndex } = selectedPlanet;
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
-	const [leftUnitsAndTravelTime, setLeftUnitsAndTravelTime] = useState([]);
+	const [leftUnitsAndTravelTime, setLeftUnitsAndTravelTime] = useState(
+		Array(4).fill({
+			name: '',
+			botImageName: '',
+			distance: '',
+			speed: '',
+			travelTime: 0,
+			totalUnits: {
+				original: -1,
+				current: -1,
+			},
+			error: true,
+			planetIndexArr: [],
+			vehicleIndexArr: [],
+		})
+	);
 
 	useEffect(() => {
 		setPlanetAndBotsData(populatePlanetAndBotsData());
@@ -32,7 +47,7 @@ const SelectBotContainer = () => {
 	}, [planetValue, planetIndex, vehicleIndex]);
 
 	useEffect(() => {
-		Object.keys(leftUnitsAndTravelTime).length > 0 && calcTimeTravelAndBotsLeft();
+		planetValue.length > 0 && planetIndex > -1 && vehicleIndex > -1 && syncBotUnitsAndTravelTime();
 	}, [leftUnitsAndTravelTime]);
 
 	const populatePlanetAndBotsData = () => {
@@ -64,6 +79,18 @@ const SelectBotContainer = () => {
 		});
 	};
 
+	const syncBotUnitsAndTravelTime = () => {
+		// alert('called');
+		const updatedPlanetAndBotsData = planetAndBotsData.map((data) => {
+			return {
+				...data,
+				vehicleDataArray: [...leftUnitsAndTravelTime],
+			};
+		});
+
+		setPlanetAndBotsData(updatedPlanetAndBotsData);
+	};
+
 	const updateBotUnitsAndTravelTime = () => {
 		const planetDistance = planetAndBotsData[planetIndex].distance;
 		const { vehicleDataArray } = planetAndBotsData[planetIndex];
@@ -71,19 +98,52 @@ const SelectBotContainer = () => {
 		const totalUnits = vehicleDataArray[vehicleIndex].totalUnits;
 		const vehicleSpeed = vehicleDataArray[vehicleIndex].speed;
 		if (planetDistance <= vehicleMaxDistance && totalUnits.current > 0) {
-			setLeftUnitsAndTravelTime([
-				...leftUnitsAndTravelTime,
-				{
-					...leftUnitsAndTravelTime,
-					vehicleName: vehicleDataArray[vehicleIndex].name,
-					leftUnits: totalUnits.current - 1,
-					travelTime: Math.round(planetAndBotsData[planetIndex].distance / parseInt(vehicleSpeed)),
-					planetIndex,
-					vehicleIndex,
-				},
-			]);
-		} else {
-			setLeftUnitsAndTravelTime([...leftUnitsAndTravelTime]);
+			// leftUnitsAndTravelTime is array of 4. update all array.
+			const updatedLeftUnitsAndTravelTime = leftUnitsAndTravelTime.map((data, idx) => {
+				if (data.planetIndexArr.includes(planetIndex)) {
+					return {
+						...vehicleDataArray[idx],
+						travelTime: 0,
+						totalUnits: {
+							original: vehicleDataArray[idx].totalUnits.original,
+							current:
+							vehicleDataArray[idx].totalUnits.current + 1 <= vehicleDataArray[idx].totalUnits.original
+									? vehicleDataArray[idx].totalUnits.current + 1
+									: vehicleDataArray[idx].totalUnits.original,
+						},
+						planetIndexArr: [],
+						vehicleIndexArr: [],
+					};
+				} else {
+					if (idx === vehicleIndex) {
+						// 1st new entry is added below
+						return {
+							...vehicleDataArray[idx],
+							travelTime: Math.round(planetAndBotsData[planetIndex].distance / parseInt(vehicleSpeed)),
+							totalUnits: {
+								original: totalUnits.original,
+								current: totalUnits.current - 1,
+							},
+							planetIndexArr: [planetIndex],
+							vehicleIndexArr: [vehicleIndex],
+						};
+					} else {
+						// all old entry is overwritten
+						return {
+							...vehicleDataArray[idx],
+							travelTime: 0,
+							totalUnits: {
+								original: vehicleDataArray[idx].totalUnits.original,
+								current: vehicleDataArray[idx].totalUnits.current,
+							},
+							planetIndexArr: [],
+							vehicleIndexArr: [],
+						};
+					}
+				}
+			});
+
+			setLeftUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
 		}
 	};
 
@@ -96,6 +156,7 @@ const SelectBotContainer = () => {
 				return {
 					leftUnits,
 					travelTime,
+					planetIndexArr: [],
 				};
 			} else {
 				return {
@@ -112,71 +173,6 @@ const SelectBotContainer = () => {
 		}
 	};
 
-	const calcTimeTravelAndBotsLeft = () => {
-		console.log(`updatedPlanetAndBotsData ${planetIndex} :: ${planetValue} ::  ${vehicleIndex}`);
-		const updatedPlanetAndBotsData = planetAndBotsData.map((planetData, planetidx) => {
-			const { vehicleDataArray } = planetData;
-			if (planetidx === planetIndex) {
-				const _ = vehicleDataArray.map((vehicleData, idx) => {
-					if (idx === vehicleIndex) {
-						return {
-							...vehicleData,
-							totalUnits: {
-								original: vehicleData.totalUnits.original,
-								current: findLeftUnits().leftUnits,
-							},
-							travelTime: findLeftUnits().travelTime,
-						};
-					} else {
-						return {
-							...vehicleData,
-							totalUnits: {
-								original: vehicleData.totalUnits.original,
-								current: vehicleData.totalUnits.original,
-							},
-							travelTime: 0,
-						};
-					}
-				});
-				return {
-					...planetData,
-					vehicleDataArray: _,
-				};
-			} else {
-				return {
-					...planetData,
-					vehicleDataArray: vehicleDataArray.map((vehicleData, idx) => {
-						if (idx === vehicleIndex) {
-							return {
-								...vehicleData,
-								totalUnits: {
-									original: vehicleData.totalUnits.original,
-									current: findLeftUnits().leftUnits,
-								},
-								travelTime: 0,
-							};
-						} else {
-							/* FOLLOWING CLAUSE NOT WORKING FOR TOTAL-UNITS */
-							return {
-								...vehicleData,
-								totalUnits: {
-									original: vehicleData.totalUnits.original,
-									current:
-										findLeftUnits(vehicleData.name).leftUnits === -1
-											? vehicleData.totalUnits.original
-											: findLeftUnits(vehicleData.name).leftUnits,
-								},
-								travelTime: 0,
-							};
-						}
-					}),
-				};
-			}
-		});
-
-		console.log(`updatedPlanetAndBotsData ${JSON.stringify(updatedPlanetAndBotsData, null, 4)}`);
-		setPlanetAndBotsData([...updatedPlanetAndBotsData]);
-	};
 
 	return (
 		<React.Fragment>
