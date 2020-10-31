@@ -81,10 +81,8 @@ const SelectBotContainer = () => {
 	};
 
 	const syncBotUnitsAndTravelTime = () => {
-		// alert('called');
-		const updatedPlanetAndBotsData = planetAndBotsData.map((planetData,idx) => {
-			const _=leftUnitsAndTravelTime.filter((data)=> data.planetIndexArr.includes(idx))
-			console.log(`updatedPlanetAndBotsData ${JSON.stringify(_)}`)
+		const updatedPlanetAndBotsData = planetAndBotsData.map((planetData, idx) => {
+			const _ = leftUnitsAndTravelTime.filter((data) => data.planetIndexArr.includes(idx));
 			return {
 				...planetData,
 				planetIndexArr: [...planetData.planetIndexArr, planetIndex],
@@ -92,7 +90,6 @@ const SelectBotContainer = () => {
 				vehicleDataArray: [...leftUnitsAndTravelTime],
 			};
 		});
-
 		setPlanetAndBotsData(updatedPlanetAndBotsData);
 	};
 
@@ -112,7 +109,8 @@ const SelectBotContainer = () => {
 						totalUnits: {
 							original: vehicleDataArray[idx].totalUnits.original,
 							current:
-							vehicleDataArray[idx].totalUnits.current + 1 <= vehicleDataArray[idx].totalUnits.original
+								vehicleDataArray[idx].totalUnits.current + 1 <=
+								vehicleDataArray[idx].totalUnits.original
 									? vehicleDataArray[idx].totalUnits.current + 1
 									: vehicleDataArray[idx].totalUnits.original,
 						},
@@ -147,37 +145,9 @@ const SelectBotContainer = () => {
 					}
 				}
 			});
-
 			setLeftUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
 		}
 	};
-
-	const findLeftUnits = (currentVehicleName = undefined) => {
-		if (currentVehicleName) {
-			console.log(`currentVehicleName ${currentVehicleName}`);
-			const _ = leftUnitsAndTravelTime.find((name) => currentVehicleName === name.vehicleName);
-			if (_) {
-				const { leftUnits, travelTime } = _;
-				return {
-					leftUnits,
-					travelTime,
-					planetIndexArr: [],
-				};
-			} else {
-				return {
-					leftUnits: -1,
-					travelTime: -1,
-				};
-			}
-		} else {
-			const { leftUnits, travelTime } = leftUnitsAndTravelTime.find((name) => planetValue === name.vehicleName);
-			return {
-				leftUnits,
-				travelTime,
-			};
-		}
-	};
-
 
 	return (
 		<React.Fragment>
