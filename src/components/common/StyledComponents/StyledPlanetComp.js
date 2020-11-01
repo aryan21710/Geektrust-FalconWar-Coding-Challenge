@@ -21,7 +21,7 @@ export const SelectedPlanetWrapper = styled.div`
 
 export const SolarSystemWrapper = styled.div`
 	display: flex;
-	justify-content: space-around;
+	justify-content: flex-start;
 	align-items: center;
 	flex-direction: column;
 	width: ${(props) => props.width || '80vw'};

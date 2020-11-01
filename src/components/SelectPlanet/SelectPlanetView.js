@@ -45,14 +45,14 @@ export const SelectPlanetView = ({
 
 	return (
 		<React.Fragment>
-			<SelectedPlanetWrapper justifyContent="center">
+			<SelectedPlanetWrapper justifyContent="space-evenly">
 				<AnimatedJetWrapper style={jetAnimatedProp}>
 					<Heading color="#FAD107" fontSize="1rem">
 						Select Space Vehicle
 					</Heading>
 					<AnimatedMiniJet onClick={moveToDisplayVehiclePage} src={Minijet} />
 				</AnimatedJetWrapper>
-				<SolarSystemWrapper height="45vh">
+				<SolarSystemWrapper height="40vh">
 					<Heading fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">
 						King Shan has received intelligence that Al Falcone is in hiding in one of these 6 planets -
 						DonLon, Enchai, Jebing, Sapir, Lerbin & Pingasor. <b>Choose 4 planets you’d like to Invade.</b>
@@ -106,7 +106,7 @@ export const SelectPlanetView = ({
 						})}
 					</SelectedPlanet>
 				</PlanetWrapper>
-				<ButtonHeading onClick={onResetPlanet} fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">
+				<ButtonHeading onClick={onResetPlanet}  fontSize="1.2rem" color="#FAD107">
 						Reset Planets 
 					</ButtonHeading>
 			</SelectedPlanetWrapper>
