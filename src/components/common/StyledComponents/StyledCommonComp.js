@@ -46,7 +46,7 @@ export const Heading = styled.h1`
 
 export const ButtonHeading = styled(Heading)`
 	position: absolute;
-	bottom: 5vh;
+	bottom: 2vh;
 	right: 5vw;
 	font-style: italic;
 	border-bottom: 2px solid white;
