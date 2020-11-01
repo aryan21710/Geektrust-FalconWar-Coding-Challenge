@@ -18,7 +18,6 @@ import {
 	UnAnimatedWrapper,
 } from '../common/StyledComponents/StyledPlanetComp';
 import uuid from 'react-uuid';
-import { CustomButton } from '../../components/common/CustomButton';
 
 export const SelectPlanetView = ({
 	jetAnimatedProp,
@@ -27,6 +26,7 @@ export const SelectPlanetView = ({
 	updatedPlanetData,
 	animateSelectedPlanet,
 	selectedPlanet,
+	onResetPlanet
 }) => {
 	const WrapperContent = ({ planet, idx }) => {
 		return (
@@ -104,7 +104,7 @@ export const SelectPlanetView = ({
 						})}
 					</SelectedPlanet>
 				</PlanetWrapper>
-				<ButtonHeading fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">
+				<ButtonHeading onClick={onResetPlanet} fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">
 						Reset Planets 
 					</ButtonHeading>
 			</SelectedPlanetWrapper>

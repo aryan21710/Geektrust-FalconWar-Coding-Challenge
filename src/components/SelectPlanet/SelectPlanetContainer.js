@@ -114,6 +114,15 @@ import { SelectPlanetView } from './SelectPlanetView';
 
 	const moveToDisplayVehiclePage = () => history.push(`/displayallspacevehicles`);
 
+	const onResetPlanet = () => {
+		setAnimPlanetCnt(0);
+			setPlanetIndex(-1);
+			setImgname("");
+			setDistance(0);
+			setPlanetName("");
+	}
+
+
 	return (
 		<React.Fragment>
 			<SelectPlanetView
@@ -123,6 +132,7 @@ import { SelectPlanetView } from './SelectPlanetView';
 				updatedPlanetData={updatedPlanetData}
 				animateSelectedPlanet={animateSelectedPlanet}
 				selectedPlanet={selectedPlanet}
+				onResetPlanet={onResetPlanet}
 			/>
 		</React.Fragment>
 	);
