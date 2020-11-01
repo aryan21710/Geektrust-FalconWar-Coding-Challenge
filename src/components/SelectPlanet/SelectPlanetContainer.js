@@ -23,6 +23,7 @@ const SelectPlanetContainer = () => {
 	const [imgname, setImgname] = useState('');
 	const [planetname, setPlanetName] = useState('');
 	const [distance, setDistance] = useState(0);
+	const [updateSelection, setUpdateSelection]=useState(-1)
 
 
 	const jetAnimatedProp = useSpring({
@@ -95,6 +96,10 @@ const SelectPlanetContainer = () => {
 		}
 	}, [animPlanetCnt]);
 
+	useEffect(()=>{
+		updateSelection > -1 && updatePlanetSection()
+	},[updateSelection])
+
 	const isPlanetAlreadySelected = (planetname) =>
 		selectedPlanet.some((planetData) => planetData.planetname === planetname);
 
@@ -111,10 +116,28 @@ const SelectPlanetContainer = () => {
 		}
 	};
 
+
+	const updatePlanetSection=()=>{
+		const _=selectedPlanet.map((planet)=>{
+			if (planet.index===updateSelection) {
+				return {
+					...planet,
+					imgname: Minijet
+				}
+			} else {
+				return {
+					...planet
+				}
+			}
+		})
+		setSelectedPlanet(_)
+	}
+
 	const moveToDisplayVehiclePage = () => history.push(`/displayallspacevehicles`);
 
 	const onResetPlanet = () => setAnimPlanetCnt(0);
 
+	const onChangePlanetSelection = (e) => setUpdateSelection(parseInt(e.target.dataset.planetidx));
 
 	const stopPlanetAnim=()=>alert('4 PLANETS ALREADY SELECTED. IF YOU WANT TO RESET THE SELECTION CLICK ON RESET PLANETS.');
 
@@ -130,6 +153,7 @@ const SelectPlanetContainer = () => {
 				onResetPlanet={onResetPlanet}
 				animPlanetCnt={animPlanetCnt}
 				stopPlanetAnim={stopPlanetAnim}
+				onChangePlanetSelection={onChangePlanetSelection}
 			/>
 		</React.Fragment>
 	);

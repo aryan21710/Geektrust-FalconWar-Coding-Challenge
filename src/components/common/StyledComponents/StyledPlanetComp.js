@@ -21,7 +21,7 @@ export const SelectedPlanetWrapper = styled.div`
 
 export const SolarSystemWrapper = styled.div`
 	display: flex;
-	justify-content: flex-start;
+	justify-content: ${(props) => props.justifyContent || 'center'};
 	align-items: center;
 	flex-direction: column;
 	width: ${(props) => props.width || '80vw'};
@@ -95,6 +95,7 @@ export const SelectedPlanetImg = styled(animated.div)`
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 12vh 12vh;
+	cursor: pointer;
 	@media (max-width: 768px) {
 		height: 10vh;
 		width: 10vh;
