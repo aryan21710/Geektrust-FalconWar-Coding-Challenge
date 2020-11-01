@@ -9,7 +9,7 @@ import { StarGrid } from '../components/common/StarGrid';
 const LandingPage = lazy(() => import('../components/LandingPage'));
 const Header = lazy(() => import('../components/common/Header'));
 const Footer = lazy(() => import('../components/common/Footer'));
-const SelectPlanet = lazy(() => import('../components/SelectPlanet'));
+const SelectPlanetContainer = lazy(() => import('../components/SelectPlanet/SelectPlanetContainer'));
 const SelectBotContainer = lazy(() => import('../components/SelectBot/SelectBotContainer'));
 const DisplayAllSpaceVehicles = lazy(() => import('../components/DisplayAllSpaceVehicles'));
 const DisplayFinalResult = lazy(() => import('../components/DisplayFinalResult'));
@@ -102,7 +102,7 @@ const Approutes = () => {
 
 							<Header />
 							<Route path={`/`} exact={true} strict component={LandingPage} />
-							<Route path={`/selectplanets`} exact={true} strict component={SelectPlanet} />
+							<Route path={`/selectplanets`} exact={true} strict component={SelectPlanetContainer} />
 							<Route path={`/selectbots`} exact={true} strict component={SelectBotContainer} />
 							<Route
 								path={`/displayallspacevehicles`}
