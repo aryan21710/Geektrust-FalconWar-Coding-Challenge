@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { SelectedPlanetWrapper, Heading } from './common/StyledComponent';
+import {  Heading } from './common/StyledComponents/StyledCommonComp';
+import { SelectedPlanetWrapper } from './common/StyledComponents/StyledPlanetComp';
+
 import { PlanetDetailsContext } from '../context/appContext';
 import { usePostDataToFetchResult } from '../customHooks/usePostDataToFetchResult';
 

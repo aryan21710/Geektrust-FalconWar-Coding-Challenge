@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, HeaderWrapper } from './StyledComponent';
+import { Heading, HeaderWrapper } from './StyledComponents/StyledCommonComp';
 
 const Header = () => {
 	return (

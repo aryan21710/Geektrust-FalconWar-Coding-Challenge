@@ -1,6 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { animated } from 'react-spring';
-import solarSystem from '../../assets/images/sunWithOrbit.png';
 
 export const Wrapper = styled.div`
 	width: 100vw;
@@ -39,12 +38,21 @@ export const Heading = styled.h1`
 	font-family: ${(props) => props.fontFamily || 'Nasalisation'};
 	z-index: 1000;
 	font-weight: 100;
-	margin: ${props=>props.margin || "2.5px auto"};
+	margin: ${(props) => props.margin || '2.5px auto'};
 	@media (max-width: 768px) {
 		font-size: 1rem;
 	}
 `;
 
+export const ButtonHeading = styled(Heading)`
+	position: absolute;
+	bottom: 5vh;
+	right: 5vw;
+	font-style: italic;
+	border-bottom: 2px solid white;
+	padding: 0.5vh 0.5vw;
+	cursor: pointer;
+`;
 export const BadgeWrapper = styled.div`
 	display: flex;
 	justify-content: center;
@@ -54,13 +62,13 @@ export const BadgeWrapper = styled.div`
 	height: ${(props) => props.height || '75vh'};
 	width: ${(props) => props.width || '25vw'};
 	flex: ${(props) => props.flex || '1'};
-	flex-wrap: ${props=>props.flexWrap};
+	flex-wrap: ${(props) => props.flexWrap};
 	z-index: 2;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 30vh;
 	}
-`
+`;
 
 export const ButtonWrapper = styled.div`
 	width: 100vw;
@@ -88,7 +96,7 @@ export const ImageWrapper = styled.img`
 
 export const Button = styled.div`
 	border-radius: 50px;
-	padding: 0vh 2vw;
+	padding: ${(props) => props.padding || '0vh 2vw'};
 	font-size: 1.5rem;
 	font-weight: 700;
 	display: flex;
@@ -97,7 +105,7 @@ export const Button = styled.div`
 	align-items: center;
 	color: white;
 	outline: none;
-	opacity: ${props=>props.opacity || 1};
+	opacity: ${(props) => props.opacity || 1};
 	cursor: pointer;
 	position: relative;
 	margin: ${(props) => props.margin || '0 auto'};
@@ -139,135 +147,6 @@ export const AnimatedMiniJet = styled(animated.img)`
 	left: ${(props) => props.leftpos};
 `;
 
-export const SelectedPlanetWrapper = styled.div`
-	width: 100vw;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	display: flex;
-	justify-content: ${(props) => props.justifyContent || 'center'};
-	align-items: center;
-	flex-direction: column;
-	@media (max-width: 768px) {
-		flex-direction: column;
-		height: 140vh;
-		overflow-y: scroll;
-	}
-`;
-
-export const SolarSystemWrapper = styled.div`
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	flex-direction: column;
-	width: ${(props) => props.width || '80vw'};
-	flex-direction: ${(props) => props.flexDirection || 'column'};
-	height: ${(props) => props.height || '50vh'};
-	z-index: 100;
-	@media (max-width: 768px) {
-		width: 100vw;
-		height: 40vh;
-	}
-`;
-
-export const SolarSystemImage = styled(animated.div)`
-	cursor: pointer;
-	width: 60vw;
-	height: 30vh;
-	background-image: url(${solarSystem});
-	background-position: center;
-	background-repeat: no-repeat;
-	position: relative;
-	z-index: 100;
-	@media (max-width: 768px) {
-		width: 90vw;
-	}
-`;
-
-export const Planet = styled(animated.img)`
-	width: ${(props) => props.width || '6vw'};
-	object-fit: cover;
-	cursor: pointer;
-	position: absolute;
-	top: ${(props) => props.toppos || '10vh'};
-	left: ${(props) => props.leftpos || '0vw'};
-	z-index: 100;
-	@media (max-width: 768px) {
-		width: 90vw;
-	}
-`;
-
-export const PlanetWrapper = styled.div`
-	display: flex;
-	width: 100vw;
-	height: ${props=>props.height || "25vh"};
-	justify-content: ${props=>props.justifyContent || "center"};
-	flexDirection=> ${props=>props.flexDirection||"row"};
-	@media (max-width: 768px) {
-		width: 100vw;
-		height: 80vh;
-		flex-direction: column;
-	}
-`;
-
-export const SelectedPlanet = styled.div`
-	display: flex;
-	flex-direction: row;
-	flex: 1;
-	height: 30vh;
-	position: relative;
-	overflow: hidden;
-	@media (max-width: 768px) {
-		width: 100vw;
-		height: 55vh;
-	}
-`;
-
-export const SelectedPlanetImg = styled(animated.div)`
-	height: 12vh;
-	width: 12vh;
-	margin: ${props=>props.margin};
-	background-image: url(${(props) => props.imgname});
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 12vh 12vh;
-	@media (max-width: 768px) {
-		height: 10vh;
-		width: 10vh;
-	}
-`;
-
-const animateSelectedPlanet = keyframes`
-    from {
-      transform: translate(0vw);
-    }
-  
-    to {
-      transform: translate(30vw);
-    }
-  `;
-
-export const UnAnimatedWrapper = styled.div`
-	display: flex;
-	justify-content: space-around;
-	height: 25vh;
-	width: 100%;
-	flex: 1;
-	position: absolute;
-	left: ${(props) => props.leftpos || '-30vw'};
-	align-items: center;
-	flex-direction: column;
-	@media (max-width: 768px) {
-		height: 10vh;
-		width: 10vh;
-	}
-`;
-
-export const AnimatedWrapper = styled(UnAnimatedWrapper)`
-	animation: ${animateSelectedPlanet} 0.5s ease-in-out forwards;
-`;
-
 export const StaticWrapper = styled.div`
 	position: relative;
 	overflow: hidden;
@@ -281,7 +160,7 @@ export const Select = styled.select`
 	background: white;
 	outline: none;
 	display: block;
-	width: ${props=>props.width};
+	width: ${(props) => props.width};
 	font-size: 0.8rem;
 	font-family: sans-serif;
 	color: black;
@@ -298,7 +177,7 @@ export const Select = styled.select`
 	background-size: 0.65em auto, 100%;
 `;
 
-export const Label=styled.label`
+export const Label = styled.label`
 	font-size: 0.9rem;
 	color: white;
 	margin-left: 0.5vw;

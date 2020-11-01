@@ -1,20 +1,24 @@
 import React from 'react';
 import {
+	Heading,
+	StaticWrapper,
+	AnimatedMiniJet,
+	AnimatedJetWrapper,
+	ButtonHeading
+} from '../common/StyledComponents/StyledCommonComp';
+import {
 	SelectedPlanetWrapper,
 	SolarSystemWrapper,
 	PlanetWrapper,
 	SelectedPlanet,
 	SelectedPlanetImg,
 	SolarSystemImage,
-	Heading,
 	Planet,
 	AnimatedWrapper,
 	UnAnimatedWrapper,
-	StaticWrapper,
-	AnimatedMiniJet,
-	AnimatedJetWrapper,
-} from './../common/StyledComponent';
+} from '../common/StyledComponents/StyledPlanetComp';
 import uuid from 'react-uuid';
+import { CustomButton } from '../../components/common/CustomButton';
 
 export const SelectPlanetView = ({
 	jetAnimatedProp,
@@ -24,7 +28,7 @@ export const SelectPlanetView = ({
 	animateSelectedPlanet,
 	selectedPlanet,
 }) => {
-	const WrapperContent = ({planet,idx}) => {
+	const WrapperContent = ({ planet, idx }) => {
 		return (
 			<React.Fragment>
 				<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
@@ -39,7 +43,7 @@ export const SelectPlanetView = ({
 
 	return (
 		<React.Fragment>
-			<SelectedPlanetWrapper justifyContent="space-evenly">
+			<SelectedPlanetWrapper justifyContent="center">
 				<AnimatedJetWrapper style={jetAnimatedProp}>
 					<Heading color="#FAD107" fontSize="1rem">
 						Select Space Vehicle
@@ -76,7 +80,7 @@ export const SelectPlanetView = ({
 								return (
 									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<AnimatedWrapper>
-											<WrapperContent idx={idx} planet={planet}/>
+											<WrapperContent idx={idx} planet={planet} />
 										</AnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -84,7 +88,7 @@ export const SelectPlanetView = ({
 								return (
 									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper leftpos="0vw">
-											<WrapperContent idx={idx} planet={planet}/>
+											<WrapperContent idx={idx} planet={planet} />
 										</UnAnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -92,7 +96,7 @@ export const SelectPlanetView = ({
 								return (
 									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper>
-											<WrapperContent idx={idx} planet={planet}/>
+											<WrapperContent idx={idx} planet={planet} />
 										</UnAnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -100,6 +104,9 @@ export const SelectPlanetView = ({
 						})}
 					</SelectedPlanet>
 				</PlanetWrapper>
+				<ButtonHeading fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">
+						Reset Planets 
+					</ButtonHeading>
 			</SelectedPlanetWrapper>
 		</React.Fragment>
 	);

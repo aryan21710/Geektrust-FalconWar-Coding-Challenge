@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Wrapper, BadgeWrapper, ImageWrapper, ButtonWrapper, Heading } from './common/StyledComponent';
+import { Wrapper, BadgeWrapper, ImageWrapper, ButtonWrapper, Heading } from './common/StyledComponents/StyledCommonComp';
 import { useFetchDataFromBackend } from '../customHooks/useFetchDataFromBackend';
 import { ImageBadges } from '../customHooks/useDefineConstants';
 import { PlanetDetailsContext } from '../context/appContext';

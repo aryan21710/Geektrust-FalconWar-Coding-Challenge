@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ButtonText, AnimatedMiniJet } from '../common/StyledComponent';
+import { Button, ButtonText, AnimatedMiniJet } from './StyledComponents/StyledCommonComp';
 import { useHistory } from 'react-router';
 import { useSpring, config } from 'react-spring';
 import { MinijetImage } from '../../customHooks/useDefineConstants';

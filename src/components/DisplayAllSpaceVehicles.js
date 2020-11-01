@@ -1,5 +1,6 @@
 import React from 'react';
-import { Wrapper, BadgeWrapper, ImageWrapper, Heading, SolarSystemWrapper } from './common/StyledComponent';
+import { Wrapper, BadgeWrapper, ImageWrapper, Heading } from './common/StyledComponents/StyledCommonComp';
+import { SolarSystemWrapper } from './common/StyledComponents/StyledPlanetComp';
 
 import { SpaceBotImgArr } from '../customHooks/useDefineConstants';
 import { CustomButton } from '../components/common/CustomButton';

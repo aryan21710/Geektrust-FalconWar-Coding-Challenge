@@ -1,13 +1,15 @@
 import React from 'react';
 import {
-	SelectedPlanetWrapper,
-	SolarSystemWrapper,
 	BadgeWrapper,
 	Heading,
+	Select,
+} from '../common/StyledComponents/StyledCommonComp';
+import {
+	SelectedPlanetWrapper,
+	SolarSystemWrapper,
 	PlanetWrapper,
 	SelectedPlanetImg,
-	Select,
-} from '../common/StyledComponent';
+} from '../common/StyledComponents/StyledPlanetComp';
 import { CustomButton } from '../common/CustomButton';
 import uuid from 'react-uuid';
 
