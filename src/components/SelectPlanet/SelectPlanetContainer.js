@@ -7,11 +7,11 @@ import { createPlanetCordToDisplay } from '../../common/util';
 import { PlanetImageArr, MinijetImage } from '../../customHooks/useDefineConstants';
 import { SelectPlanetView } from './SelectPlanetView';
 
- const SelectPlanetContainer = () => {
-    const { planetCfg, setPlanetCfg, selectedPlanet, setSelectedPlanet, setSelecPlanetCount } = useContext(
-        PlanetDetailsContext
-    );
-    const history = useHistory();
+const SelectPlanetContainer = () => {
+	const { planetCfg, setPlanetCfg, selectedPlanet, setSelectedPlanet, setSelecPlanetCount } = useContext(
+		PlanetDetailsContext
+	);
+	const history = useHistory();
 
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
 	const { Minijet } = MinijetImage;
@@ -114,14 +114,9 @@ import { SelectPlanetView } from './SelectPlanetView';
 
 	const moveToDisplayVehiclePage = () => history.push(`/displayallspacevehicles`);
 
-	const onResetPlanet = () => {
-		setAnimPlanetCnt(0);
-			setPlanetIndex(-1);
-			setImgname("");
-			setDistance(0);
-			setPlanetName("");
-	}
+	const onResetPlanet = () => setAnimPlanetCnt(0);
 
+	
 
 	return (
 		<React.Fragment>
