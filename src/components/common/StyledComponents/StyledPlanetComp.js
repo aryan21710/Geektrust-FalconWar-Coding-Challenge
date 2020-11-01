@@ -91,6 +91,7 @@ export const SelectedPlanetImg = styled(animated.div)`
 	height: 12vh;
 	width: 12vh;
 	margin: ${props=>props.margin};
+	opacity: ${props=>props.opacity || "1"};
 	background-image: url(${(props) => props.imgname});
 	background-position: center;
 	background-repeat: no-repeat;
