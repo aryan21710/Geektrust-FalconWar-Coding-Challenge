@@ -16,10 +16,17 @@ const SelectPlanetContainer = () => {
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
 	const { Minijet } = MinijetImage;
 	const { planetData } = planetCfg;
+	
 	const [animPlanetCnt, setAnimPlanetCnt] = useState(0);
 	const [updatedPlanetData, setUpdatedPlanetData] = useState([]);
+	const [planetindex, setPlanetIndex] = useState(-1);
+	const [imgname, setImgname] = useState('');
+	const [planetname, setPlanetName] = useState('');
+	const [distance, setDistance] = useState(0);
+
+
 	const jetAnimatedProp = useSpring({
-		transform: animPlanetCnt === 4 ? 'translateX(104vw)' : 'translateX(0vw)',
+		transform: animPlanetCnt >= 4 ? 'translateX(104vw)' : 'translateX(0vw)',
 		delay: 700,
 		config: { mass: 1, tension: 280, friction: 50 },
 	});
@@ -28,10 +35,6 @@ const SelectPlanetContainer = () => {
 		planetData.length > 0 && setUpdatedPlanetData([...createPlanetCordToDisplay(planetData, PlanetImageArr)]);
 	}, [planetData]);
 
-	const [planetindex, setPlanetIndex] = useState(-1);
-	const [imgname, setImgname] = useState('');
-	const [planetname, setPlanetName] = useState('');
-	const [distance, setDistance] = useState(0);
 
 	const updateSelectedPlanetDataForAnim = () => {
 		if (planetindex > -1 && animPlanetCnt <= 4) {
@@ -63,11 +66,7 @@ const SelectPlanetContainer = () => {
 				}
 			});
 			setSelectedPlanet(updatedSelectedPlanet);
-		} else {
-			setSelectedPlanet([]);
-			setAnimPlanetCnt(0);
-			setSelecPlanetCount(0);
-		}
+		} 
 	};
 
 	useEffect(() => {
@@ -76,7 +75,7 @@ const SelectPlanetContainer = () => {
 
 	useEffect(() => {
 		if (animPlanetCnt === 0) {
-			setPlanetIndex('');
+			setPlanetIndex(-1);
 			setImgname('');
 			setDistance('');
 			setPlanetName('');
@@ -116,7 +115,8 @@ const SelectPlanetContainer = () => {
 
 	const onResetPlanet = () => setAnimPlanetCnt(0);
 
-	
+
+	const stopPlanetAnim=()=>alert('4 PLANETS ALREADY SELECTED. IF YOU WANT TO RESET THE SELECTION CLICK ON RESET PLANETS.');
 
 	return (
 		<React.Fragment>
@@ -128,6 +128,8 @@ const SelectPlanetContainer = () => {
 				animateSelectedPlanet={animateSelectedPlanet}
 				selectedPlanet={selectedPlanet}
 				onResetPlanet={onResetPlanet}
+				animPlanetCnt={animPlanetCnt}
+				stopPlanetAnim={stopPlanetAnim}
 			/>
 		</React.Fragment>
 	);

@@ -128,5 +128,5 @@ export const UnAnimatedWrapper = styled.div`
 `;
 
 export const AnimatedWrapper = styled(UnAnimatedWrapper)`
-	animation: ${animateSelectedPlanet} 0.5s ease-in-out forwards;
+	animation: ${animateSelectedPlanet} 0.5s  ease-in-out forwards;
 `;
