@@ -24,7 +24,7 @@ const SelectBotContainer = () => {
 				original: -1,
 				current: -1,
 			},
-			error: true,
+			error: false,
 			planetIndexArr: [],
 			vehicleIndexArr: [],
 		})
@@ -58,7 +58,8 @@ const SelectBotContainer = () => {
 			planetIndexArr: [],
 			travelTime: 0,
 			finalStatus: false,
-			planetValue: "",
+			planetValue: '',
+			error: false,
 			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
 				name: data.name,
 				botImageName: 'data.imgName',
@@ -69,7 +70,6 @@ const SelectBotContainer = () => {
 					original: data.totalUnits,
 					current: data.totalUnits,
 				},
-				error: true,
 			})),
 		}));
 	};
@@ -88,9 +88,10 @@ const SelectBotContainer = () => {
 			return {
 				...planetData,
 				planetIndexArr: [...planetData.planetIndexArr, planetIndex],
-				planetValue: idx===planetIndex ? planetValue : planetData.planetValue,
+				planetValue: idx === planetIndex ? planetValue : planetData.planetValue,
 				travelTime: _.length > 0 ? _[0].travelTime : planetData.travelTime,
 				vehicleDataArray: [...leftUnitsAndTravelTime],
+				error: idx === planetIndex ? leftUnitsAndTravelTime[vehicleIndex].error : planetData.error,
 			};
 		});
 		setPlanetAndBotsData(updatedPlanetAndBotsData);
@@ -111,14 +112,18 @@ const SelectBotContainer = () => {
 						travelTime: 0,
 						totalUnits: {
 							original: vehicleDataArray[idx].totalUnits.original,
-							current:
-								vehicleDataArray[idx].totalUnits.current + 1 <=
-								vehicleDataArray[idx].totalUnits.original
-									? vehicleDataArray[idx].totalUnits.current + 1
-									: vehicleDataArray[idx].totalUnits.original,
+							current: !data.planetIndexArr.includes(planetIndex)
+								? vehicleDataArray[idx].totalUnits.current
+								: vehicleDataArray[idx].totalUnits.current + 1 <=
+								  vehicleDataArray[idx].totalUnits.original
+								? vehicleDataArray[idx].totalUnits.current + 1
+								: vehicleDataArray[idx].totalUnits.current,
 						},
-						planetIndexArr: [],
+						planetIndexArr: data.planetIndexArr.includes(planetIndex)
+							? [planetIndex]
+							: [...data.planetIndexArr, planetIndex],
 						vehicleIndexArr: [],
+						error: true,
 					};
 				} else {
 					if (idx === vehicleIndex) {
@@ -130,8 +135,11 @@ const SelectBotContainer = () => {
 								original: totalUnits.original,
 								current: totalUnits.current - 1,
 							},
-							planetIndexArr: [planetIndex],
+							planetIndexArr: data.planetIndexArr.includes(planetIndex)
+								? [planetIndex]
+								: [...data.planetIndexArr, planetIndex],
 							vehicleIndexArr: [vehicleIndex],
+							error: false,
 						};
 					} else {
 						// all old entry is overwritten
@@ -140,14 +148,20 @@ const SelectBotContainer = () => {
 							travelTime: 0,
 							totalUnits: {
 								original: vehicleDataArray[idx].totalUnits.original,
-								current: vehicleDataArray[idx].totalUnits.current,
+								current: data.planetIndexArr.includes(planetIndex)
+									? vehicleDataArray[idx].totalUnits.current + 1
+									: vehicleDataArray[idx].totalUnits.current,
 							},
-							planetIndexArr: [],
+							planetIndexArr: data.planetIndexArr.includes(planetIndex)
+								? [planetIndex]
+								: [...data.planetIndexArr],
 							vehicleIndexArr: [],
+							error: false,
 						};
 					}
 				}
 			});
+			console.log(`updatedLeftUnitsAndTravelTime ${planetIndex} :: ${planetValue} :: ${vehicleIndex}`);
 
 			console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(updatedLeftUnitsAndTravelTime, null, 4)}`);
 			setLeftUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
