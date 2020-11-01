@@ -16,8 +16,26 @@ import {
 } from './../common/StyledComponent';
 import uuid from 'react-uuid';
 
-
-export const SelectPlanetView = ({jetAnimatedProp,moveToDisplayVehiclePage,Minijet,updatedPlanetData,animateSelectedPlanet,selectedPlanet}) => {
+export const SelectPlanetView = ({
+	jetAnimatedProp,
+	moveToDisplayVehiclePage,
+	Minijet,
+	updatedPlanetData,
+	animateSelectedPlanet,
+	selectedPlanet,
+}) => {
+	const WrapperContent = ({planet,idx}) => {
+		return (
+			<React.Fragment>
+				<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
+				<SelectedPlanetImg imgname={planet.imgname} />
+				<Heading color="#FAD107" fontSize="1.2rem">
+					{planet.planetname}
+				</Heading>
+				<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${planet.distance} megamiles`}</Heading>
+			</React.Fragment>
+		);
+	};
 
 	return (
 		<React.Fragment>
@@ -58,15 +76,7 @@ export const SelectPlanetView = ({jetAnimatedProp,moveToDisplayVehiclePage,Minij
 								return (
 									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<AnimatedWrapper>
-											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
-											<SelectedPlanetImg imgname={planet.imgname} />
-											<Heading color="#FAD107" fontSize="1.2rem">
-												{planet.planetname}
-											</Heading>
-											<Heading
-												color="#FAD107"
-												fontSize="1rem"
-											>{`DISTANCE ${planet.distance} megamiles`}</Heading>
+											<WrapperContent idx={idx} planet={planet}/>
 										</AnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -74,15 +84,7 @@ export const SelectPlanetView = ({jetAnimatedProp,moveToDisplayVehiclePage,Minij
 								return (
 									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper leftpos="0vw">
-											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
-											<SelectedPlanetImg imgname={planet.imgname} />
-											<Heading color="#FAD107" fontSize="1.2rem">
-												{planet.planetname}
-											</Heading>
-											<Heading
-												color="#FAD107"
-												fontSize="1rem"
-											>{`DISTANCE ${planet.distance} megamiles`}</Heading>
+											<WrapperContent idx={idx} planet={planet}/>
 										</UnAnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -90,15 +92,7 @@ export const SelectPlanetView = ({jetAnimatedProp,moveToDisplayVehiclePage,Minij
 								return (
 									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper>
-											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
-											<SelectedPlanetImg imgname={planet.imgname} />
-											<Heading color="#FAD107" fontSize="1.2rem">
-												{planet.planetname}
-											</Heading>
-											<Heading
-												color="#FAD107"
-												fontSize="1rem"
-											>{`DISTANCE ${planet.distance} megamiles`}</Heading>
+											<WrapperContent idx={idx} planet={planet}/>
 										</UnAnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -110,5 +104,3 @@ export const SelectPlanetView = ({jetAnimatedProp,moveToDisplayVehiclePage,Minij
 		</React.Fragment>
 	);
 };
-
-
