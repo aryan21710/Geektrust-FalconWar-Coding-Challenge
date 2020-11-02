@@ -43,14 +43,26 @@ const SelectPlanetContainer = () => {
 		if (planetindex > -1 && animPlanetCnt <= 4) {
 			const updatedSelectedPlanet = selectedPlanet.map((planetData, idx) => {
 				if (idx === animPlanetCnt - 1) {
-					return {
-						isAnimated: true,
-						imgname,
-						index: animPlanetCnt - 1,
-						planetname,
-						distance,
-						opacity: updateSelectionIndex > -1 && idx===updateSelectionIndex ? 0.3 : 1
-					};
+					if (updateSelectionIndex > -1) {
+						return {
+							isAnimated: false,
+							imgname,
+							index: animPlanetCnt - 1,
+							planetname,
+							distance,
+							opacity: updateSelectionIndex > -1 && idx===updateSelectionIndex ? 0.3 : 1
+						};
+					} else {
+						return {
+							isAnimated: true,
+							imgname,
+							index: animPlanetCnt - 1,
+							planetname,
+							distance,
+							opacity: updateSelectionIndex > -1 && idx===updateSelectionIndex ? 0.3 : 1
+						};
+					}
+					
 				} else if (planetData.isAnimated && idx !== animPlanetCnt - 1) {
 					return {
 						isAnimated: false,
