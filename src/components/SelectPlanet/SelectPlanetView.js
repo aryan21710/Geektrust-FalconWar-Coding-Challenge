@@ -27,10 +27,7 @@ export const SelectPlanetView = ({
 	animateSelectedPlanet,
 	selectedPlanet,
 	onResetPlanet,
-	animPlanetCnt,
-	stopPlanetAnim,
-	onChangePlanetSelection,
-	indexOfSelectedPlanet,
+	onChangePlanetSelection
 }) => {
 	const WrapperContent = ({ planet, idx }) => {
 		return (
@@ -128,3 +125,13 @@ export const SelectPlanetView = ({
 		</React.Fragment>
 	);
 };
+
+
+/*
+
+donlon-1.bdba723b.png
+j 3.62c2b63d.png
+lerbin-5.3c9a077b.png
+pinga-/static/media/6.8bd5ba98.png
+
+*/

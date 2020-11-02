@@ -42,7 +42,7 @@ const SelectPlanetContainer = () => {
 				return {
 					...planetData,
 					isAnimated: false,
-					imgname: planetImgName,
+					imgname: planetData.imgname,
 					opacity: idx === indexOfSelectedPlanet ? 0.3 : 1,
 				};
 			} else {
@@ -153,7 +153,7 @@ const SelectPlanetContainer = () => {
 			alert('PLANET ALREADY SELECTED.. PLEASE SELECT SOME OTHER PLANET');
 		} else {
 			if (indexOfSelectedPlanet > -1) {
-				updatePlanetSection(imgname, planetname);
+				updatePlanetSection(imgname, planetname,distance,planetindex);
 			} else if (animPlanetCnt <= 3 && indexOfSelectedPlanet === -1) {
 				setAnimPlanetCnt(animPlanetCnt + 1);
 				setPlanetIndex(parseInt(planetindex));
@@ -165,18 +165,22 @@ const SelectPlanetContainer = () => {
 				stopPlanetAnim();
 			}
 		}
+		// animPlanetCnt = 4 && indexOfSelectedPlanet === -1 calling the stopPlanetAnim during planet selection
 	};
 
-	const updatePlanetSection = (newPlanetImgNameToSwap, newPlanetNameToSwap) => {
-		console.log('updatePlanetSection', newPlanetNameToSwap);
-		let oldImageName="";
+	const updatePlanetSection = (newPlanetImgNameToSwap, newPlanetNameToSwap, newDistanceToSwap, newIndexToSwap) => {
+		let oldPlanetName="";
 		const _ = selectedPlanet.map((planet) => {
 			if (planet.index === indexOfSelectedPlanet) {
-				oldImageName=planet.planetname
+				oldPlanetName=planet.planetname
+				console.log(`updatePlanetSection ${planet.imgname}::${newPlanetImgNameToSwap}`);
+
 				return {
 					...planet,
 					imgname: newPlanetImgNameToSwap,
 					planetname: newPlanetNameToSwap,
+					distance: newDistanceToSwap,
+					index: newIndexToSwap,
 					isAnimated: true,
 					opacity: 1,
 				};
@@ -188,9 +192,9 @@ const SelectPlanetContainer = () => {
 			}
 		});
 
-		const updatedSelecPlanetNames=selectedplanetnames.map((data)=>data===oldImageName ? newPlanetNameToSwap : data);
+		const updatedSelecPlanetNames=selectedplanetnames.map((data)=>data===oldPlanetName ? newPlanetNameToSwap : data);
 
-		console.log(`updatePlanetSection ${JSON.stringify(updatedSelecPlanetNames, null, 4)}`);
+		console.log(`updatePlanetSection ${JSON.stringify(_, null, 4)}`);
 
 		setSelectedPlanet(_);
 		setIndexOfSelectedPlanet(-1);
@@ -243,11 +247,8 @@ const SelectPlanetContainer = () => {
 				animateSelectedPlanet={animateSelectedPlanet}
 				selectedPlanet={selectedPlanet}
 				onResetPlanet={onResetPlanet}
-				animPlanetCnt={animPlanetCnt}
-				stopPlanetAnim={stopPlanetAnim}
 				onChangePlanetSelection={onChangePlanetSelection}
-				indexOfSelectedPlanet={indexOfSelectedPlanet}
-				indexOfSelectedPlanet={indexOfSelectedPlanet}
+	
 			/>
 		</React.Fragment>
 	);
