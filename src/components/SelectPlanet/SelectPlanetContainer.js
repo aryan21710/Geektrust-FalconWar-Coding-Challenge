@@ -42,21 +42,23 @@ const SelectPlanetContainer = () => {
 	const updateSelectedPlanetDataForAnim = () => {
 		if (planetindex > -1 && animPlanetCnt <= 4) {
 			const updatedSelectedPlanet = selectedPlanet.map((planetData, idx) => {
-				if (idx !== updateSelectionIndex && idx === animPlanetCnt - 1) {
+				if (idx === animPlanetCnt - 1) {
 					return {
 						isAnimated: true,
 						imgname,
 						index: animPlanetCnt - 1,
 						planetname,
 						distance,
+						opacity: updateSelectionIndex > -1 && idx===updateSelectionIndex ? 0.3 : 1
 					};
-				} else if (planetData.isAnimated && idx !== animPlanetCnt - 1 && idx===updatePlanetSection) {
+				} else if (planetData.isAnimated && idx !== animPlanetCnt - 1) {
 					return {
 						isAnimated: false,
 						imgname: planetData.imgname,
 						index: planetData.index,
 						planetname: planetData.planetname,
 						distance: planetData.distance,
+						opacity:  updateSelectionIndex > -1 && idx===updateSelectionIndex ? 0.3 : 1
 					};
 				} else {
 					return {
@@ -65,6 +67,7 @@ const SelectPlanetContainer = () => {
 						index: planetData.index,
 						planetname: planetData.planetname,
 						distance: planetData.distance,
+						opacity: updateSelectionIndex > -1 && idx===updateSelectionIndex ? 0.3 : 1
 					};
 				}
 			});

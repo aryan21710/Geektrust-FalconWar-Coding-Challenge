@@ -37,7 +37,7 @@ export const SelectPlanetView = ({
 			<React.Fragment>
 				<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
 				<SelectedPlanetImg
-					opacity={idx === updateSelectionIndex ? '0.3' : '1'}
+					opacity={planet.opacity}
 					imgname={planet.imgname}
 					data-planetidx={idx}
 					onClick={onChangePlanetSelection}
