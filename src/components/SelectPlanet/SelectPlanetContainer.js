@@ -23,7 +23,7 @@ const SelectPlanetContainer = () => {
 	const [imgname, setImgname] = useState('');
 	const [planetname, setPlanetName] = useState('');
 	const [distance, setDistance] = useState(0);
-	const [updateSelection, setUpdateSelection]=useState(-1)
+	const [updateSelectionIndex, setUpdateSelectionIndex]=useState(-1)
 
 
 	const jetAnimatedProp = useSpring({
@@ -37,10 +37,12 @@ const SelectPlanetContainer = () => {
 	}, [planetData]);
 
 
+	// planetindex default value is -1 and animPlanetCnt is 0. isAnimated is false and only
+	// for planets for whom u want to perform animation set to true.
 	const updateSelectedPlanetDataForAnim = () => {
 		if (planetindex > -1 && animPlanetCnt <= 4) {
 			const updatedSelectedPlanet = selectedPlanet.map((planetData, idx) => {
-				if (idx === animPlanetCnt - 1) {
+				if (idx !== updateSelectionIndex && idx === animPlanetCnt - 1) {
 					return {
 						isAnimated: true,
 						imgname,
@@ -48,7 +50,7 @@ const SelectPlanetContainer = () => {
 						planetname,
 						distance,
 					};
-				} else if (planetData.isAnimated && idx !== animPlanetCnt - 1) {
+				} else if (planetData.isAnimated && idx !== animPlanetCnt - 1 && idx===updatePlanetSection) {
 					return {
 						isAnimated: false,
 						imgname: planetData.imgname,
@@ -97,8 +99,8 @@ const SelectPlanetContainer = () => {
 	}, [animPlanetCnt]);
 
 	useEffect(()=>{
-		updateSelection > -1 && updatePlanetSection()
-	},[updateSelection])
+		updateSelectionIndex > -1 && updateSelectedPlanetDataForAnim()
+	},[updateSelectionIndex])
 
 	const isPlanetAlreadySelected = (planetname) =>
 		selectedPlanet.some((planetData) => planetData.planetname === planetname);
@@ -118,26 +120,40 @@ const SelectPlanetContainer = () => {
 
 
 	const updatePlanetSection=()=>{
-		const _=selectedPlanet.map((planet)=>{
-			if (planet.index===updateSelection) {
-				return {
-					...planet,
-					imgname: Minijet
-				}
-			} else {
-				return {
-					...planet
-				}
-			}
-		})
-		setSelectedPlanet(_)
+		/* onChangePlanetSelection should reduce the opacity of the planet in 
+		SelectedPlanetImg first.
+		set isAnimated to false for that index.
+		once user clicks on new planet reduce its opacity also.
+		store the src index as updateSelection and dest index as the new planet index
+		
+		find the src index and dst index in selectedPlanet and swap them.
+
+		*/
+		// const _=selectedPlanet.map((planet)=>{
+		// 	if (planet.index===updateSelectionIndex) {
+		// 		return {
+		// 			...planet,
+		// 			// imgname: Minijet
+		// 			// isAnimated: false,
+				
+		// 		}
+		// 	} else {
+		// 		return {
+		// 			...planet
+		// 		}
+		// 	}
+		// })
+		// setSelectedPlanet(_)
 	}
 
 	const moveToDisplayVehiclePage = () => history.push(`/displayallspacevehicles`);
 
-	const onResetPlanet = () => setAnimPlanetCnt(0);
+	const onResetPlanet = () => {
+		setAnimPlanetCnt(0);
+		setUpdateSelectionIndex(-1);
+	}
 
-	const onChangePlanetSelection = (e) => setUpdateSelection(parseInt(e.target.dataset.planetidx));
+	const onChangePlanetSelection = (e) => setUpdateSelectionIndex(parseInt(e.target.dataset.planetidx));
 
 	const stopPlanetAnim=()=>alert('4 PLANETS ALREADY SELECTED. IF YOU WANT TO RESET THE SELECTION CLICK ON RESET PLANETS.');
 
@@ -154,9 +170,29 @@ const SelectPlanetContainer = () => {
 				animPlanetCnt={animPlanetCnt}
 				stopPlanetAnim={stopPlanetAnim}
 				onChangePlanetSelection={onChangePlanetSelection}
+				updateSelectionIndex={updateSelectionIndex}
 			/>
 		</React.Fragment>
 	);
 };
 
 export default SelectPlanetContainer;
+
+
+/*
+
+if u click on a planet --> calls animateSelectedPlanet
+animateSelectedPlanet increments the animatePlanetCnt and
+update planetIndex with the new planetIndex everytime new planet is
+selected. Once planetIndex  updates it calls-->updateSelectedPlanetDataForAnim
+updateSelectedPlanetDataForAnim 
+	checks whether animPlanetCnt <=4 and planetindex is updated (planetindex > -1)
+	it updates isAnimated to true to perform animation for that index and increments the value of index
+	and updates the state variable selectedplanet which resides in approutes.
+
+when user clicks on selected planet it calls ---> onChangePlanetSelection
+this updates a state variable updateSelectionIndex and then calls --> updatePlanetSection
+
+
+*/
+

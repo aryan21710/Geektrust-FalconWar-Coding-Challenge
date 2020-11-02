@@ -30,12 +30,18 @@ export const SelectPlanetView = ({
 	animPlanetCnt,
 	stopPlanetAnim,
 	onChangePlanetSelection,
+	updateSelectionIndex
 }) => {
 	const WrapperContent = ({ planet, idx }) => {
 		return (
 			<React.Fragment>
 				<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
-				<SelectedPlanetImg opacity={idx===0 &&  "0.3"}imgname={planet.imgname} data-planetidx={idx} onClick={onChangePlanetSelection} />
+				<SelectedPlanetImg
+					opacity={idx === updateSelectionIndex ? '0.3' : '1'}
+					imgname={planet.imgname}
+					data-planetidx={idx}
+					onClick={onChangePlanetSelection}
+				/>
 				<Heading color="#FAD107" fontSize="1.2rem">
 					{planet.planetname}
 				</Heading>
