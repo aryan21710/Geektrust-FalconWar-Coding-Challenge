@@ -30,6 +30,7 @@ export const SelectPlanetView = ({
 	animPlanetCnt,
 	stopPlanetAnim,
 	onChangePlanetSelection,
+	indexOfSelectedPlanet,
 }) => {
 	const WrapperContent = ({ planet, idx }) => {
 		return (
@@ -71,7 +72,7 @@ export const SelectPlanetView = ({
 								return (
 									<Planet
 										key={uuid()}
-										onClick={animPlanetCnt <= 3 ? animateSelectedPlanet : stopPlanetAnim}
+										onClick={animateSelectedPlanet}
 										toppos={_.topPos}
 										leftpos={_.leftpos}
 										data-imgname={_.imgName}

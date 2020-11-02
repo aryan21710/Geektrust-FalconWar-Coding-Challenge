@@ -36,29 +36,40 @@ const SelectPlanetContainer = () => {
 		planetData.length > 0 && setPlanetDataUsedForRender([...createPlanetCordToDisplay(planetData, PlanetImageArr)]);
 	}, [planetData]);
 
+	const disableAnimPostPlanetSelection = () => {
+		const _ = selectedPlanet.map((planetData, idx) => {
+			if (idx === animPlanetCnt - 1) {
+				return {
+					...planetData,
+					isAnimated: false,
+					imgname: planetImgName,
+					opacity: idx === indexOfSelectedPlanet ? 0.3 : 1,
+				};
+			} else {
+				return {
+					...planetData,
+					isAnimated: false,
+					imgname: planetData.imgname,
+					opacity: indexOfSelectedPlanet > -1 && idx === indexOfSelectedPlanet ? 0.3 : 1,
+				};
+			}
+		});
+		indexOfSelectedPlanet > -1 && reduceOpacityOfPlanetInSolarSystem();
+		setSelectedPlanet(_);
+	};
+
 	const updateSelectedPlanetDataForAnim = () => {
 		if (planetindex > -1 && animPlanetCnt <= 4) {
 			const updatedSelectedPlanet = selectedPlanet.map((planetData, idx) => {
 				if (idx === animPlanetCnt - 1) {
-					if (indexOfSelectedPlanet > -1) {
-						return {
-							isAnimated: false,
-							imgname: planetImgName,
-							index: animPlanetCnt - 1,
-							planetname,
-							distance,
-							opacity: idx === indexOfSelectedPlanet ? 0.3 : 1,
-						};
-					} else {
-						return {
-							isAnimated: true,
-							imgname: planetImgName,
-							index: animPlanetCnt - 1,
-							planetname,
-							distance,
-							opacity: idx === indexOfSelectedPlanet ? 0.3 : 1,
-						};
-					}
+					return {
+						isAnimated: true,
+						imgname: planetImgName,
+						index: animPlanetCnt - 1,
+						planetname,
+						distance,
+						opacity: idx === indexOfSelectedPlanet ? 0.3 : 1,
+					};
 				} else if (planetData.isAnimated && idx !== animPlanetCnt - 1) {
 					return {
 						isAnimated: false,
@@ -79,7 +90,6 @@ const SelectPlanetContainer = () => {
 					};
 				}
 			});
-			indexOfSelectedPlanet > -1 && reduceOpacityOfPlanetInSolarSystem();
 			setSelectedPlanet(updatedSelectedPlanet);
 		}
 	};
@@ -101,8 +111,12 @@ const SelectPlanetContainer = () => {
 	}, []);
 
 	useEffect(() => {
-		(planetindex > -1 || indexOfSelectedPlanet > -1) && updateSelectedPlanetDataForAnim();
-	}, [planetindex, indexOfSelectedPlanet]);
+		planetindex > -1 && updateSelectedPlanetDataForAnim();
+	}, [planetindex]);
+
+	useEffect(() => {
+		indexOfSelectedPlanet > -1 ? disableAnimPostPlanetSelection() : reduceOpacityOfPlanetInSolarSystem();
+	}, [indexOfSelectedPlanet]);
 
 	useEffect(() => {
 		if (animPlanetCnt === 0) {
@@ -139,36 +153,48 @@ const SelectPlanetContainer = () => {
 			alert('PLANET ALREADY SELECTED.. PLEASE SELECT SOME OTHER PLANET');
 		} else {
 			if (indexOfSelectedPlanet > -1) {
-				updatePlanetSection(e.target.dataset.imgname);
-			} else {
+				updatePlanetSection(imgname, planetname);
+			} else if (animPlanetCnt <= 3 && indexOfSelectedPlanet === -1) {
 				setAnimPlanetCnt(animPlanetCnt + 1);
-				setPlanetIndex(planetindex);
+				setPlanetIndex(parseInt(planetindex));
 				setDistance(distance);
 				setPlanetName(planetname);
 				setPlanetImageName(imgname);
 				setSelectedplanetnames([...selectedplanetnames, planetname]);
+			} else if (animPlanetCnt > 3 && indexOfSelectedPlanet === -1) {
+				stopPlanetAnim();
 			}
 		}
 	};
 
-	const updatePlanetSection = (newPlanetImgNameToSwap) => {
+	const updatePlanetSection = (newPlanetImgNameToSwap, newPlanetNameToSwap) => {
+		console.log('updatePlanetSection', newPlanetNameToSwap);
+		let oldImageName="";
 		const _ = selectedPlanet.map((planet) => {
 			if (planet.index === indexOfSelectedPlanet) {
+				oldImageName=planet.planetname
 				return {
 					...planet,
 					imgname: newPlanetImgNameToSwap,
+					planetname: newPlanetNameToSwap,
 					isAnimated: true,
-					opacity: 1
+					opacity: 1,
 				};
 			} else {
 				return {
 					...planet,
+					isAnimated: false,
 				};
 			}
 		});
-		setIndexOfSelectedPlanet(-1);
-		setSelectedplanetnames([]);
+
+		const updatedSelecPlanetNames=selectedplanetnames.map((data)=>data===oldImageName ? newPlanetNameToSwap : data);
+
+		console.log(`updatePlanetSection ${JSON.stringify(updatedSelecPlanetNames, null, 4)}`);
+
 		setSelectedPlanet(_);
+		setIndexOfSelectedPlanet(-1);
+		setSelectedplanetnames(updatedSelecPlanetNames);
 	};
 
 	const moveToDisplayVehiclePage = () => history.push(`/displayallspacevehicles`);
@@ -221,11 +247,10 @@ const SelectPlanetContainer = () => {
 				stopPlanetAnim={stopPlanetAnim}
 				onChangePlanetSelection={onChangePlanetSelection}
 				indexOfSelectedPlanet={indexOfSelectedPlanet}
+				indexOfSelectedPlanet={indexOfSelectedPlanet}
 			/>
 		</React.Fragment>
 	);
 };
 
 export default SelectPlanetContainer;
-
-
