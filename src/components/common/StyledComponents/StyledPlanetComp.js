@@ -53,6 +53,7 @@ export const Planet = styled(animated.img)`
 	object-fit: cover;
 	cursor: pointer;
 	position: absolute;
+	opacity: ${(props) => props.opacity || 1};
 	top: ${(props) => props.toppos || '10vh'};
 	left: ${(props) => props.leftpos || '0vw'};
 	z-index: 100;

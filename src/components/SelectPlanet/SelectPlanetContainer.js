@@ -16,15 +16,15 @@ const SelectPlanetContainer = () => {
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
 	const { Minijet } = MinijetImage;
 	const { planetData } = planetCfg;
-	
-	const [animPlanetCnt, setAnimPlanetCnt] = useState(0);
-	const [updatedPlanetData, setUpdatedPlanetData] = useState([]);
-	const [planetindex, setPlanetIndex] = useState(-1);
-	const [imgname, setImgname] = useState('');
-	const [planetname, setPlanetName] = useState('');
-	const [distance, setDistance] = useState(0);
-	const [updateSelectionIndex, setUpdateSelectionIndex]=useState(-1)
 
+	const [animPlanetCnt, setAnimPlanetCnt] = useState(0);
+	const [planetDataUsedForRender, setPlanetDataUsedForRender] = useState([]);
+	const [planetindex, setPlanetIndex] = useState(-1);
+	const [selectedplanetnames, setSelectedplanetnames] = useState([]);
+	const [planetname, setPlanetName] = useState([]);
+	const [planetImgName, setPlanetImageName] = useState('');
+	const [distance, setDistance] = useState(0);
+	const [updateSelectionIndex, setUpdateSelectionIndex] = useState(-1);
 
 	const jetAnimatedProp = useSpring({
 		transform: animPlanetCnt >= 4 ? 'translateX(104vw)' : 'translateX(0vw)',
@@ -33,9 +33,8 @@ const SelectPlanetContainer = () => {
 	});
 
 	useEffect(() => {
-		planetData.length > 0 && setUpdatedPlanetData([...createPlanetCordToDisplay(planetData, PlanetImageArr)]);
+		planetData.length > 0 && setPlanetDataUsedForRender([...createPlanetCordToDisplay(planetData, PlanetImageArr)]);
 	}, [planetData]);
-
 
 	// planetindex default value is -1 and animPlanetCnt is 0. isAnimated is false and only
 	// for planets for whom u want to perform animation set to true.
@@ -46,23 +45,22 @@ const SelectPlanetContainer = () => {
 					if (updateSelectionIndex > -1) {
 						return {
 							isAnimated: false,
-							imgname,
+							imgname: planetImgName,
 							index: animPlanetCnt - 1,
 							planetname,
 							distance,
-							opacity:  idx===updateSelectionIndex ? 0.3 : 1
+							opacity: idx === updateSelectionIndex ? 0.3 : 1,
 						};
 					} else {
 						return {
 							isAnimated: true,
-							imgname,
+							imgname: planetImgName,
 							index: animPlanetCnt - 1,
 							planetname,
 							distance,
-							opacity:  idx===updateSelectionIndex ? 0.3 : 1
+							opacity: idx === updateSelectionIndex ? 0.3 : 1,
 						};
 					}
-					
 				} else if (planetData.isAnimated && idx !== animPlanetCnt - 1) {
 					return {
 						isAnimated: false,
@@ -70,7 +68,7 @@ const SelectPlanetContainer = () => {
 						index: planetData.index,
 						planetname: planetData.planetname,
 						distance: planetData.distance,
-						opacity:  updateSelectionIndex > -1 && idx===updateSelectionIndex ? 0.3 : 1
+						opacity: updateSelectionIndex > -1 && idx === updateSelectionIndex ? 0.3 : 1,
 					};
 				} else {
 					return {
@@ -79,22 +77,58 @@ const SelectPlanetContainer = () => {
 						index: planetData.index,
 						planetname: planetData.planetname,
 						distance: planetData.distance,
-						opacity: updateSelectionIndex > -1 && idx===updateSelectionIndex ? 0.3 : 1
+						opacity: updateSelectionIndex > -1 && idx === updateSelectionIndex ? 0.3 : 1,
 					};
 				}
 			});
-			setSelectedPlanet(updatedSelectedPlanet);
-		} 
+			if (updateSelectionIndex > -1) {
+				reduceOpacityOfPlanetInSolarSystem();
+				setSelectedPlanet(updatedSelectedPlanet);
+			} else {
+				setSelectedPlanet(updatedSelectedPlanet);
+			}
+		}
+	};
+
+	// const syncIdxInUpdatePlanetDataWithSelectedPlanet = () => {
+	// 	const updatedSelectedPlanet = selectedPlanet.map((planet, idx) => {
+	// 		if (planet.index > 0) {
+	// 			return {
+	// 				...planetDataUsedForRender[idx],
+	// 				index: planet.index,
+	// 			};
+	// 		}
+	// 	});
+	// };
+
+	const addAnimationDataToSelectedPlanet = () => {
+		const _ = planetData.map((planet, idx) => {
+			return {
+				...planet,
+				isAnimated: false,
+				imgname: '',
+				index: -1,
+				planetname: '',
+				distance: '',
+			};
+		});
+		setSelectedPlanet(_);
 	};
 
 	useEffect(() => {
-		planetindex > -1 && updateSelectedPlanetDataForAnim();
-	}, [planetindex]);
+		planetData.length > 0 && addAnimationDataToSelectedPlanet();
+	}, []);
+
+	useEffect(() => {
+		if (planetindex > -1 || updateSelectionIndex > -1) {
+			updateSelectedPlanetDataForAnim();
+		}
+	}, [planetindex, updateSelectionIndex]);
 
 	useEffect(() => {
 		if (animPlanetCnt === 0) {
 			setPlanetIndex(-1);
-			setImgname('');
+			setSelectedplanetnames('');
 			setDistance('');
 			setPlanetName('');
 			setSelectedPlanet(
@@ -113,9 +147,9 @@ const SelectPlanetContainer = () => {
 		}
 	}, [animPlanetCnt]);
 
-	useEffect(()=>{
-		updateSelectionIndex > -1 && updateSelectedPlanetDataForAnim()
-	},[updateSelectionIndex])
+	useEffect(() => {
+		selectedplanetnames.length === 0 && reduceOpacityOfPlanetInSolarSystem();
+	}, [selectedplanetnames]);
 
 	const isPlanetAlreadySelected = (planetname) =>
 		selectedPlanet.some((planetData) => planetData.planetname === planetname);
@@ -127,18 +161,21 @@ const SelectPlanetContainer = () => {
 		} else {
 			setAnimPlanetCnt(animPlanetCnt + 1);
 			setPlanetIndex(planetindex);
-			setImgname(imgname);
 			setDistance(distance);
 			setPlanetName(planetname);
+			setPlanetImageName(imgname);
+			setSelectedplanetnames([...selectedplanetnames, planetname]);
 		}
 	};
 
-
-	const updatePlanetSection=()=>{
+	const updatePlanetSection = () => {
 		/* onChangePlanetSelection should reduce the opacity of the planet in 
 		SelectedPlanetImg first.
 		set isAnimated to false for that index.
 		once user clicks on new planet reduce its opacity also.
+
+
+		reduce opacity of only those planet in src which can be selected.
 		store the src index as updateSelection and dest index as the new planet index
 		
 		find the src index and dst index in selectedPlanet and swap them.
@@ -150,7 +187,6 @@ const SelectPlanetContainer = () => {
 		// 			...planet,
 		// 			// imgname: Minijet
 		// 			// isAnimated: false,
-				
 		// 		}
 		// 	} else {
 		// 		return {
@@ -159,18 +195,43 @@ const SelectPlanetContainer = () => {
 		// 	}
 		// })
 		// setSelectedPlanet(_)
-	}
+	};
 
 	const moveToDisplayVehiclePage = () => history.push(`/displayallspacevehicles`);
 
 	const onResetPlanet = () => {
 		setAnimPlanetCnt(0);
 		setUpdateSelectionIndex(-1);
-	}
+		setSelectedplanetnames([]);
+		setPlanetName('');
+	};
 
-	const onChangePlanetSelection = (e) => setUpdateSelectionIndex(parseInt(e.target.dataset.planetidx));
+	const reduceOpacityOfPlanetInSolarSystem = () => {
+		const planetDataWithReducedOpacity = planetDataUsedForRender.map((planet) => {
+			if (selectedplanetnames.includes(planet.planetname)) {
+				return {
+					...planet,
+					opacity: updateSelectionIndex > -1 ? 0.3 : 1,
+				};
+			} else {
+				return {
+					...planet,
+					opacity: 1,
+				};
+			}
+		});
+		setPlanetDataUsedForRender(planetDataWithReducedOpacity);
+	};
 
-	const stopPlanetAnim=()=>alert('4 PLANETS ALREADY SELECTED. IF YOU WANT TO RESET THE SELECTION CLICK ON RESET PLANETS.');
+	const onChangePlanetSelection = (e) => {
+		if (!selectedplanetnames.includes(e.target.dataset.selectedplanetname)) {
+			setSelectedplanetnames([...selectedplanetnames, e.target.dataset.selectedplanetname]);
+		}
+		setUpdateSelectionIndex(parseInt(e.target.dataset.planetidx));
+	};
+
+	const stopPlanetAnim = () =>
+		alert('4 PLANETS ALREADY SELECTED. IF YOU WANT TO RESET THE SELECTION CLICK ON RESET PLANETS.');
 
 	return (
 		<React.Fragment>
@@ -178,7 +239,7 @@ const SelectPlanetContainer = () => {
 				jetAnimatedProp={jetAnimatedProp}
 				moveToDisplayVehiclePage={moveToDisplayVehiclePage}
 				Minijet={Minijet}
-				updatedPlanetData={updatedPlanetData}
+				planetDataUsedForRender={planetDataUsedForRender}
 				animateSelectedPlanet={animateSelectedPlanet}
 				selectedPlanet={selectedPlanet}
 				onResetPlanet={onResetPlanet}
@@ -192,7 +253,6 @@ const SelectPlanetContainer = () => {
 };
 
 export default SelectPlanetContainer;
-
 
 /*
 
@@ -210,4 +270,3 @@ this updates a state variable updateSelectionIndex and then calls --> updatePlan
 
 
 */
-

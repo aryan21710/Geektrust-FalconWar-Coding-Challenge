@@ -23,14 +23,15 @@ export const SelectPlanetView = ({
 	jetAnimatedProp,
 	moveToDisplayVehiclePage,
 	Minijet,
-	updatedPlanetData,
+	planetDataUsedForRender,
 	animateSelectedPlanet,
 	selectedPlanet,
 	onResetPlanet,
 	animPlanetCnt,
 	stopPlanetAnim,
 	onChangePlanetSelection,
-	updateSelectionIndex
+	updateSelectionIndex,
+	selectedPlanetName
 }) => {
 	const WrapperContent = ({ planet, idx }) => {
 		return (
@@ -40,6 +41,7 @@ export const SelectPlanetView = ({
 					opacity={planet.opacity}
 					imgname={planet.imgname}
 					data-planetidx={idx}
+					data-selectedplanetname={planet.planetname}
 					onClick={onChangePlanetSelection}
 				/>
 				<Heading color="#FAD107" fontSize="1.2rem">
@@ -67,7 +69,7 @@ export const SelectPlanetView = ({
 							<b>Choose 4 planets you’d like to Invade.</b>
 						</Heading>
 						<SolarSystemImage>
-							{updatedPlanetData.map((_, idx) => {
+							{planetDataUsedForRender.map((_, idx) => {
 								return (
 									<Planet
 										key={uuid()}
@@ -79,6 +81,7 @@ export const SelectPlanetView = ({
 										data-distance={_.distance}
 										data-planetindex={idx}
 										src={_.imgName}
+										opacity={_.opacity}
 									/>
 								);
 							})}
