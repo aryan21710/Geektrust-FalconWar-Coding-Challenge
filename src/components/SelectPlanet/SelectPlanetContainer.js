@@ -50,7 +50,7 @@ const SelectPlanetContainer = () => {
 							index: animPlanetCnt - 1,
 							planetname,
 							distance,
-							opacity: updateSelectionIndex > -1 && idx===updateSelectionIndex ? 0.3 : 1
+							opacity:  idx===updateSelectionIndex ? 0.3 : 1
 						};
 					} else {
 						return {
@@ -59,7 +59,7 @@ const SelectPlanetContainer = () => {
 							index: animPlanetCnt - 1,
 							planetname,
 							distance,
-							opacity: updateSelectionIndex > -1 && idx===updateSelectionIndex ? 0.3 : 1
+							opacity:  idx===updateSelectionIndex ? 0.3 : 1
 						};
 					}
 					
