@@ -30,8 +30,6 @@ export const SelectPlanetView = ({
 	animPlanetCnt,
 	stopPlanetAnim,
 	onChangePlanetSelection,
-	updateSelectionIndex,
-	selectedPlanetName
 }) => {
 	const WrapperContent = ({ planet, idx }) => {
 		return (
