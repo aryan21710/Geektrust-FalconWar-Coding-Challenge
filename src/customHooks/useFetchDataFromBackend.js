@@ -1,28 +1,32 @@
-import axios from 'axios';
 import { TokenUrl, PlanetUrl, VehicleUrl } from '../common/myenv';
-import { defaultAxiosHeader, postDataAxiosHeader } from '../common/axiosHeaders';
+import { makeRequestToBackend } from '../services/api';
+import { SpaceBotImgArr } from '../customHooks/useDefineConstants';
 
 export const useFetchDataFromBackend = async (planetCfg, setPlanetCfg) => {
-	const { token, planetData, vehicleData, apiError } = planetCfg;
-	if (token.length === 0 && apiError.length === 0 && planetData.length === 0 && vehicleData.length === 0) {
+	if (Object.keys(planetCfg).length === 0) {
 		try {
-			const planetApiResponse = await axios(PlanetUrl, defaultAxiosHeader);
-
-			const planetData = planetApiResponse?.data;
-
-			const vehicleApiResponse = await axios(VehicleUrl, defaultAxiosHeader);
-
-			const vehicleData = vehicleApiResponse?.data;
-
-			const tokenApiResponse = await axios(TokenUrl, {
-				method: 'POST',
-				defaultAxiosHeader,
-				headers: postDataAxiosHeader,
-			});
-
-			const token = tokenApiResponse?.data?.token;
-			if (token && planetData && vehicleData) {
-				setPlanetCfg({ ...planetCfg, token, planetData, vehicleData });
+			const response = await Promise.all([
+				await makeRequestToBackend(PlanetUrl, 'GET'),
+				await makeRequestToBackend(VehicleUrl, 'GET'),
+				await makeRequestToBackend(TokenUrl, 'POST'),
+			]);
+			if (response.length === 3) {
+				const vehicleData = response[1]?.data;
+				const token = response[2]?.data?.token;
+				const planetData = response[0]?.data;
+				const updatedVehData = vehicleData.map((data, idx) => ({
+					imgName: SpaceBotImgArr[idx],
+					name: data.name.toUpperCase(),
+					distance: data.max_distance,
+					speed: data.speed,
+					totalUnits: data.total_no,
+				}));
+				setPlanetCfg({
+					...planetCfg,
+					token,
+					planetData,
+					vehicleData: updatedVehData,
+				});
 			} else {
 				setPlanetCfg({ ...planetCfg, apiError: 'ERROR WHILE FETCHING DATA FROM THE BACKEND' });
 			}

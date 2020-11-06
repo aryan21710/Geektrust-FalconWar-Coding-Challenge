@@ -28,13 +28,7 @@ class DebugRouter extends Router {
 }
 
 const Approutes = () => {
-	const [planetCfg, setPlanetCfg] = useState({
-		token: '',
-		apiError: '',
-		planetData: [],
-		vehicleData: [],
-	});
-	const { apiError, token, vehicleData } = planetCfg;
+	const [planetCfg, setPlanetCfg] = useState({});
 
 	const [selecPlanetCnt, setSelecPlanetCount] = useState(0);
 	const [selectedPlanet, setSelectedPlanet] = useState(() =>
@@ -54,28 +48,18 @@ const Approutes = () => {
 	});
 
 	useEffect(() => {
-		if (token.length > 0) {
-			const updatedVehData = vehicleData.map((data, idx) => ({
-				imgName: SpaceBotImgArr[idx],
-				name: data.name.toUpperCase(),
-				distance: data.max_distance,
-				speed: data.speed,
-				totalUnits: data.total_no,
-			}));
-
-			console.log(`updatedVehData ${JSON.stringify(updatedVehData,null,4)}`)
-			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
-			setFinalData({ ...finalData, token });
-
-			// SAVING DATA ON LOCALSTORAGE TO FETCH DATA DURING PAGE REFRESH.
-			localStorage.setItem('planetCfg', JSON.stringify(updatedVehData));
-			localStorage.setItem('token', token);
+		if (Object.keys(planetCfg).length > 0) {
+			const { apiError, token, vehicleData } = planetCfg;
+			if (token.length > 0) {
+				setFinalData({ ...finalData, token });
+				// SAVING DATA ON LOCALSTORAGE TO FETCH DATA DURING PAGE REFRESH.
+				localStorage.setItem('planetCfg', JSON.stringify(vehicleData));
+				localStorage.setItem('token', token);
+			} else if (apiError.length > 0) {
+				alert(apiError);
+			}
 		}
-	}, [token]);
-
-	useEffect(() => {
-		apiError.length > 0 && alert(apiError);
-	}, [apiError]);
+	}, [planetCfg]);
 
 	useUpdatedPlanetAndBotsData(selecPlanetCnt, selectedPlanet, setSelectedPlanet);
 

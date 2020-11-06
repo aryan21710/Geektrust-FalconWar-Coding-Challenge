@@ -32,7 +32,6 @@ export const createPlanetCordToDisplay = (planetData, PlanetImageArr) => {
 			}
 		});
 
-	console.log(`createPlanetCordToDisplay ${JSON.stringify(_)}`);
 	return _;
 };
 
