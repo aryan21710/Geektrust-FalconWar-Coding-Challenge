@@ -6,12 +6,12 @@ import { useUpdatedPlanetAndBotsData } from '../customHooks/useUpdatedPlanetAndB
 import { StarGrid } from '../components/common/StarGrid';
 
 // *** LAZY LOAD ALL COMPONENTS FOR FASTER PAGE LOAD ***
-const LandingPage = lazy(() => import('../components/LandingPage'));
+const LandingPage = lazy(() => import('../screens/LandingPage/components/LandingPage'));
 const Header = lazy(() => import('../components/common/Header'));
 const Footer = lazy(() => import('../components/common/Footer'));
 const SelectPlanetContainer = lazy(() => import('../components/SelectPlanet/SelectPlanetContainer'));
 const SelectBotContainer = lazy(() => import('../components/SelectBot/SelectBotContainer'));
-const DisplayAllSpaceVehicles = lazy(() => import('../components/DisplayAllSpaceVehicles'));
+const DisplayAllSpaceVehicles = lazy(() => import('../screens/DisplayAllSpaceVehicles/components/DisplayAllSpaceVehicles'));
 const DisplayFinalResult = lazy(() => import('../components/DisplayFinalResult'));
 
 const Approutes = () => {

@@ -4,12 +4,13 @@ import {
 	BadgeWrapper,
 	ImageWrapper,
 	ButtonWrapper,
-	Heading,
-} from './common/StyledComponents/StyledCommonComp';
-import { useFetchDataFromBackend } from '../customHooks/useFetchDataFromBackend';
-import { ImageBadges } from '../customHooks/useDefineConstants';
-import { PlanetDetailsContext } from '../context/appContext';
-import { CustomButton } from '../components/common/CustomButton';
+	SmallHeading,
+	BigHeading
+} from '../styles.js';
+import { useFetchDataFromBackend } from '../../../customHooks/useFetchDataFromBackend';
+import { ImageBadges } from '../../../customHooks/useDefineConstants';
+import { PlanetDetailsContext } from '../../../context/appContext';
+import { CustomButton } from '../../../components/CustomButton';
 import uuid from 'react-uuid';
 
 const LandingPage = () => {
@@ -20,19 +21,19 @@ const LandingPage = () => {
 		<React.Fragment>
 			<Wrapper>
 				{Object.keys(ImageBadges).map((image) => (
-					<BadgeWrapper key={uuid()} flexDirection="column">
-						<ImageWrapper marginBottom="3vh" src={ImageBadges[image]} />
-						<Heading fontSize="1.5rem" color="#FAD107">
+					<BadgeWrapper key={uuid()}>
+						<ImageWrapper src={ImageBadges[image]} />
+						<BigHeading>
 							{image}
-						</Heading>
+						</BigHeading>
 					</BadgeWrapper>
 				))}
 
 				<ButtonWrapper>
-					<Heading color="white" fontSize="1.2rem" fontFamily="Avenir">
+					<SmallHeading>
 						Queen Al Falcone is now in hiding. But if King Shan can find her before the years are up, she
 						will be exiled for another 15 years…
-					</Heading>
+					</SmallHeading>
 					<CustomButton
 						disabled={Object.keys(apiError).length === 0 ? false : true}
 						redirectPath="/selectplanets"

@@ -10,7 +10,7 @@ import {
 	PlanetWrapper,
 	SelectedPlanetImg,
 } from '../common/StyledComponents/StyledPlanetComp';
-import { CustomButton } from '../common/CustomButton';
+import { CustomButton } from '../CustomButton';
 import uuid from 'react-uuid';
 
 const SelectBotView = ({ planetAndBotsData, finalData, onRadioChange, vehicleIndex, planetIndex, planetValue }) => {
