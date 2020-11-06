@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { Wrapper, BadgeWrapper, ImageWrapper, SolarSystemWrapper, SmallHeading, BigHeading } from '../styles';
-import { CustomButton } from '../../../components/CustomButton';
-import { PlanetDetailsContext } from '../../../context/appContext';
+import { Wrapper, BadgeWrapper, ImageWrapper, SolarSystemWrapper, SmallHeading, BigHeading } from './styles';
+import { CustomButton } from '../../components/CustomButton';
+import { PlanetDetailsContext } from '../../context/appContext';
 
-const DisplayAllSpaceVehicles = () => {
+const DisplayAllSpaceVehiclesScreen = () => {
 	const { planetCfg } = useContext(PlanetDetailsContext);
 	const { vehicleData } = planetCfg;
 
@@ -28,4 +28,4 @@ const DisplayAllSpaceVehicles = () => {
 	);
 };
 
-export default DisplayAllSpaceVehicles;
+export default DisplayAllSpaceVehiclesScreen;

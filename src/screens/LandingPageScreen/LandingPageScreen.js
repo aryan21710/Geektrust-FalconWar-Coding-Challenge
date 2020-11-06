@@ -6,14 +6,14 @@ import {
 	ButtonWrapper,
 	SmallHeading,
 	BigHeading
-} from '../styles.js';
-import { useFetchDataFromBackend } from '../../../customHooks/useFetchDataFromBackend';
-import { ImageBadges } from '../../../customHooks/useDefineConstants';
-import { PlanetDetailsContext } from '../../../context/appContext';
-import { CustomButton } from '../../../components/CustomButton';
+} from './styles.js';
+import { useFetchDataFromBackend } from '../../customHooks/useFetchDataFromBackend';
+import { ImageBadges } from '../../customHooks/useDefineConstants';
+import { PlanetDetailsContext } from '../../context/appContext';
+import { CustomButton } from '../../components/CustomButton';
 import uuid from 'react-uuid';
 
-const LandingPage = () => {
+const LandingPageScreen = () => {
 	const { planetCfg, setPlanetCfg, apiError, setApiError } = useContext(PlanetDetailsContext);
 	useFetchDataFromBackend(planetCfg, setPlanetCfg, apiError, setApiError);
 
@@ -47,4 +47,4 @@ const LandingPage = () => {
 	);
 };
 
-export default LandingPage;
+export default LandingPageScreen;

@@ -1,21 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useSpring } from 'react-spring';
 import { myCustomHooks } from '../../customHooks';
 import { PlanetDetailsContext } from '../../context/appContext';
 import { useHistory } from 'react-router';
-import { PlanetImageArr, MinijetImage } from '../../customHooks/useDefineConstants';
-import { SelectPlanetView } from './SelectPlanetView';
+import { PlanetImageArr } from '../../customHooks/useDefineConstants';
+import { SelectPlanetView } from './components/SelectPlanetView';
 import { createPlanetCordToDisplay,updatePlanetSelectionData } from '../../common/util';
 
 
-const SelectPlanetContainer = () => {
+const SelectedPlanetsScreen = () => {
 	const { useFetchDataFromBackend,useSelectedPlanetDataTOHandleAnim } = myCustomHooks;
 	const { planetCfg, setPlanetCfg, selectedPlanet, setSelectedPlanet, setSelecPlanetCount } = useContext(
 		PlanetDetailsContext
 	);
 	const history = useHistory();
 
-	const { Minijet } = MinijetImage;
 	const { planetData } = planetCfg;
 
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
@@ -34,11 +32,6 @@ const SelectPlanetContainer = () => {
 		planetDataUsedForRender.length === 0 && setPlanetDataUsedForRender([...createPlanetCordToDisplay(planetData, PlanetImageArr)]);
 	}, [planetDataUsedForRender]);
 
-	const jetAnimatedProp = useSpring({
-		transform: animPlanetCnt >= 4 ? 'translateX(104vw)' : 'translateX(0vw)',
-		delay: 700,
-		config: { mass: 1, tension: 280, friction: 50 },
-	});
 
 	const disableAnimPostPlanetSelection = () => {
 		const _ = selectedPlanet.map((planetData, idx) => {
@@ -223,17 +216,16 @@ const SelectPlanetContainer = () => {
 	return (
 		<React.Fragment>
 			<SelectPlanetView
-				jetAnimatedProp={jetAnimatedProp}
 				moveToDisplayVehiclePage={moveToDisplayVehiclePage}
-				Minijet={Minijet}
 				planetDataUsedForRender={planetDataUsedForRender}
 				animateSelectedPlanet={animateSelectedPlanet}
 				selectedPlanet={selectedPlanet}
 				onResetPlanet={onResetPlanet}
 				onChangePlanetSelection={onChangePlanetSelection}
+				animPlanetCnt={animPlanetCnt}
 			/>
 		</React.Fragment>
 	);
 };
 
-export default SelectPlanetContainer;
+export default SelectedPlanetsScreen;

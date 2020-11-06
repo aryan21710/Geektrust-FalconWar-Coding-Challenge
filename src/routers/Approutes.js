@@ -6,12 +6,12 @@ import { useUpdatedPlanetAndBotsData } from '../customHooks/useUpdatedPlanetAndB
 import { StarGrid } from '../components/common/StarGrid';
 
 // *** LAZY LOAD ALL COMPONENTS FOR FASTER PAGE LOAD ***
-const LandingPage = lazy(() => import('../screens/LandingPage/components/LandingPage'));
+const LandingPage = lazy(() => import('../screens/LandingPageScreen/LandingPageScreen'));
 const Header = lazy(() => import('../components/common/Header'));
 const Footer = lazy(() => import('../components/common/Footer'));
-const SelectPlanetContainer = lazy(() => import('../components/SelectPlanet/SelectPlanetContainer'));
+const SelectedPlanetsScreen = lazy(() => import('../screens/SelectPlanetsScreen/SelectedPlanetsScreen'));
 const SelectBotContainer = lazy(() => import('../components/SelectBot/SelectBotContainer'));
-const DisplayAllSpaceVehicles = lazy(() => import('../screens/DisplayAllSpaceVehicles/components/DisplayAllSpaceVehicles'));
+const DisplayAllSpaceVehicles = lazy(() => import('../screens/DisplayAllSpaceVehiclesScreen/DisplayAllSpaceVehiclesScreen'));
 const DisplayFinalResult = lazy(() => import('../components/DisplayFinalResult'));
 
 const Approutes = () => {
@@ -79,7 +79,7 @@ const Approutes = () => {
 
 							<Header />
 							<Route path={`/`} exact={true} strict component={LandingPage} />
-							<Route path={`/selectplanets`} exact={true} strict component={SelectPlanetContainer} />
+							<Route path={`/selectplanets`} exact={true} strict component={SelectedPlanetsScreen} />
 							<Route path={`/selectbots`} exact={true} strict component={SelectBotContainer} />
 							<Route
 								path={`/displayallspacevehicles`}
