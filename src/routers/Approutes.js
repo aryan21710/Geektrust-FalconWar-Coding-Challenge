@@ -14,19 +14,6 @@ const SelectBotContainer = lazy(() => import('../components/SelectBot/SelectBotC
 const DisplayAllSpaceVehicles = lazy(() => import('../components/DisplayAllSpaceVehicles'));
 const DisplayFinalResult = lazy(() => import('../components/DisplayFinalResult'));
 
-class DebugRouter extends Router {
-	constructor(props) {
-		super(props);
-		this.history.listen((location, action) => {
-			console.log(`The current URL is ${location.pathname}`);
-			console.log(
-				`The last navigation action was ${action} with state as ${location.state}`,
-				JSON.stringify(this.history, null, 2)
-			);
-		});
-	}
-}
-
 const Approutes = () => {
 	const [planetCfg, setPlanetCfg] = useState({});
 	const [apiError, setApiError] = useState({});
@@ -60,13 +47,15 @@ const Approutes = () => {
 				localStorage.setItem('planetCfg', JSON.stringify(vehicleData));
 				localStorage.setItem('token', token);
 			} 
+		} else if (Object.keys(apiError).length > 0) {
+			alert(`${apiError.url} ${apiError.message}`)
 		}
 	}, [planetCfg,apiError]);
 
 	useUpdatedPlanetAndBotsData(selecPlanetCnt, selectedPlanet, setSelectedPlanet);
 
 	return (
-		<DebugRouter>
+		<Router>
 			<Switch>
 				<Suspense fallback={<div>Loading</div>}>
 					<PlanetDetailsContext.Provider
@@ -105,13 +94,10 @@ const Approutes = () => {
 					</PlanetDetailsContext.Provider>
 				</Suspense>
 			</Switch>
-		</DebugRouter>
+		</Router>
 	);
 };
 
 export default Approutes;
 
-/*
- touch LandingPage/services/index.js SelectPlanets/services/index.js DisplayAllSpaceVehicles/services/index.js SelectBots/services/index.js DisplayFinalResult/services/index.js
 
-*/
