@@ -5,7 +5,7 @@ import { PlanetDetailsContext } from '../../context/appContext';
 import { useHistory } from 'react-router';
 import { PlanetImageArr, MinijetImage } from '../../customHooks/useDefineConstants';
 import { SelectPlanetView } from './SelectPlanetView';
-import { createPlanetCordToDisplay } from '../../common/util';
+import { createPlanetCordToDisplay,updatePlanetSelectionData } from '../../common/util';
 
 
 const SelectPlanetContainer = () => {
@@ -177,15 +177,16 @@ const SelectPlanetContainer = () => {
 		const updatedSelecPlanetNames = selectedplanetnames.map((data) =>
 			data === oldPlanetName ? newPlanetNameToSwap : data
 		);
-
 		console.log(`applyAnimForSelecPlanet ${JSON.stringify(_, null, 4)}`);
-
 		setSelectedPlanet(_);
 		setIndexOfSelectedPlanet(-1);
 		setSelectedplanetnames(updatedSelecPlanetNames);
 	};
 
-	const moveToDisplayVehiclePage = () => history.push(`/displayallspacevehicles`);
+	const moveToDisplayVehiclePage = () =>  {
+		updatePlanetSelectionData(animPlanetCnt, selectedPlanet, setSelectedPlanet)
+		history.push(`/displayallspacevehicles`);
+	}
 
 	const onResetPlanet = () => {
 		setAnimPlanetCnt(0);
