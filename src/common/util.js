@@ -1,6 +1,6 @@
 export const createPlanetCordToDisplay=(planetData,PlanetImageArr)=>{
     const [Planet1, Planet2, Planet3, Planet4,  Planet5, Planet6]=PlanetImageArr;
-    return planetData
+    const _= planetData
     .map((_) => {
         return {
             distance: _.distance,
@@ -31,5 +31,8 @@ export const createPlanetCordToDisplay=(planetData,PlanetImageArr)=>{
                 return {};
         }
     });
+
+    console.log(`createPlanetCordToDisplay ${JSON.stringify(_)}`)
+    return _
 
 }
