@@ -1,5 +1,11 @@
 import React, { useContext } from 'react';
-import { Wrapper, BadgeWrapper, ImageWrapper, ButtonWrapper, Heading } from './common/StyledComponents/StyledCommonComp';
+import {
+	Wrapper,
+	BadgeWrapper,
+	ImageWrapper,
+	ButtonWrapper,
+	Heading,
+} from './common/StyledComponents/StyledCommonComp';
 import { useFetchDataFromBackend } from '../customHooks/useFetchDataFromBackend';
 import { ImageBadges } from '../customHooks/useDefineConstants';
 import { PlanetDetailsContext } from '../context/appContext';
@@ -7,8 +13,8 @@ import { CustomButton } from '../components/common/CustomButton';
 import uuid from 'react-uuid';
 
 const LandingPage = () => {
-	const { planetCfg, setPlanetCfg } = useContext(PlanetDetailsContext);
-	useFetchDataFromBackend(planetCfg, setPlanetCfg);
+	const { planetCfg, setPlanetCfg, apiError, setApiError } = useContext(PlanetDetailsContext);
+	useFetchDataFromBackend(planetCfg, setPlanetCfg, apiError, setApiError);
 
 	return (
 		<React.Fragment>

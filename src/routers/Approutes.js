@@ -29,7 +29,7 @@ class DebugRouter extends Router {
 
 const Approutes = () => {
 	const [planetCfg, setPlanetCfg] = useState({});
-
+	const [apiError, setApiError] = useState({});
 	const [selecPlanetCnt, setSelecPlanetCount] = useState(0);
 	const [selectedPlanet, setSelectedPlanet] = useState(() =>
 		PlanetImageArr.map((planetImg) => ({
@@ -47,19 +47,21 @@ const Approutes = () => {
 		vehicle_names: [],
 	});
 
+	useEffect(()=>{
+		Object.keys(apiError).length > 0 && alert(`${apiError.url} ${apiError.message}`)
+	},[apiError])
+
 	useEffect(() => {
-		if (Object.keys(planetCfg).length > 0) {
-			const { apiError, token, vehicleData } = planetCfg;
+		if (Object.keys(planetCfg).length > 0 && Object.keys(apiError).length===0) {
+			const { token, vehicleData } = planetCfg;
 			if (token.length > 0) {
 				setFinalData({ ...finalData, token });
 				// SAVING DATA ON LOCALSTORAGE TO FETCH DATA DURING PAGE REFRESH.
 				localStorage.setItem('planetCfg', JSON.stringify(vehicleData));
 				localStorage.setItem('token', token);
-			} else if (apiError.length > 0) {
-				alert(apiError);
-			}
+			} 
 		}
-	}, [planetCfg]);
+	}, [planetCfg,apiError]);
 
 	useUpdatedPlanetAndBotsData(selecPlanetCnt, selectedPlanet, setSelectedPlanet);
 
@@ -77,6 +79,8 @@ const Approutes = () => {
 							setSelecPlanetCount,
 							finalData,
 							setFinalData,
+							apiError,
+							setApiError
 						}}
 					>
 						<React.Fragment>
