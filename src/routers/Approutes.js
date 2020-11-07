@@ -10,7 +10,7 @@ const LandingPage = lazy(() => import('../screens/LandingPageScreen/LandingPageS
 const Header = lazy(() => import('../components/common/Header'));
 const Footer = lazy(() => import('../components/common/Footer'));
 const SelectedPlanetsScreen = lazy(() => import('../screens/SelectPlanetsScreen/SelectedPlanetsScreen'));
-const SelectBotContainer = lazy(() => import('../components/SelectBot/SelectBotContainer'));
+const SelectBotsScreen = lazy(() => import('../screens/SelectBotsScreen/SelectBotsScreen'));
 const DisplayAllSpaceVehicles = lazy(() => import('../screens/DisplayAllSpaceVehiclesScreen/DisplayAllSpaceVehiclesScreen'));
 const DisplayFinalResult = lazy(() => import('../components/DisplayFinalResult'));
 
@@ -80,7 +80,7 @@ const Approutes = () => {
 							<Header />
 							<Route path={`/`} exact={true} strict component={LandingPage} />
 							<Route path={`/selectplanets`} exact={true} strict component={SelectedPlanetsScreen} />
-							<Route path={`/selectbots`} exact={true} strict component={SelectBotContainer} />
+							<Route path={`/selectbots`} exact={true} strict component={SelectBotsScreen} />
 							<Route
 								path={`/displayallspacevehicles`}
 								exact={true}

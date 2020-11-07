@@ -15,7 +15,7 @@ const DisplayAllSpaceVehiclesScreen = () => {
 					{vehicleData.map((data) => (
 						<BadgeWrapper>
 							<ImageWrapper src={data.imgName} />
-							<SmallHeading>{data.name}</SmallHeading>
+							<BigHeading>{data.name}</BigHeading>
 							<SmallHeading>Units = {data.totalUnits}</SmallHeading>
 							<SmallHeading>Max_distance = {data.distance} megamiles</SmallHeading>
 							<SmallHeading>Speed = {data.speed} megamiles/hour</SmallHeading>

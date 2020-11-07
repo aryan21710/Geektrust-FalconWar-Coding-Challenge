@@ -75,7 +75,7 @@ export const BigHeading = styled(Heading)`
 	font-size: 1.2rem;
 	color: '#FAD107';
 	text-align: center;
-	font-family: "Avenir";
+	font-family: Nasalisation;
 	z-index: 1000;
 	font-weight: 100;
 	margin: ${(props) => props.margin || '2.5px auto'};
@@ -85,7 +85,8 @@ export const BigHeading = styled(Heading)`
 `;
 
 export const SmallHeading = styled(BigHeading)`
-	font-size: ${props=>props.fontSize || "1.2rem"};
+	font-size: ${props=>props.fontSize || "1rem"};
 	color: ${props=>props.color || "#FAD107"};
-	font-family: 'Avenir';
+	font-family: Nasalisation;
+	
 `;

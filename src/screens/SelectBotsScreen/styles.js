@@ -41,9 +41,9 @@ export const SelectedPlanetWrapper = styled.div`
 export const BadgeWrapper = styled.div`
 	display: flex;
 	align-items: ${(props) => props.alignItems || 'center'};
-	justify-content: ${(props) => props.justifyContent || 'center'};
+	justify-content: space-evenly;
 	flex-direction: column;
-	height: 50vh;
+    height: 40vh;
 	width: ${(props) => props.width || '25vw'};
 	flex: ${(props) => props.flex || '1'};
 	flex-wrap: ${(props) => props.flexWrap};
@@ -79,11 +79,11 @@ export const ButtonWrapper = styled.div`
 `;
 export const SolarSystemWrapper = styled.div`
 	display: flex;
-	justify-content: ${(props) => props.justifyContent || 'center'};
+	justify-content:  center;
 	align-items: center;
-	width: ${props=>props.width || "100vw"};
+	width:  100vw;
 	flex-direction: column;
-	height: ${props=>props.height || "40vh"};
+	height: 75vh;
 	z-index: 100;
 	@media (max-width: 768px) {
 		width: 100vw;
@@ -92,10 +92,10 @@ export const SolarSystemWrapper = styled.div`
 `;
 
 export const BigHeading = styled(Heading)`
-	font-size: ${props=>props.fontSize || "1.3rem"};
-	color: ${props=>props.color || "white"};
+	font-size: 1.2rem;
+	color: #FAD107;
 	text-align: center;
-	font-family: "Avenir";
+	font-family: ${props=>props.fontFamily || "Avenir"};
 	z-index: 1000;
 	font-weight: 100;
 	margin: ${(props) => props.margin || '2.5px auto'};
@@ -105,9 +105,10 @@ export const BigHeading = styled(Heading)`
 `;
 
 export const SmallHeading = styled(BigHeading)`
-	font-size: ${props=>props.fontSize || "1.2rem"};
-	color: ${props=>props.color || "#FAD107"};
-	font-family: ${props=>props.fontFamily || "Avenir"};
+	font-size: ${props=>props.fontSize || "1.1rem"};
+	color: #FAD107;
+    font-family: Nasalisation;
+    margin: ${props=>props.margin || "0px 0px"};
 `;
 
 export const Planet = styled(animated.img)`
@@ -130,9 +131,10 @@ export const Planet = styled(animated.img)`
 export const PlanetWrapper = styled.div`
 	display: flex;
 	width: 100vw;
-	height: ${props=>props.height || "25vh"};
-	justify-content: ${props=>props.justifyContent || "center"};
-	flexDirection=> ${props=>props.flexDirection||"row"};
+	height: 60vh;
+	justify-content: flex-start;
+    flexDirection=> row;
+    margin: 2vh 0vw;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 80vh;
@@ -194,7 +196,7 @@ export const StaticWrapper = styled.div`
   export const SelectedPlanetImg = styled(animated.div)`
 	height: 12vh;
 	width: 12vh;
-	margin: ${props=>props.margin};
+	margin: 1vh 0vw;
 	opacity: ${props=>props.opacity || "1"};
 	background-image: url(${(props) => props.imgname});
 	background-position: center;
@@ -244,7 +246,7 @@ export const SolarSystemImage = styled(animated.div)`
 `;
 
 export const AnimatedJetWrapper = styled(animated.div)`
-	width: ${(props) => props.width || '20vw'};
+	width: ${(props) => props.width || '17vw'};
 	height: ${(props) => props.height || '10vh'};
 	position: absolute;
 	top: 50vh;
@@ -253,4 +255,28 @@ export const AnimatedJetWrapper = styled(animated.div)`
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-end;
+`;
+
+export const Select = styled.select`
+	margin: 1.5vh 0 5vh 0;
+	border-radius: 20px;
+	padding: 0.5vh 2vw;
+	background: white;
+	outline: none;
+	display: block;
+	width: 15vw;
+	font-size: 0.8rem;
+	font-family: sans-serif;
+	color: black;
+	line-height: 1;
+	box-sizing: border-box;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+	background-repeat: no-repeat, repeat;
+	background-position: right 0.7em top 50%, 0 0;
+	background-size: 0.65em auto, 100%;
 `;

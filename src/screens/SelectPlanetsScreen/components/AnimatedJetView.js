@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnimatedJetWrapper, AnimatedMiniJet, BigHeading } from '../styles';
+import { AnimatedJetWrapper, AnimatedMiniJet, SmallHeading } from '../styles';
 import { useSpring } from 'react-spring';
 import {  MinijetImage } from '../../../customHooks/useDefineConstants';
 
@@ -13,9 +13,9 @@ import {  MinijetImage } from '../../../customHooks/useDefineConstants';
 	});
 	return (
 		<AnimatedJetWrapper style={jetAnimatedProp}>
-			<BigHeading color="#FAD107" fontSize="1rem">
+			<SmallHeading fontFamily="Nasalisation" color="#FAD107" fontSize="1rem">
 				Select Space Vehicle
-			</BigHeading>
+			</SmallHeading>
 			<AnimatedMiniJet onClick={moveToDisplayVehiclePage} src={Minijet} />
 		</AnimatedJetWrapper>
 	);
