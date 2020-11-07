@@ -1,6 +1,6 @@
 import React from 'react';
-import { ButtonView, PlanetAndTravelTimeView, HeadingView } from './';
-import { SelectedPlanetWrapper, SolarSystemWrapper } from '../styles';
+import { ButtonView, PlanetAndTravelTimeView, HeadingView } from '../..';
+import { SelectedPlanetWrapper, SolarSystemWrapper } from '../../styles';
 import PropTypes from 'prop-types';
 
 const SelectBotView = (props) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BigHeading} from '../styles'
+import {BigHeading} from '../../../styles'
 
  const HeadingView = () => {
 	return (

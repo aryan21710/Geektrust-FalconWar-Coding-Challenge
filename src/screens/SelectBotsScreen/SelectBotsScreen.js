@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { SelectBotView } from './components/index';
+import { SelectBotView } from './index';
 import { PlanetDetailsContext } from '../../context/appContext';
 
 const SelectBotsScreen = () => {

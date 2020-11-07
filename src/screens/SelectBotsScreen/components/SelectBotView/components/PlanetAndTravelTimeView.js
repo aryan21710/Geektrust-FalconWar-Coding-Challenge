@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlanetWrapper, BadgeWrapper, SelectedPlanetImg,Select, SmallHeading } from '../styles';
+import { PlanetWrapper, BadgeWrapper, SelectedPlanetImg,Select, SmallHeading } from '../../../styles';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 
