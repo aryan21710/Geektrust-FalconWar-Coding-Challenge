@@ -1,13 +1,13 @@
 export const calcBotsTravelTime = (...args) => {
-	const [planetAndBotsData, planetIndex, vehicleIndex, leftUnitsAndTravelTime, setLeftUnitsAndTravelTime,planetValue] = args;
+	const [planetAndBotsData, planetIndex, vehicleIndex,  remainingUnitsAndTravelTime,  setRemainingUnitsAndTravelTime,planetValue] = args;
 	const planetDistance = planetAndBotsData[planetIndex].distance;
 	const { vehicleDataArray } = planetAndBotsData[planetIndex];
 	const vehicleMaxDistance = vehicleDataArray[vehicleIndex].distance;
 	const totalUnits = vehicleDataArray[vehicleIndex].totalUnits;
 	const vehicleSpeed = vehicleDataArray[vehicleIndex].speed;
 	if (planetDistance <= vehicleMaxDistance && totalUnits.current > 0) {
-		// leftUnitsAndTravelTime is array of 4. update all array.
-		const updatedLeftUnitsAndTravelTime = leftUnitsAndTravelTime.map((data, idx) => {
+		//  remainingUnitsAndTravelTime is array of 4. update all array.
+		const updatedLeftUnitsAndTravelTime =  remainingUnitsAndTravelTime.map((data, idx) => {
 			if (data.planetIndexArr.includes(planetIndex)) {
 				return {
 					...vehicleDataArray[idx],
@@ -65,23 +65,23 @@ export const calcBotsTravelTime = (...args) => {
 		console.log(`updatedLeftUnitsAndTravelTime ${planetIndex} :: ${planetValue} :: ${vehicleIndex}`);
 
 		console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(updatedLeftUnitsAndTravelTime, null, 4)}`);
-		setLeftUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
+		 setRemainingUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
 	}
 };
 
 
 export const syncBotUnitsAndTravelTime = (...args) => {
-	const [planetAndBotsData, planetIndex, vehicleIndex, leftUnitsAndTravelTime,planetValue,setPlanetAndBotsData] = args;
+	const [planetAndBotsData, planetIndex, vehicleIndex,  remainingUnitsAndTravelTime,planetValue,setPlanetAndBotsData] = args;
 
 	const updatedPlanetAndBotsData = planetAndBotsData.map((planetData, idx) => {
-		const _ = leftUnitsAndTravelTime.filter((data) => data.planetIndexArr.includes(idx));
+		const _ =  remainingUnitsAndTravelTime.filter((data) => data.planetIndexArr.includes(idx));
 		return {
 			...planetData,
 			planetIndexArr: [...planetData.planetIndexArr, planetIndex],
 			planetValue: idx === planetIndex ? planetValue : planetData.planetValue,
 			travelTime: _.length > 0 ? _[0].travelTime : planetData.travelTime,
-			vehicleDataArray: [...leftUnitsAndTravelTime],
-			error: idx === planetIndex ? leftUnitsAndTravelTime[vehicleIndex].error : planetData.error,
+			vehicleDataArray: [... remainingUnitsAndTravelTime],
+			error: idx === planetIndex ?  remainingUnitsAndTravelTime[vehicleIndex].error : planetData.error,
 		};
 	});
 	setPlanetAndBotsData(updatedPlanetAndBotsData);

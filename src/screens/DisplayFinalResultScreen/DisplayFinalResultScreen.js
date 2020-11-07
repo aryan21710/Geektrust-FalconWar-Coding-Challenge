@@ -4,13 +4,13 @@ import { PlanetDetailsContext } from '../../context/appContext';
 import { usePostDataToFetchResult } from '../../customHooks/usePostDataToFetchResult';
 
 const DisplayFinalResultScreen = () => {
-	const { finalData } = useContext(PlanetDetailsContext);
+	const { dataToFetchFinalResult } = useContext(PlanetDetailsContext);
 	const [backendResponse, setBackendResponse] = useState({});
 	const [status, setStatus] = useState(false);
 	const [error, setError] = useState({});
 	const [displayMessage, setDisplayMessage] = useState('');
 
-	usePostDataToFetchResult(finalData, setBackendResponse, backendResponse, setError, error);
+	usePostDataToFetchResult(dataToFetchFinalResult, setBackendResponse, backendResponse, setError, error);
 
 	useEffect(() => {
 		if (Object.keys(backendResponse).length > 0) {

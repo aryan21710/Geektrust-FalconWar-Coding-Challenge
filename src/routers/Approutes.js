@@ -28,7 +28,7 @@ const Approutes = () => {
 		}))
 	);
 
-	const [finalData, setFinalData] = useState({
+	const [dataToFetchFinalResult, setDataToFetchFinalResult] = useState({
 		token: '',
 		planet_names: [],
 		vehicle_names: [],
@@ -38,7 +38,7 @@ const Approutes = () => {
 		if (Object.keys(planetCfg).length > 0 && Object.keys(apiError).length===0) {
 			const { token, vehicleData } = planetCfg;
 			if (token.length > 0) {
-				setFinalData({ ...finalData, token });
+				setDataToFetchFinalResult({ ...dataToFetchFinalResult, token });
 				// SAVING DATA ON LOCALSTORAGE TO FETCH DATA DURING PAGE REFRESH.
 				localStorage.setItem('planetCfg', JSON.stringify(vehicleData));
 				localStorage.setItem('token', token);
@@ -62,8 +62,8 @@ const Approutes = () => {
 							selectedPlanet,
 							selecPlanetCnt,
 							setSelecPlanetCount,
-							finalData,
-							setFinalData,
+							dataToFetchFinalResult,
+							setDataToFetchFinalResult,
 							apiError,
 							setApiError
 						}}

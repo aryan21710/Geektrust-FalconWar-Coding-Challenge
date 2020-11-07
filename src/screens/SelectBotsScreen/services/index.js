@@ -1,1 +1,1 @@
-export {calcBotsTravelTime,syncBotUnitsAndTravelTime} from './TravelTime'
+export {calcBotsTravelTime,syncBotUnitsAndTravelTime} from './travelTime'

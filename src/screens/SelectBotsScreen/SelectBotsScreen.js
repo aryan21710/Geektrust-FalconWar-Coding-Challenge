@@ -2,9 +2,10 @@ import React, { useContext, useState, useEffect } from 'react';
 import { SelectBot } from './index';
 import { PlanetDetailsContext } from '../../context/appContext';
 import { calcBotsTravelTime, syncBotUnitsAndTravelTime } from './services';
+import {unitsAndTravelTimeData} from '../../constants'
 
 const SelectBotsScreen = () => {
-	const { finalData } = useContext(PlanetDetailsContext);
+	const { dataToFetchFinalResult } = useContext(PlanetDetailsContext);
 
 	const [selectedPlanet, setSelectedPlanet] = useState({
 		planetIndex: -1,
@@ -14,22 +15,7 @@ const SelectBotsScreen = () => {
 
 	const { planetIndex, planetValue, vehicleIndex } = selectedPlanet;
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
-	const [leftUnitsAndTravelTime, setLeftUnitsAndTravelTime] = useState(
-		Array(4).fill({
-			name: '',
-			botImageName: '',
-			distance: '',
-			speed: '',
-			travelTime: 0,
-			totalUnits: {
-				original: -1,
-				current: -1,
-			},
-			error: false,
-			planetIndexArr: [],
-			vehicleIndexArr: [],
-		})
-	);
+	const [remainingUnitsAndTravelTime, setRemainingUnitsAndTravelTime] = useState(unitsAndTravelTimeData);
 
 	useEffect(() => {
 		setPlanetAndBotsData(populatePlanetAndBotsData());
@@ -41,8 +27,8 @@ const SelectBotsScreen = () => {
 				planetAndBotsData,
 				planetIndex,
 				vehicleIndex,
-				leftUnitsAndTravelTime,
-				setLeftUnitsAndTravelTime,
+				remainingUnitsAndTravelTime,
+				setRemainingUnitsAndTravelTime,
 				planetValue
 			);
 		} else {
@@ -62,11 +48,11 @@ const SelectBotsScreen = () => {
 				planetAndBotsData,
 				planetIndex,
 				vehicleIndex,
-				leftUnitsAndTravelTime,
+				remainingUnitsAndTravelTime,
 				planetValue,
 				setPlanetAndBotsData
 			);
-	}, [leftUnitsAndTravelTime]);
+	}, [remainingUnitsAndTravelTime]);
 
 	const populatePlanetAndBotsData = () => {
 		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet'));
@@ -103,7 +89,7 @@ const SelectBotsScreen = () => {
 		<React.Fragment>
 			<SelectBot
 				planetAndBotsData={planetAndBotsData}
-				finalData={finalData}
+				dataToFetchFinalResult={dataToFetchFinalResult}
 				onRadioChange={onRadioChange}
 				vehicleIndex={vehicleIndex}
 				planetIndex={planetIndex}

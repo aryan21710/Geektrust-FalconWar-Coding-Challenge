@@ -2,15 +2,15 @@ import React from 'react';
 import { CustomButton } from '../../../../../sharedComponents/CustomButton';
 import PropTypes from 'prop-types';
 
- const MissionFindFalconBtn= ({ finalData }) => {
+ const MissionFindFalconBtn= ({ dataToFetchFinalResult }) => {
 	return (
 		<CustomButton
 			redirectPath="/displayfinalresult"
-			disabled={finalData.planet_names.length === 4 ? false : true}
+			disabled={dataToFetchFinalResult.planet_names.length === 4 ? false : true}
 			leftpos="0vh"
 			width="15vw"
 			TextForButton="Mission Find Falcone"
-			opacity={finalData.planet_names.length === 4 ? 1 : 0.6}
+			opacity={dataToFetchFinalResult.planet_names.length === 4 ? 1 : 0.6}
 		/>
 	);
 };
@@ -18,6 +18,6 @@ import PropTypes from 'prop-types';
 export default MissionFindFalconBtn;
 
 MissionFindFalconBtn.propTypes = {
-	finalData: PropTypes.arrayOf(PropTypes.object),
+	dataToFetchFinalResult: PropTypes.arrayOf(PropTypes.object),
 };
 
