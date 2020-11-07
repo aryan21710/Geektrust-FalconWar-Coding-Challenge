@@ -1,20 +1,18 @@
 export const updateSelectedPlanetDataForAnim = (...args) => {
 	const [
-		planetindex,
-		animPlanetCnt,
+		values,
 		selectedPlanet,
 		indexOfSelectedPlanet,
 		setSelectedPlanet,
-		planetImgName,
-		planetname,
-		distance,
 	] = args;
+	const { planetname, planetindex, imgname, distance, animPlanetCnt } = values;
+
 	if (planetindex > -1 && animPlanetCnt <= 4) {
 		const updatedSelectedPlanet = selectedPlanet.map((selecPlanData, idx) => {
 			if (idx === animPlanetCnt - 1) {
 				return {
 					isAnimated: true,
-					imgname: planetImgName,
+					imgname,
 					index: animPlanetCnt - 1,
 					planetname,
 					distance,
@@ -39,9 +37,9 @@ export const updateSelectedPlanetDataForAnim = (...args) => {
 };
 
 export const reduceOpacityOfPlanetInSolarSystem = (...args) => {
-	const [planetDataUsedForRender, selectedplanetnames, indexOfSelectedPlanet, setPlanetDataUsedForRender] = args;
+	const [planetDataUsedForRender, planetNameArr, indexOfSelectedPlanet, setPlanetDataUsedForRender] = args;
 	const planetDataWithReducedOpacity = planetDataUsedForRender.map((planet) => {
-		return selectedplanetnames.includes(planet.planetname)
+		return planetNameArr.includes(planet.planetname)
 			? {
 					...planet,
 					opacity: indexOfSelectedPlanet > -1 ? 0.3 : 1,
@@ -56,28 +54,29 @@ export const reduceOpacityOfPlanetInSolarSystem = (...args) => {
 
 export const applyAnimForSelecPlanet = (...args) => {
 	const [
-        selectedplanetnames,
-		setSelectedplanetnames,
+		values,
+		setValues,
 		setIndexOfSelectedPlanet,
 		selectedPlanet,
 		indexOfSelectedPlanet,
-		newPlanetImgNameToSwap,
-		newPlanetNameToSwap,
-		newDistanceToSwap,
-		newIndexToSwap,
 		setSelectedPlanet,
+		newData
 	] = args;
+	const { planetNameArr } = values;
+	const { planetname, planetindex, imgname, distance } = newData;
+
+
 	let oldPlanetName = '';
 	const _ = selectedPlanet.map((planet) => {
 		if (planet.index === indexOfSelectedPlanet) {
 			oldPlanetName = planet.planetname;
-			console.log(`applyAnimForSelecPlanet ${planet.imgname}::${newPlanetImgNameToSwap}`);
+			console.log(`applyAnimForSelecPlanet ${planet.imgname}::${planetname}`);
 			return {
 				...planet,
-				imgname: newPlanetImgNameToSwap,
-				planetname: newPlanetNameToSwap,
-				distance: newDistanceToSwap,
-				index: newIndexToSwap,
+				imgname,
+				planetname,
+				distance,
+				index:planetindex,
 				isAnimated: true,
 				opacity: 1,
 			};
@@ -89,13 +88,13 @@ export const applyAnimForSelecPlanet = (...args) => {
 		}
 	});
 
-	const updatedSelecPlanetNames = selectedplanetnames.map((data) =>
-		data === oldPlanetName ? newPlanetNameToSwap : data
+	const updatedSelecPlanetNames = planetNameArr.map((data) =>
+		data === oldPlanetName ? planetname : data
 	);
 	console.log(`applyAnimForSelecPlanet ${JSON.stringify(_, null, 4)}`);
 	setSelectedPlanet(_);
 	setIndexOfSelectedPlanet(-1);
-	setSelectedplanetnames(updatedSelecPlanetNames);
+	setValues({...values,planetNameArr:[...planetNameArr,updatedSelecPlanetNames]})
 };
 
 export const stopPlanetAnim = () =>

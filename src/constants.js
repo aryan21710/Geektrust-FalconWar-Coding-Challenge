@@ -22,3 +22,13 @@ export const DATATOANIMSELECTEDPLANET = Array(6)
 		planetname: '',
 		distance: '',
 	}));
+
+
+export const PLANETANDBOTSDATA={
+    planetname: "",
+    planetindex: -1,
+    imgname: "",
+    distance : 0,
+    animPlanetCnt: 0,
+    planetNameArr: []
+}
