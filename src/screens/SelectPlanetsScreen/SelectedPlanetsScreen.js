@@ -3,7 +3,7 @@ import { myCustomHooks } from '../../customHooks';
 import { PlanetDetailsContext } from '../../context/appContext';
 import { useHistory } from 'react-router';
 import { PlanetImageArr } from '../../customHooks/useDefineConstants';
-import { SelectPlanetView } from './components/SelectPlanetView';
+import { SelectPlanetView } from './components/SelectPlanetView/SelectPlanetView';
 import {
 	createPlanetCordToDisplay,
 	updatePlanetSelectionData,

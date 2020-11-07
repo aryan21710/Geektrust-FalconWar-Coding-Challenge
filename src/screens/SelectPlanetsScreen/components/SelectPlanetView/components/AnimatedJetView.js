@@ -1,7 +1,7 @@
 import React from 'react';
-import { AnimatedJetWrapper, AnimatedMiniJet, SmallHeading } from '../styles';
+import { AnimatedJetWrapper, AnimatedMiniJet, SmallHeading } from '../../../styles';
 import { useSpring } from 'react-spring';
-import {  MinijetImage } from '../../../customHooks/useDefineConstants';
+import {  MinijetImage } from '../../../../../customHooks/useDefineConstants';
 import PropTypes from 'prop-types';
 
  const AnimatedJetView = ({ moveToDisplayVehiclePage,animPlanetCnt }) => {

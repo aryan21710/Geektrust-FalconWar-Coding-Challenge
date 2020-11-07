@@ -6,9 +6,9 @@ import {
 	StaticWrapper,
 	SelectedPlanet,
 	UnAnimatedWrapper,
-} from '../styles';
+} from '../../../styles';
 import uuid from 'react-uuid';
-import { SelectedPlanetAnimBox } from '.';
+import { SelectedPlanetAnimBox } from '../..';
 import PropTypes from 'prop-types';
 
 

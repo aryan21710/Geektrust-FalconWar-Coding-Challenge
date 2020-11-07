@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonHeading } from '../styles';
+import { ButtonHeading } from '../../../styles';
 import PropTypes from 'prop-types';
 
  const ResetPlanetBtnView = ({ onResetPlanet }) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import {
     SelectedPlanetImg,
     BigHeading
-} from '../styles';
+} from '../../../styles';
 import PropTypes from 'prop-types';
 
 

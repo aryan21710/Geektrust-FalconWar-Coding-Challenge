@@ -1,6 +1,6 @@
 import React from 'react';
-import { SolarSystemView, SelectedPlanetView, ResetPlanetBtnView, AnimatedJetView } from './index';
-import { SelectedPlanetWrapper, SolarSystemWrapper } from '../styles';
+import { SolarSystemView, SelectedPlanetView, ResetPlanetBtnView, AnimatedJetView } from '../index';
+import { SelectedPlanetWrapper, SolarSystemWrapper } from '../../styles';
 import PropTypes from 'prop-types';
 
 export const SelectPlanetView = (props) => {

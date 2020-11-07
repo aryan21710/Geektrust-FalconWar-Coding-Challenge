@@ -1,5 +1,5 @@
 import React from 'react';
-import { SolarSystemWrapper, BigHeading, SolarSystemImage, Planet } from '../styles';
+import { SolarSystemWrapper, BigHeading, SolarSystemImage, Planet } from '../../../styles';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 
