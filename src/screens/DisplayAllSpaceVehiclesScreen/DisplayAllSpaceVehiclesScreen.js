@@ -5,7 +5,7 @@ import { PlanetDetailsContext } from '../../context/appContext';
 
 const DisplayAllSpaceVehiclesScreen = () => {
 	const { planetCfg } = useContext(PlanetDetailsContext);
-	const { vehicleData } = planetCfg;
+	const vehicleData  = planetCfg?.vehicleData || JSON.parse(localStorage.getItem('planetCfg'));
 
 	return (
 		<React.Fragment>
