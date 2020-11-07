@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { Heading } from '../../components/common/styles';
+import { Heading } from '../../sharedComponents/styles';
 import { animated } from 'react-spring';
 import solarSystem from '../../assets/images/sunWithOrbit.png';
 

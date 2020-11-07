@@ -1,11 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {  Heading } from './common/styles';
-import { SelectedPlanetWrapper } from './common/StyledComponents/StyledPlanetComp';
+import {  Heading,SelectedPlanetWrapper } from './styles';
+import { PlanetDetailsContext } from '../../context/appContext';
+import { usePostDataToFetchResult } from '../../customHooks/usePostDataToFetchResult';
 
-import { PlanetDetailsContext } from '../context/appContext';
-import { usePostDataToFetchResult } from '../customHooks/usePostDataToFetchResult';
-
-const DisplayFinalResult = () => {
+const DisplayFinalResultScreen = () => {
 	const { finalData } = useContext(PlanetDetailsContext);
 	const [backendResponse, setBackendResponse] = useState({});
 	const [status, setStatus] = useState(false);
@@ -40,4 +38,4 @@ const DisplayFinalResult = () => {
 	);
 };
 
-export default DisplayFinalResult;
+export default DisplayFinalResultScreen;

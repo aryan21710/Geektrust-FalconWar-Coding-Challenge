@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomButton } from '../../../../../components/common/CustomButton';
+import { CustomButton } from '../../../../../sharedComponents/CustomButton';
 import PropTypes from 'prop-types';
 
  const ButtonView = ({ finalData }) => {

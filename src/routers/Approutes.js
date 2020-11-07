@@ -1,18 +1,18 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PlanetDetailsContext } from '../context/appContext';
-import { PlanetImageArr, SpaceBotImgArr } from '../customHooks/useDefineConstants';
+import { PlanetImageArr} from '../customHooks/useDefineConstants';
 import { useUpdatedPlanetAndBotsData } from '../customHooks/useUpdatedPlanetAndBotsData';
-import { StarGrid } from '../components/common/StarGrid';
+import { StarGrid } from '../sharedComponents/StarGrid';
 
 // *** LAZY LOAD ALL COMPONENTS FOR FASTER PAGE LOAD ***
 const LandingPage = lazy(() => import('../screens/LandingPageScreen/LandingPageScreen'));
-const Header = lazy(() => import('../components/common/Header'));
-const Footer = lazy(() => import('../components/common/Footer'));
+const Header = lazy(() => import('../sharedComponents/Header'));
+const Footer = lazy(() => import('../sharedComponents/Footer'));
 const SelectedPlanetsScreen = lazy(() => import('../screens/SelectPlanetsScreen/SelectedPlanetsScreen'));
 const SelectBotsScreen = lazy(() => import('../screens/SelectBotsScreen/SelectBotsScreen'));
 const DisplayAllSpaceVehicles = lazy(() => import('../screens/DisplayAllSpaceVehiclesScreen/DisplayAllSpaceVehiclesScreen'));
-const DisplayFinalResult = lazy(() => import('../components/DisplayFinalResult'));
+const DisplayFinalResultScreen = lazy(() => import('../screens/DisplayFinalResultScreen/DisplayFinalResultScreen'));
 
 const Approutes = () => {
 	const [planetCfg, setPlanetCfg] = useState({});
@@ -83,7 +83,7 @@ const Approutes = () => {
 								strict
 								component={DisplayAllSpaceVehicles}
 							/>
-							<Route path={`/displayfinalresult`} exact={true} strict component={DisplayFinalResult} />
+							<Route path={`/displayfinalresult`} exact={true} strict component={DisplayFinalResultScreen} />
 
 							<Footer />
 						</React.Fragment>

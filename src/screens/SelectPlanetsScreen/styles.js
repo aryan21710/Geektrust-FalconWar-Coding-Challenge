@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import { Heading } from '../../components/common/styles';
 import { animated } from 'react-spring';
 import solarSystem from '../../assets/images/sunWithOrbit.png';
 
@@ -91,7 +90,7 @@ export const SolarSystemWrapper = styled.div`
 	}
 `;
 
-export const BigHeading = styled(Heading)`
+export const BigHeading = styled.h1`
 	font-size: ${props=>props.fontSize || "1.3rem"};
 	color: ${props=>props.color || "white"};
 	text-align: center;
@@ -207,7 +206,7 @@ export const StaticWrapper = styled.div`
 	}
 `;
 
-export const ButtonHeading = styled(Heading)`
+export const ButtonHeading = styled.h1`
 	position: absolute;
 	bottom: 2vh;
 	right: 5vw;

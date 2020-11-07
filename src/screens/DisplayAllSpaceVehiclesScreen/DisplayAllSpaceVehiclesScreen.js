@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Wrapper, BadgeWrapper, ImageWrapper, SolarSystemWrapper, SmallHeading, BigHeading } from './styles';
-import { CustomButton } from '../../components/common/CustomButton';
+import { CustomButton } from '../../sharedComponents/CustomButton';
 import { PlanetDetailsContext } from '../../context/appContext';
 
 const DisplayAllSpaceVehiclesScreen = () => {

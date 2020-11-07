@@ -10,7 +10,7 @@ import {
 import { useFetchDataFromBackend } from '../../customHooks/useFetchDataFromBackend';
 import { ImageBadges } from '../../customHooks/useDefineConstants';
 import { PlanetDetailsContext } from '../../context/appContext';
-import { CustomButton } from '../../components/common/CustomButton';
+import { CustomButton } from '../../sharedComponents/CustomButton';
 import uuid from 'react-uuid';
 
 const LandingPageScreen = () => {
