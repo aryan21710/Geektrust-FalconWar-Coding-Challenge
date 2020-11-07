@@ -3,6 +3,7 @@ import { Button, ButtonText, AnimatedMiniJet } from './styles';
 import { useHistory } from 'react-router';
 import { useSpring, config } from 'react-spring';
 import { MinijetImage } from '../../customHooks/useDefineConstants';
+import PropTypes from 'prop-types';
 
 export const CustomButton = (props) => {
 	const { redirectPath, leftpos, TextForButton, width, disabled, opacity } = props;
@@ -38,4 +39,13 @@ export const CustomButton = (props) => {
 			</Button>
 		</React.Fragment>
 	);
+};
+
+CustomButton.propTypes = {
+	redirectPath: PropTypes.string,
+	leftpos: PropTypes.string,
+	TextForButton: PropTypes.string,
+	width: PropTypes.string,
+	disabled: PropTypes.bool,
+	opacity: PropTypes.number,
 };
