@@ -4,20 +4,25 @@ import { PlanetDetailsContext } from '../../context/appContext';
 import { useHistory } from 'react-router';
 import { PlanetImageArr } from '../../customHooks/useDefineConstants';
 import { SelectPlanetView } from './components/SelectPlanetView';
-import { createPlanetCordToDisplay,updatePlanetSelectionData } from '../../common/util';
-
+import { createPlanetCordToDisplay, updatePlanetSelectionData } from '../../common/util';
 
 const SelectedPlanetsScreen = () => {
-	const { useFetchDataFromBackend,useSelectedPlanetDataTOHandleAnim } = myCustomHooks;
-	const { planetCfg, setPlanetCfg, selectedPlanet, setSelectedPlanet, setSelecPlanetCount } = useContext(
-		PlanetDetailsContext
-	);
+	const { useFetchDataFromBackend, useSelectedPlanetDataTOHandleAnim } = myCustomHooks;
+	const {
+		planetCfg,
+		setPlanetCfg,
+		selectedPlanet,
+		setSelectedPlanet,
+		setSelecPlanetCount,
+		apiError,
+		setApiError,
+	} = useContext(PlanetDetailsContext);
 	const history = useHistory();
 
 	const { planetData } = planetCfg;
 
-	useFetchDataFromBackend(planetCfg, setPlanetCfg);
-	useSelectedPlanetDataTOHandleAnim(setSelectedPlanet, selectedPlanet,planetData);
+	useFetchDataFromBackend(planetCfg, setPlanetCfg, apiError, setApiError);
+	useSelectedPlanetDataTOHandleAnim(setSelectedPlanet, selectedPlanet, planetData);
 
 	const [animPlanetCnt, setAnimPlanetCnt] = useState(0);
 	const [planetDataUsedForRender, setPlanetDataUsedForRender] = useState([]);
@@ -29,9 +34,9 @@ const SelectedPlanetsScreen = () => {
 	const [indexOfSelectedPlanet, setIndexOfSelectedPlanet] = useState(-1);
 
 	useEffect(() => {
-		planetDataUsedForRender.length === 0 && setPlanetDataUsedForRender([...createPlanetCordToDisplay(planetData, PlanetImageArr)]);
-	}, [planetDataUsedForRender]);
-
+		(planetData && planetDataUsedForRender.length === 0) &&
+			setPlanetDataUsedForRender([...createPlanetCordToDisplay(planetData, PlanetImageArr)]);
+	}, [planetDataUsedForRender,planetData]);
 
 	const disableAnimPostPlanetSelection = () => {
 		const _ = selectedPlanet.map((planetData, idx) => {
@@ -144,7 +149,7 @@ const SelectedPlanetsScreen = () => {
 	};
 
 	const applyAnimForSelecPlanet = (...args) => {
-		const [newPlanetImgNameToSwap, newPlanetNameToSwap, newDistanceToSwap, newIndexToSwap]=args;
+		const [newPlanetImgNameToSwap, newPlanetNameToSwap, newDistanceToSwap, newIndexToSwap] = args;
 		let oldPlanetName = '';
 		const _ = selectedPlanet.map((planet) => {
 			if (planet.index === indexOfSelectedPlanet) {
@@ -176,10 +181,10 @@ const SelectedPlanetsScreen = () => {
 		setSelectedplanetnames(updatedSelecPlanetNames);
 	};
 
-	const moveToDisplayVehiclePage = () =>  {
-		updatePlanetSelectionData(animPlanetCnt, selectedPlanet, setSelectedPlanet)
+	const moveToDisplayVehiclePage = () => {
+		updatePlanetSelectionData(animPlanetCnt, selectedPlanet, setSelectedPlanet);
 		history.push(`/displayallspacevehicles`);
-	}
+	};
 
 	const onResetPlanet = () => {
 		setAnimPlanetCnt(0);

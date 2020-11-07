@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
+import '../../styles/components/stargrid.css'
 
 export const StarGrid = () => {
 	const [selectRandomStar, setSelectRandomStar] = useState(0);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, HeaderWrapper } from './StyledComponents/StyledCommonComp';
+import { Heading, HeaderWrapper } from './styles';
 
 const Footer = () => {
 	return (

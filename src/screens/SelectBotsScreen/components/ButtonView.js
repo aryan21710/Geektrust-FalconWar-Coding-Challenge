@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomButton } from '../../../components/CustomButton';
+import { CustomButton } from '../../../components/common/CustomButton';
 
  const ButtonView = ({ finalData }) => {
 	return (

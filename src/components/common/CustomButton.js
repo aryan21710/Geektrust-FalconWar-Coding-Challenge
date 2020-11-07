@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Button, ButtonText, AnimatedMiniJet } from './common/StyledComponents/StyledCommonComp';
+import { Button, ButtonText, AnimatedMiniJet } from './styles';
 import { useHistory } from 'react-router';
 import { useSpring, config } from 'react-spring';
-import { MinijetImage } from '../customHooks/useDefineConstants';
+import { MinijetImage } from '../../customHooks/useDefineConstants';
 
 export const CustomButton = (props) => {
 	const { redirectPath, leftpos, TextForButton, width, disabled, opacity } = props;

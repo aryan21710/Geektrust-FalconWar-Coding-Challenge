@@ -34,10 +34,6 @@ const Approutes = () => {
 		vehicle_names: [],
 	});
 
-	useEffect(()=>{
-		Object.keys(apiError).length > 0 && alert(`${apiError.url} ${apiError.message}`)
-	},[apiError])
-
 	useEffect(() => {
 		if (Object.keys(planetCfg).length > 0 && Object.keys(apiError).length===0) {
 			const { token, vehicleData } = planetCfg;

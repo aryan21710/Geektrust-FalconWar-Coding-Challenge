@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export const useSelectedPlanetDataTOHandleAnim = (setSelectedPlanet, selectedPlanet, planetData) => {
+export const useSelectedPlanetDataTOHandleAnim = (setSelectedPlanet, planetData) => {
 	const updatedSelectedPlanet = planetData.map((data) => ({
         ...data,
 		isAnimated: false,

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Heading } from '../../components/common/StyledComponents/StyledCommonComp';
+import { Heading } from '../../components/common/styles';
 
 export const Wrapper = styled.div`
 	width: 100vw;

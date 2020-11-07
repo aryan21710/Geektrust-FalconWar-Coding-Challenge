@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {  Heading } from './common/StyledComponents/StyledCommonComp';
+import {  Heading } from './common/styles';
 import { SelectedPlanetWrapper } from './common/StyledComponents/StyledPlanetComp';
 
 import { PlanetDetailsContext } from '../context/appContext';
