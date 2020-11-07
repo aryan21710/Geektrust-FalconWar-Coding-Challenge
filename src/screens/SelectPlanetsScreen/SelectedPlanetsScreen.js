@@ -12,7 +12,7 @@ import {
 	applyAnimForSelecPlanet,
 	stopPlanetAnim
 } from './services';
-import {dataToAnimSelectedPlanet} from '../../constants';
+import {DATATOANIMSELECTEDPLANET} from '../../constants';
 
 const SelectedPlanetsScreen = () => {
 	const { useFetchDataFromBackend, useSelectedPlanetDataTOHandleAnim } = myCustomHooks;
@@ -78,7 +78,7 @@ const SelectedPlanetsScreen = () => {
 			setSelectedplanetnames('');
 			setDistance('');
 			setPlanetName('');
-			setSelectedPlanet(dataToAnimSelectedPlanet);
+			setSelectedPlanet(DATATOANIMSELECTEDPLANET);
 		} else if (animPlanetCnt === 4) {
 			setSelecPlanetCount(animPlanetCnt);
 		}

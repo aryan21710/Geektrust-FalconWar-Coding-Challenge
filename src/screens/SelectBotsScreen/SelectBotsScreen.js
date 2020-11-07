@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { SelectBot } from './index';
 import { PlanetDetailsContext } from '../../context/appContext';
 import { calcBotsTravelTime, syncBotUnitsAndTravelTime } from './services';
-import {unitsAndTravelTimeData} from '../../constants'
+import {UNITSANDTRAVELTIMEDATA} from '../../constants'
 
 const SelectBotsScreen = () => {
 	const { dataToFetchFinalResult } = useContext(PlanetDetailsContext);
@@ -15,7 +15,7 @@ const SelectBotsScreen = () => {
 
 	const { planetIndex, planetValue, vehicleIndex } = selectedPlanet;
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
-	const [remainingUnitsAndTravelTime, setRemainingUnitsAndTravelTime] = useState(unitsAndTravelTimeData);
+	const [remainingUnitsAndTravelTime, setRemainingUnitsAndTravelTime] = useState(UNITSANDTRAVELTIMEDATA);
 
 	useEffect(() => {
 		setPlanetAndBotsData(populatePlanetAndBotsData());

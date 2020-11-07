@@ -1,4 +1,4 @@
-export const unitsAndTravelTimeData = Array(4).fill({
+export const UNITSANDTRAVELTIMEDATA = Array(4).fill({
 	name: '',
 	botImageName: '',
 	distance: '',
@@ -13,7 +13,7 @@ export const unitsAndTravelTimeData = Array(4).fill({
 	vehicleIndexArr: [],
 });
 
-export const dataToAnimSelectedPlanet = Array(6)
+export const DATATOANIMSELECTEDPLANET = Array(6)
 	.fill('')
 	.map(() => ({
 		isAnimated: false,
