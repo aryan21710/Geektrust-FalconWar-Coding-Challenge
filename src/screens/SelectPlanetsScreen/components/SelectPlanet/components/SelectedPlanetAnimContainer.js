@@ -6,7 +6,7 @@ import {
 import PropTypes from 'prop-types';
 
 
- const SelectedPlanetAnimBox = ({planet,idx,onChangePlanetSelection}) => {
+ const  SelectedPlanetAnimContainer = ({planet,idx,onChangePlanetSelection}) => {
     return (
         <React.Fragment>
             <BigHeading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</BigHeading>
@@ -25,9 +25,9 @@ import PropTypes from 'prop-types';
     );
 }
 
-export default SelectedPlanetAnimBox;
+export default  SelectedPlanetAnimContainer;
 
-SelectedPlanetAnimBox.propTypes = {
+ SelectedPlanetAnimContainer.propTypes = {
     planet: PropTypes.object,
     idx: PropTypes.number,
     onChangePlanetSelection: PropTypes.func

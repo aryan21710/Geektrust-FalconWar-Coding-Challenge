@@ -2,7 +2,7 @@ import React from 'react';
 import { CustomButton } from '../../../../../sharedComponents/CustomButton';
 import PropTypes from 'prop-types';
 
- const ButtonView = ({ finalData }) => {
+ const MissionFindFalconBtn= ({ finalData }) => {
 	return (
 		<CustomButton
 			redirectPath="/displayfinalresult"
@@ -15,9 +15,9 @@ import PropTypes from 'prop-types';
 	);
 };
 
-export default ButtonView;
+export default MissionFindFalconBtn;
 
-ButtonView.propTypes = {
+MissionFindFalconBtn.propTypes = {
 	finalData: PropTypes.arrayOf(PropTypes.object),
 };
 

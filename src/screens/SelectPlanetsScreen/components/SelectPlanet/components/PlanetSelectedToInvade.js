@@ -8,11 +8,11 @@ import {
 	UnAnimatedWrapper,
 } from '../../../styles';
 import uuid from 'react-uuid';
-import { SelectedPlanetAnimBox } from '../..';
+import {  SelectedPlanetAnimContainer } from '../..';
 import PropTypes from 'prop-types';
 
 
- const SelectedPlanetView = ({ selectedPlanet,onChangePlanetSelection }) => {
+ const PlanetSelectedToInvade = ({ selectedPlanet,onChangePlanetSelection }) => {
 	return (
 		<React.Fragment>
 			<BigHeading color="#FAD107">
@@ -25,7 +25,7 @@ import PropTypes from 'prop-types';
 							return (
 								<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 									<AnimatedWrapper>
-										<SelectedPlanetAnimBox onChangePlanetSelection={onChangePlanetSelection} idx={idx} planet={planet} />
+										< SelectedPlanetAnimContainer onChangePlanetSelection={onChangePlanetSelection} idx={idx} planet={planet} />
 									</AnimatedWrapper>
 								</StaticWrapper>
 							);
@@ -33,7 +33,7 @@ import PropTypes from 'prop-types';
 							return (
 								<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 									<UnAnimatedWrapper leftpos="0vw">
-										<SelectedPlanetAnimBox onChangePlanetSelection={onChangePlanetSelection} idx={idx} planet={planet} />
+										< SelectedPlanetAnimContainer onChangePlanetSelection={onChangePlanetSelection} idx={idx} planet={planet} />
 									</UnAnimatedWrapper>
 								</StaticWrapper>
 							);
@@ -41,7 +41,7 @@ import PropTypes from 'prop-types';
 							return (
 								<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 									<UnAnimatedWrapper>
-										<SelectedPlanetAnimBox onChangePlanetSelection={onChangePlanetSelection} idx={idx} planet={planet} />
+										< SelectedPlanetAnimContainer onChangePlanetSelection={onChangePlanetSelection} idx={idx} planet={planet} />
 									</UnAnimatedWrapper>
 								</StaticWrapper>
 							);
@@ -53,11 +53,11 @@ import PropTypes from 'prop-types';
 	);
 };
 
-export default SelectedPlanetView;
+export default PlanetSelectedToInvade;
 
 
 
-SelectedPlanetView.propTypes = {
+PlanetSelectedToInvade.propTypes = {
     selectedPlanet: PropTypes.arrayOf(PropTypes.object),
     onChangePlanetSelection: PropTypes.func
 }

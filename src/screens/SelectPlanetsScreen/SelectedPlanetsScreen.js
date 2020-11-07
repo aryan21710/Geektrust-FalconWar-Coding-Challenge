@@ -3,13 +3,14 @@ import { myCustomHooks } from '../../customHooks';
 import { PlanetDetailsContext } from '../../context/appContext';
 import { useHistory } from 'react-router';
 import { PlanetImageArr } from '../../customHooks/useDefineConstants';
-import { SelectPlanetView } from './components/SelectPlanetView/SelectPlanetView';
+import { SelectPlanet} from './components/SelectPlanet/SelectPlanet';
 import {
 	createPlanetCordToDisplay,
 	updatePlanetSelectionData,
 	updateSelectedPlanetDataForAnim,
 	reduceOpacityOfPlanetInSolarSystem,
 	applyAnimForSelecPlanet,
+	stopPlanetAnim
 } from './services';
 
 const SelectedPlanetsScreen = () => {
@@ -183,12 +184,10 @@ const SelectedPlanetsScreen = () => {
 		setIndexOfSelectedPlanet(parseInt(e.target.dataset.planetidx));
 	};
 
-	const stopPlanetAnim = () =>
-		alert('4 PLANETS ALREADY SELECTED. IF YOU WANT TO RESET THE SELECTION CLICK ON RESET PLANETS.');
-
+	
 	return (
 		<React.Fragment>
-			<SelectPlanetView
+			<SelectPlanet
 				moveToDisplayVehiclePage={moveToDisplayVehiclePage}
 				planetDataUsedForRender={planetDataUsedForRender}
 				animateSelectedPlanet={animateSelectedPlanet}

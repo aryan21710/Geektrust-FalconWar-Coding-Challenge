@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonHeading } from '../../../styles';
 import PropTypes from 'prop-types';
 
- const ResetPlanetBtnView = ({ onResetPlanet }) => {
+ const ResetPlanet= ({ onResetPlanet }) => {
 	return (
 		<React.Fragment>
 			<ButtonHeading onClick={onResetPlanet}>
@@ -12,9 +12,9 @@ import PropTypes from 'prop-types';
 	);
 };
 
-export default ResetPlanetBtnView;
+export default ResetPlanet ;
 
 
-ResetPlanetBtnView.propTypes = {
+ResetPlanet.propTypes = {
 	onResetPlanet: PropTypes.func,
 }

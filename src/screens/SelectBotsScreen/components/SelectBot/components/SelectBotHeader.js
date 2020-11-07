@@ -1,7 +1,7 @@
 import React from 'react';
 import {BigHeading} from '../../../styles'
 
- const HeadingView = () => {
+ const SelectBotHeader= () => {
 	return (
 		<BigHeading>
 			Choose Space Vehicles to Invade the Planets.
@@ -9,4 +9,4 @@ import {BigHeading} from '../../../styles'
 	);
 };
 
-export default HeadingView
+export default SelectBotHeader

@@ -3,7 +3,7 @@ import { PlanetWrapper, BadgeWrapper, SelectedPlanetImg,Select, SmallHeading } f
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 
- const PlanetAndTravelTimeView = ({ planetAndBotsData, onRadioChange }) => {
+ const PlanetAndTravelTime= ({ planetAndBotsData, onRadioChange }) => {
 	return (
 		<PlanetWrapper>
 			{planetAndBotsData.map(({ planetIndexArr, planetname, imgname, distance, vehicleDataArray }, idx) => (
@@ -46,9 +46,9 @@ import PropTypes from 'prop-types';
 	);
 };
 
-export default PlanetAndTravelTimeView;
+export default PlanetAndTravelTime ;
 
-PlanetAndTravelTimeView.propTypes = {
+PlanetAndTravelTime.propTypes = {
 	planetAndBotsData: PropTypes.arrayOf(PropTypes.object),
 	onRadioChange: PropTypes.func
 };

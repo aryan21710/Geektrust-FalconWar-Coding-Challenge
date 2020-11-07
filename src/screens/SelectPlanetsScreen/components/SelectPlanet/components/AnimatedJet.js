@@ -4,7 +4,7 @@ import { useSpring } from 'react-spring';
 import {  MinijetImage } from '../../../../../customHooks/useDefineConstants';
 import PropTypes from 'prop-types';
 
- const AnimatedJetView = ({ moveToDisplayVehiclePage,animPlanetCnt }) => {
+ const AnimatedJet= ({ moveToDisplayVehiclePage,animPlanetCnt }) => {
 	const { Minijet } = MinijetImage;
 
 	const jetAnimatedProp = useSpring({
@@ -22,9 +22,9 @@ import PropTypes from 'prop-types';
 	);
 };
 
-export default AnimatedJetView;
+export default AnimatedJet;
 
-AnimatedJetView.propTypes = {
+AnimatedJet.propTypes = {
 	moveToDisplayVehiclePage: PropTypes.func,
 	animPlanetCnt: PropTypes.number
 }

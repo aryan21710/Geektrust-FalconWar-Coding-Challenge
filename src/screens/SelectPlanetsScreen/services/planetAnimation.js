@@ -98,3 +98,7 @@ export const applyAnimForSelecPlanet = (...args) => {
 	setSelectedplanetnames(updatedSelecPlanetNames);
 };
 
+export const stopPlanetAnim = () =>
+alert('4 PLANETS ALREADY SELECTED. IF YOU WANT TO RESET THE SELECTION CLICK ON RESET PLANETS.');
+
+

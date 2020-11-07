@@ -1,9 +1,9 @@
 import React from 'react';
-import { SolarSystemView, SelectedPlanetView, ResetPlanetBtnView, AnimatedJetView } from '../index';
+import { SolarSystem, PlanetSelectedToInvade, ResetPlanet, AnimatedJet} from '../index';
 import { SelectedPlanetWrapper, SolarSystemWrapper } from '../../styles';
 import PropTypes from 'prop-types';
 
-export const SelectPlanetView = (props) => {
+export const SelectPlanet= (props) => {
 	const {
 		moveToDisplayVehiclePage,
 		planetDataUsedForRender,
@@ -16,19 +16,19 @@ export const SelectPlanetView = (props) => {
 	return (
 		<SelectedPlanetWrapper justifyContent="center">
 			<SolarSystemWrapper height="90vh" justifyContent="space-evenly">
-				<AnimatedJetView animPlanetCnt={animPlanetCnt} moveToDisplayVehiclePage={moveToDisplayVehiclePage} />
-				<SolarSystemView
+				<AnimatedJet animPlanetCnt={animPlanetCnt} moveToDisplayVehiclePage={moveToDisplayVehiclePage} />
+				<SolarSystem
 					planetDataUsedForRender={planetDataUsedForRender}
 					animateSelectedPlanet={animateSelectedPlanet}
 				/>
-				<SelectedPlanetView selectedPlanet={selectedPlanet} onChangePlanetSelection={onChangePlanetSelection} />
-				<ResetPlanetBtnView onResetPlanet={onResetPlanet} />
+				<PlanetSelectedToInvade selectedPlanet={selectedPlanet} onChangePlanetSelection={onChangePlanetSelection} />
+				<ResetPlanet onResetPlanet={onResetPlanet} />
 			</SolarSystemWrapper>
 		</SelectedPlanetWrapper>
 	);
 };
 
-SelectPlanetView.propTypes = {
+SelectPlanet.propTypes = {
 	moveToDisplayVehiclePage: PropTypes.func,
 	planetDataUsedForRender: PropTypes.arrayOf(PropTypes.object),
 	animateSelectedPlanet: PropTypes.func,
