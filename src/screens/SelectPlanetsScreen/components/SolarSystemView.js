@@ -1,6 +1,7 @@
 import React from 'react';
 import { SolarSystemWrapper, BigHeading, SolarSystemImage, Planet } from '../styles';
 import uuid from 'react-uuid';
+import PropTypes from 'prop-types';
 
  const SolarSystemView = ({ planetDataUsedForRender, animateSelectedPlanet }) => {
 	return (
@@ -32,3 +33,9 @@ import uuid from 'react-uuid';
 };
 
 export default SolarSystemView;
+
+SolarSystemView.propTypes = {
+	planetDataUsedForRender: PropTypes.arrayOf(PropTypes.object),
+	animateSelectedPlanet: PropTypes.func,
+};
+

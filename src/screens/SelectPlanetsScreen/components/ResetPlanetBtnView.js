@@ -1,5 +1,6 @@
 import React from 'react';
 import { ButtonHeading } from '../styles';
+import PropTypes from 'prop-types';
 
  const ResetPlanetBtnView = ({ onResetPlanet }) => {
 	return (
@@ -12,3 +13,8 @@ import { ButtonHeading } from '../styles';
 };
 
 export default ResetPlanetBtnView;
+
+
+ResetPlanetBtnView.propTypes = {
+	onResetPlanet: PropTypes.func,
+}

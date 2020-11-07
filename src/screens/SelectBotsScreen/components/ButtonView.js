@@ -1,5 +1,6 @@
 import React from 'react';
 import { CustomButton } from '../../../components/common/CustomButton';
+import PropTypes from 'prop-types';
 
  const ButtonView = ({ finalData }) => {
 	return (
@@ -14,4 +15,9 @@ import { CustomButton } from '../../../components/common/CustomButton';
 	);
 };
 
-export default ButtonView
+export default ButtonView;
+
+ButtonView.propTypes = {
+	finalData: PropTypes.arrayOf(PropTypes.object),
+};
+

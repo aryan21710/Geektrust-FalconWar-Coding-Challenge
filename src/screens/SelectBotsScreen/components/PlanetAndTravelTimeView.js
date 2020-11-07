@@ -1,6 +1,7 @@
 import React from 'react';
-import { PlanetWrapper, BadgeWrapper, SelectedPlanetImg, BigHeading, Select, SmallHeading } from '../styles';
+import { PlanetWrapper, BadgeWrapper, SelectedPlanetImg,Select, SmallHeading } from '../styles';
 import uuid from 'react-uuid';
+import PropTypes from 'prop-types';
 
  const PlanetAndTravelTimeView = ({ planetAndBotsData, onRadioChange }) => {
 	return (
@@ -46,3 +47,9 @@ import uuid from 'react-uuid';
 };
 
 export default PlanetAndTravelTimeView;
+
+PlanetAndTravelTimeView.propTypes = {
+	planetAndBotsData: PropTypes.arrayOf(PropTypes.object),
+	onRadioChange: PropTypes.func
+};
+

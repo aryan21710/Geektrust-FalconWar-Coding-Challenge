@@ -9,6 +9,8 @@ import {
 } from '../styles';
 import uuid from 'react-uuid';
 import { SelectedPlanetAnimBox } from '.';
+import PropTypes from 'prop-types';
+
 
  const SelectedPlanetView = ({ selectedPlanet,onChangePlanetSelection }) => {
 	return (
@@ -51,4 +53,12 @@ import { SelectedPlanetAnimBox } from '.';
 	);
 };
 
-export default SelectedPlanetView
+export default SelectedPlanetView;
+
+
+
+SelectedPlanetView.propTypes = {
+    selectedPlanet: PropTypes.arrayOf(PropTypes.object),
+    onChangePlanetSelection: PropTypes.func
+}
+

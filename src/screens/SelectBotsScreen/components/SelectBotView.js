@@ -1,6 +1,7 @@
 import React from 'react';
 import { ButtonView, PlanetAndTravelTimeView, HeadingView } from './';
 import { SelectedPlanetWrapper, SolarSystemWrapper } from '../styles';
+import PropTypes from 'prop-types';
 
 const SelectBotView = (props) => {
 	const { planetAndBotsData, finalData, onRadioChange } = props;
@@ -15,3 +16,10 @@ const SelectBotView = (props) => {
 	);
 };
 export default SelectBotView;
+
+SelectBotView.propTypes = {
+	finalData: PropTypes.arrayOf(PropTypes.object),
+	planetAndBotsData: PropTypes.arrayOf(PropTypes.object),
+	onRadioChange: PropTypes.func
+};
+

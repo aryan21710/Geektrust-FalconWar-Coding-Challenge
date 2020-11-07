@@ -3,6 +3,8 @@ import {
     SelectedPlanetImg,
     BigHeading
 } from '../styles';
+import PropTypes from 'prop-types';
+
 
  const SelectedPlanetAnimBox = ({planet,idx,onChangePlanetSelection}) => {
     return (
@@ -24,3 +26,9 @@ import {
 }
 
 export default SelectedPlanetAnimBox;
+
+SelectedPlanetAnimBox.propTypes = {
+    planet: PropTypes.object,
+    idx: PropTypes.number,
+    onChangePlanetSelection: PropTypes.func
+}
