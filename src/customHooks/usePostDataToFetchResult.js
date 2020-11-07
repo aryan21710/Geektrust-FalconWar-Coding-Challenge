@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FindFalconeUrl } from '../common/myenv';
+import { FindFalconeUrl } from '../lib/myenv';
 
 export const usePostDataToFetchResult = async (finalData, setBackendResponse, backendResponse, setError, error) => {
 	if (Object.keys(backendResponse).length === 0 && Object.keys(error).length === 0) {

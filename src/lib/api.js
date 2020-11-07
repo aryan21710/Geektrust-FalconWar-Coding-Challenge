@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { defaultAxiosHeader, postDataAxiosHeader } from '../../common/axiosHeaders';
+import { defaultAxiosHeader, postDataAxiosHeader } from './axiosHeaders';
 
 export const makeRequestToBackend = async (url, method, setApiError, body = undefined) => {
 	try {

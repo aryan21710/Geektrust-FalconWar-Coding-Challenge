@@ -4,7 +4,7 @@ import { PlanetDetailsContext } from '../../context/appContext';
 import { useHistory } from 'react-router';
 import { PlanetImageArr } from '../../customHooks/useDefineConstants';
 import { SelectPlanetView } from './components/SelectPlanetView';
-import { createPlanetCordToDisplay, updatePlanetSelectionData } from '../../common/util';
+import { createPlanetCordToDisplay, updatePlanetSelectionData } from '../../lib/util';
 
 const SelectedPlanetsScreen = () => {
 	const { useFetchDataFromBackend, useSelectedPlanetDataTOHandleAnim } = myCustomHooks;
