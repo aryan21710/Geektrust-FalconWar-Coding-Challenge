@@ -4,19 +4,20 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-react-app": "^9.1.2",
     "bootstrap": "^4.5.0",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.15.5",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.18.3",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.20",
     "node-sass": "^4.14.1",
     "query-string": "^6.13.2",
+    "raf": "^3.3.2",
     "react": "^16.14.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-bootstrap": "^1.2.2",
@@ -56,5 +57,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "react-testing-library": "^8.0.1"
   }
 }
