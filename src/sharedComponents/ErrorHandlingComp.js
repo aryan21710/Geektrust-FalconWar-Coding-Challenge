@@ -1,6 +1,5 @@
 import React from 'react';
 import { Wrapper, Heading, Button, ButtonText, BadgeWrapper } from './styles';
-import { CustomButton } from './CustomButton';
 import { withRouter } from 'react-router-dom';
 
 class ErrorHandlerComp extends React.Component {
