@@ -5,16 +5,12 @@ export const calcBotsTravelTime = (...args) => {
 		vehicleIndex,
 		remainingUnitsAndTravelTime,
 		setRemainingUnitsAndTravelTime,
-		planetValue,
-		dataToFetchFinalResult,
-		setDataToFetchFinalResult,
 	] = args;
 	const planetDistance = planetAndBotsData[planetIndex].distance;
 	const { vehicleDataArray } = planetAndBotsData[planetIndex];
 	const vehicleMaxDistance = vehicleDataArray[vehicleIndex].distance;
 	const totalUnits = vehicleDataArray[vehicleIndex].totalUnits;
 	const vehicleSpeed = vehicleDataArray[vehicleIndex].speed;
-	let vehicleSelectedForInvasion = "";
 	if (planetDistance <= vehicleMaxDistance && totalUnits.current > 0) {
 		//  remainingUnitsAndTravelTime is array of 4. update all array.
 		const updatedLeftUnitsAndTravelTime = remainingUnitsAndTravelTime.map((data, idx) => {
@@ -39,7 +35,6 @@ export const calcBotsTravelTime = (...args) => {
 			} else {
 				if (idx === vehicleIndex) {
 					// 1st new entry is added below
-					vehicleSelectedForInvasion=planetValue;
 					return {
 						...vehicleDataArray[idx],
 						travelTime: Math.round(planetAndBotsData[planetIndex].distance / parseInt(vehicleSpeed)),
@@ -73,14 +68,8 @@ export const calcBotsTravelTime = (...args) => {
 				}
 			}
 		});
-		console.log(`updatedLeftUnitsAndTravelTime ${vehicleSelectedForInvasion}`);
-
-		// console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(updatedLeftUnitsAndTravelTime, null, 4)}`);
+		// console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(vehicleSelectedForInvasionCnt, null, 4)}`);
 		setRemainingUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
-		setDataToFetchFinalResult({
-			...dataToFetchFinalResult,
-			vehicle_names: [ ...dataToFetchFinalResult.vehicle_names, vehicleSelectedForInvasion ],
-		});
 	}
 };
 
@@ -107,10 +96,18 @@ export const syncBotUnitsAndTravelTime = (...args) => {
 			error: idx === planetIndex ? remainingUnitsAndTravelTime[vehicleIndex].error : planetData.error,
 		};
 	});
+
+	const vehicleSelectedForInvasionCnt=updatedPlanetAndBotsData.filter((data)=>data.travelTime > 0)
+	console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(vehicleSelectedForInvasionCnt, null, 4)}`);
+
+	if (vehicleSelectedForInvasionCnt.length===4) {
+		setDataToFetchFinalResult({
+			...dataToFetchFinalResult,
+			token: dataToFetchFinalResult?.token ? dataToFetchFinalResult.token : localStorage.getItem('token'),
+			planet_names: planetName,
+			vehicle_names: vehicleSelectedForInvasionCnt.map((data)=>data.planetValue)
+		});
+	}
 	setPlanetAndBotsData(updatedPlanetAndBotsData);
-	setDataToFetchFinalResult({
-		...dataToFetchFinalResult,
-		token: dataToFetchFinalResult?.token ? dataToFetchFinalResult.token : localStorage.getItem('token'),
-		planet_names: planetName,
-	});
+
 };

@@ -28,10 +28,7 @@ const SelectBotsScreen = () => {
 				planetIndex,
 				vehicleIndex,
 				remainingUnitsAndTravelTime,
-				setRemainingUnitsAndTravelTime,
-				planetValue,
-				dataToFetchFinalResult,
-				setDataToFetchFinalResult,
+				setRemainingUnitsAndTravelTime
 			);
 		} else {
 			setSelectedPlanet({
