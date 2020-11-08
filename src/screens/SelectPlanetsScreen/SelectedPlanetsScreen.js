@@ -12,7 +12,7 @@ import {
 	applyAnimForSelecPlanet,
 	stopPlanetAnim,
 } from './services';
-import { DATATOANIMSELECTEDPLANET, PLANETANDBOTSDATA } from '../../constants';
+import { DEFAULTDATATOANIMSELECTEDPLANET, DEFAULTPLANETANDBOTSDATA } from '../../constants';
 
 const SelectedPlanetsScreen = () => {
 	const { useFetchDataFromBackend, useSelectedPlanetDataTOHandleAnim } = myCustomHooks;
@@ -34,9 +34,10 @@ const SelectedPlanetsScreen = () => {
 
 	const [planetDataUsedForRender, setPlanetDataUsedForRender] = useState([]);
 	const [indexOfSelectedPlanet, setIndexOfSelectedPlanet] = useState(-1);
-	const [values, setValues] = useState(PLANETANDBOTSDATA);
+	const [values, setValues] = useState(DEFAULTPLANETANDBOTSDATA);
 
 	const {  planetindex, animPlanetCnt, planetNameArr } = values;
+	 
 
 	useEffect(() => {
 		planetData &&
@@ -62,8 +63,8 @@ const SelectedPlanetsScreen = () => {
 
 	useEffect(() => {
 		if (animPlanetCnt === 0) {
-			setValues(PLANETANDBOTSDATA);
-			setSelectedPlanet(DATATOANIMSELECTEDPLANET);
+			setValues(DEFAULTPLANETANDBOTSDATA);
+			setSelectedPlanet(DEFAULTDATATOANIMSELECTEDPLANET);
 		} else if (animPlanetCnt === 4) {
 			setSelecPlanetCount(animPlanetCnt);
 		}

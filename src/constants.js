@@ -13,7 +13,7 @@ export const UNITSANDTRAVELTIMEDATA = Array(4).fill({
 	vehicleIndexArr: [],
 });
 
-export const DATATOANIMSELECTEDPLANET = Array(6)
+export const DEFAULTDATATOANIMSELECTEDPLANET = Array(6)
 	.fill('')
 	.map(() => ({
 		isAnimated: false,
@@ -24,7 +24,7 @@ export const DATATOANIMSELECTEDPLANET = Array(6)
 	}));
 
 
-export const PLANETANDBOTSDATA={
+export const DEFAULTPLANETANDBOTSDATA={
     planetname: "",
     planetindex: -1,
     imgname: "",

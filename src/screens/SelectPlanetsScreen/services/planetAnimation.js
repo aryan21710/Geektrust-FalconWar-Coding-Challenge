@@ -1,12 +1,6 @@
 export const updateSelectedPlanetDataForAnim = (...args) => {
-	const [
-		values,
-		selectedPlanet,
-		indexOfSelectedPlanet,
-		setSelectedPlanet,
-	] = args;
+	const [values, selectedPlanet, indexOfSelectedPlanet, setSelectedPlanet] = args;
 	const { planetname, planetindex, imgname, distance, animPlanetCnt } = values;
-
 	if (planetindex > -1 && animPlanetCnt <= 4) {
 		const updatedSelectedPlanet = selectedPlanet.map((selecPlanData, idx) => {
 			if (idx === animPlanetCnt - 1) {
@@ -60,44 +54,25 @@ export const applyAnimForSelecPlanet = (...args) => {
 		selectedPlanet,
 		indexOfSelectedPlanet,
 		setSelectedPlanet,
-		newData
+		newData,
 	] = args;
-	const { planetNameArr } = values;
 	const { planetname, planetindex, imgname, distance } = newData;
-
-
-	let oldPlanetName = '';
-	const _ = selectedPlanet.map((planet) => {
-		if (planet.index === indexOfSelectedPlanet) {
-			oldPlanetName = planet.planetname;
-			console.log(`applyAnimForSelecPlanet ${planet.imgname}::${planetname}`);
-			return {
-				...planet,
-				imgname,
-				planetname,
-				distance,
-				index:planetindex,
-				isAnimated: true,
-				opacity: 1,
-			};
-		} else {
-			return {
-				...planet,
-				isAnimated: false,
-			};
-		}
-	});
-
-	const updatedSelecPlanetNames = planetNameArr.map((data) =>
-		data === oldPlanetName ? planetname : data
-	);
-	console.log(`applyAnimForSelecPlanet ${JSON.stringify(_, null, 4)}`);
-	setSelectedPlanet(_);
+	const newPlanetData = {
+		imgname,
+		planetname,
+		distance,
+		index: planetindex,
+		isAnimated: true,
+		opacity: 1,
+	};
+	selectedPlanet.splice(indexOfSelectedPlanet, 1, newPlanetData);
+	const updatedSelecPlanetNames = selectedPlanet
+		.filter((planet) => planet.planetname.length > 0)
+		.map((_) => _.planetname);
+	setSelectedPlanet(selectedPlanet);
 	setIndexOfSelectedPlanet(-1);
-	setValues({...values,planetNameArr:[...planetNameArr,updatedSelecPlanetNames]})
+	setValues({ ...values, planetNameArr: [...updatedSelecPlanetNames] });
 };
 
 export const stopPlanetAnim = () =>
-alert('4 PLANETS ALREADY SELECTED. IF YOU WANT TO RESET THE SELECTION CLICK ON RESET PLANETS.');
-
-
+	alert('4 PLANETS ALREADY SELECTED. IF YOU WANT TO RESET THE SELECTION CLICK ON RESET PLANETS.');
