@@ -100,12 +100,20 @@ export const syncBotUnitsAndTravelTime = (...args) => {
 	const vehicleSelectedForInvasionCnt=updatedPlanetAndBotsData.filter((data)=>data.travelTime > 0)
 	console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(vehicleSelectedForInvasionCnt, null, 4)}`);
 
+	const vehicleToTravelTimeMapping={};
+	updatedPlanetAndBotsData.forEach((data)=>{
+		if (data.travelTime > 0) {
+			vehicleToTravelTimeMapping[data.planetname]=data.travelTime
+		}
+	})
+
 	if (vehicleSelectedForInvasionCnt.length===4) {
 		setDataToFetchFinalResult({
 			...dataToFetchFinalResult,
 			token: dataToFetchFinalResult?.token ? dataToFetchFinalResult.token : localStorage.getItem('token'),
 			planet_names: planetName,
-			vehicle_names: vehicleSelectedForInvasionCnt.map((data)=>data.planetValue)
+			vehicle_names: vehicleSelectedForInvasionCnt.map((data)=>data.planetValue),
+			vehicleToTravelTimeMapping
 		});
 	}
 	setPlanetAndBotsData(updatedPlanetAndBotsData);

@@ -35,6 +35,7 @@ const Approutes = () => {
 		token: '',
 		planet_names: [],
 		vehicle_names: [],
+		vehicleToTravelTimeMapping: {}
 	});
 
 	useEffect(() => {
