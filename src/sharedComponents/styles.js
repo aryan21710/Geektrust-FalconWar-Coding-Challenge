@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 	padding: 0;
 	overflow: hidden;
 	display: flex;
-	justify-content: center;
+	justify-content: ${props=>props.justifyContent || "center"};
 	opacity: 1;
 	z-index: 2;
 	flex-direction: ${(props) => props.flexDirection || 'row'};

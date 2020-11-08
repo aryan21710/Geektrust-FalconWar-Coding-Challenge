@@ -6,7 +6,7 @@ import uuid from 'react-uuid';
 
 const DisplayAllSpaceVehiclesScreen = () => {
 	const { planetCfg } = useContext(PlanetDetailsContext);
-	const vehicleData  = planetCfg?.vehicleData || JSON.parse(localStorage.getItem('planetCfg'));
+	const vehicleData  = planetCfg?.vehicleDat || JSON.parse(localStorage.getItem('planetCf'));
 
 	return (
 		<React.Fragment>
