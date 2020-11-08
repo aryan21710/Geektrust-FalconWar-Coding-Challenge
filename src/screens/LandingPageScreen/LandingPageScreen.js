@@ -7,8 +7,8 @@ import {
 	SmallHeading,
 	BigHeading
 } from './styles.js';
-import { useFetchDataFromBackend } from '../../customHooks/useFetchDataFromBackend';
-import { ImageBadges } from '../../customHooks/useDefineConstants';
+import { useFetchDataFromBackend } from '../services';
+import { ImageBadges } from '../../lib/constants';
 import { PlanetDetailsContext } from '../../context/appContext';
 import { CustomButton } from '../../sharedComponents/CustomButton';
 import uuid from 'react-uuid';

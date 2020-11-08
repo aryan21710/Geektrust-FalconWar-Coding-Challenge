@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { myCustomHooks } from '../../customHooks';
+import { useFetchDataFromBackend } from '../services';
+import { useSelectedPlanetDataTOHandleAnim } from './services';
 import { PlanetDetailsContext } from '../../context/appContext';
 import { useHistory } from 'react-router';
-import { PlanetImageArr } from '../../customHooks/useDefineConstants';
+import { PlanetImageArr } from '../../lib/constants';
 import { SelectPlanet } from './components/SelectPlanet/SelectPlanet';
 import {
 	createPlanetCordToDisplay,
@@ -12,10 +13,9 @@ import {
 	planetAnimPostSwapForSelecPlan,
 	stopPlanetAnim,
 } from './services';
-import { DEFAULTDATATOANIMSELECTEDPLANET, DEFAULTPLANETANDBOTSDATA } from '../../constants';
+import { DEFAULTDATATOANIMSELECTEDPLANET, DEFAULTPLANETANDBOTSDATA } from '../../lib/constants';
 
 const SelectedPlanetsScreen = () => {
-	const { useFetchDataFromBackend, useSelectedPlanetDataTOHandleAnim } = myCustomHooks;
 	const {
 		planetCfg,
 		setPlanetCfg,
@@ -40,7 +40,7 @@ const SelectedPlanetsScreen = () => {
 	const [idxOfSelecPlanForSwap, setIdxOfSelecPlanForSwap] = useState(-1);
 	const [values, setValues] = useState(DEFAULTPLANETANDBOTSDATA);
 	const { animPlanetCnt, planetNameArr } = values;
-	 
+
 	useEffect(() => {
 		planetData &&
 			planetDataUsedForRender.length === 0 &&
@@ -63,7 +63,13 @@ const SelectedPlanetsScreen = () => {
 			setValues(DEFAULTPLANETANDBOTSDATA);
 			setSelectedPlanet(DEFAULTDATATOANIMSELECTEDPLANET);
 		} else {
-			updateSelectedPlanetDataForAnim(values, selectedPlanet, idxOfSelecPlanForSwap, setSelectedPlanet,setSelecPlanetCount);
+			updateSelectedPlanetDataForAnim(
+				values,
+				selectedPlanet,
+				idxOfSelecPlanForSwap,
+				setSelectedPlanet,
+				setSelecPlanetCount
+			);
 		}
 	}, [animPlanetCnt]);
 

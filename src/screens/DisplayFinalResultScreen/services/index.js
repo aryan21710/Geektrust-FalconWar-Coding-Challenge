@@ -1,0 +1,1 @@
+export {usePostDataToFetchResult} from './usePostDataToFetchResult';

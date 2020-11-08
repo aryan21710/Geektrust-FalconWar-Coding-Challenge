@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Heading, SelectedPlanetWrapper } from './styles';
 import { PlanetDetailsContext } from '../../context/appContext';
-import { usePostDataToFetchResult } from '../../customHooks/usePostDataToFetchResult';
+import { usePostDataToFetchResult } from '../DisplayFinalResultScreen/services';
 
 const DisplayFinalResultScreen = () => {
 	const { dataToFetchFinalResult, apiError, setApiError } = useContext(PlanetDetailsContext);

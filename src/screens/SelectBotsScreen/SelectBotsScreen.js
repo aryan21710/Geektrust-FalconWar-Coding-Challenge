@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { SelectBot } from './index';
 import { PlanetDetailsContext } from '../../context/appContext';
 import { calcBotsTravelTime, syncBotUnitsAndTravelTime } from './services';
-import { UNITSANDTRAVELTIMEDATA } from '../../constants';
+import { UNITSANDTRAVELTIMEDATA } from '../../lib/constants';
 
 const SelectBotsScreen = () => {
 	const { dataToFetchFinalResult,setDataToFetchFinalResult } = useContext(PlanetDetailsContext);

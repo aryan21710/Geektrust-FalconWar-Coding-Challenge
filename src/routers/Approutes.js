@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PlanetDetailsContext } from '../context/appContext';
-import { PlanetImageArr } from '../customHooks/useDefineConstants';
-import { useUpdatedPlanetAndBotsData } from '../customHooks/useUpdatedPlanetAndBotsData';
+import {PlanetImageArr} from '../lib/constants';
+import { useUpdatedPlanetAndBotsData } from '../screens/services';
 import { StarGrid } from '../sharedComponents/StarGrid';
 
 // *** LAZY LOAD ALL COMPONENTS FOR FASTER PAGE LOAD ***

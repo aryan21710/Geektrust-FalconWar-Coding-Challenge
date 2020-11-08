@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { FindFalconeUrl } from '../lib/myenv';
-import { makePostRequestToBackend } from '../lib/api';
+import { FindFalconeUrl } from '../../../lib/myenv';
+import { makePostRequestToBackend } from '../../../lib/api';
 
 export const usePostDataToFetchResult = async (
 	setBackendResponse,

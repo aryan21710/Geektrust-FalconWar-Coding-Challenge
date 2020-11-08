@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { TokenUrl, PlanetUrl, VehicleUrl } from '../lib/myenv';
-import { makePostRequestToBackend, makeGetRequestToBackend} from '../lib/api';
-import { SpaceBotImgArr } from '../customHooks/useDefineConstants';
+import { TokenUrl, PlanetUrl, VehicleUrl } from '../../lib/myenv';
+import { makePostRequestToBackend, makeGetRequestToBackend} from '../../lib/api';
+import { SpaceBotImgArr } from '../../lib/constants';
 
 export const useFetchDataFromBackend = async (planetCfg, setPlanetCfg, apiError, setApiError) => {
 	useEffect(() => {

@@ -22,9 +22,9 @@ import PropTypes from 'prop-types';
 	);
 };
 
-export default AnimatedJet;
+export default AnimatedJetView;
 
-AnimatedJet.propTypes = {
+AnimatedJetView.propTypes = {
 	moveToDisplayVehiclePage: PropTypes.func,
 	animPlanetCnt: PropTypes.number
 }

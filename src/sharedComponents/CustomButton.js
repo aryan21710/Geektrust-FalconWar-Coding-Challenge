@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, ButtonText, AnimatedMiniJet } from './styles';
 import { useHistory } from 'react-router';
 import { useSpring, config } from 'react-spring';
-import { MinijetImage } from '../customHooks/useDefineConstants';
+import { MinijetImage } from '../lib/constants';
 import PropTypes from 'prop-types';
 
 export const CustomButton = (props) => {
