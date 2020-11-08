@@ -17,7 +17,10 @@ export const calcBotsTravelTime = (...args) => {
 			if (data.planetIndexArr.includes(planetIndex)) {
 				return {
 					...vehicleDataArray[idx],
-					travelTime: data.travelTime,
+					travelTime:
+						data.travelTime !== Math.round(planetAndBotsData[planetIndex].distance / parseInt(vehicleSpeed))
+							? Math.round(planetAndBotsData[planetIndex].distance / parseInt(vehicleSpeed))
+							: data.travelTime,
 					totalUnits: {
 						original: vehicleDataArray[idx].totalUnits.original,
 						current: !data.planetIndexArr.includes(planetIndex)
@@ -68,7 +71,7 @@ export const calcBotsTravelTime = (...args) => {
 				}
 			}
 		});
-		// console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(vehicleSelectedForInvasionCnt, null, 4)}`);
+		console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(updatedLeftUnitsAndTravelTime, null, 4)}`);
 		setRemainingUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
 	}
 };
@@ -97,25 +100,24 @@ export const syncBotUnitsAndTravelTime = (...args) => {
 		};
 	});
 
-	const vehicleSelectedForInvasionCnt=updatedPlanetAndBotsData.filter((data)=>data.travelTime > 0)
+	const vehicleSelectedForInvasionCnt = updatedPlanetAndBotsData.filter((data) => data.travelTime > 0);
 	console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(vehicleSelectedForInvasionCnt, null, 4)}`);
 
-	const vehicleToTravelTimeMapping={};
-	updatedPlanetAndBotsData.forEach((data)=>{
+	const vehicleToTravelTimeMapping = {};
+	updatedPlanetAndBotsData.forEach((data) => {
 		if (data.travelTime > 0) {
-			vehicleToTravelTimeMapping[data.planetname]=data.travelTime
+			vehicleToTravelTimeMapping[data.planetname] = data.travelTime;
 		}
-	})
+	});
 
-	if (vehicleSelectedForInvasionCnt.length===4) {
+	if (vehicleSelectedForInvasionCnt.length === 4) {
 		setDataToFetchFinalResult({
 			...dataToFetchFinalResult,
 			token: dataToFetchFinalResult?.token ? dataToFetchFinalResult.token : localStorage.getItem('token'),
 			planet_names: planetName,
-			vehicle_names: vehicleSelectedForInvasionCnt.map((data)=>data.planetValue),
-			vehicleToTravelTimeMapping
+			vehicle_names: vehicleSelectedForInvasionCnt.map((data) => data.planetValue),
+			vehicleToTravelTimeMapping,
 		});
 	}
 	setPlanetAndBotsData(updatedPlanetAndBotsData);
-
 };

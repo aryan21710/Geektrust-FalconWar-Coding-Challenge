@@ -21,7 +21,7 @@ const DisplayFinalResultScreen = () => {
 			const { planet_name } = backendResponse;
 			planet_name
 				? setDisplayMessage(
-						`CONGRATULATIONS . YOU FOUND AL FALCONE ON ${planet_name.toUpperCase()}. TRAVEL TIME ${vehicleToTravelTimeMapping[planet_name]}`
+						`CONGRATULATIONS . YOU FOUND AL FALCONE ON ${planet_name.toUpperCase()}. TRAVEL TIME ${vehicleToTravelTimeMapping[planet_name]}..`
 				  )
 				: setDisplayMessage('MISSION FAILED.. KEEP LOOKING FOR AL FALCONE');
 		} else {
