@@ -4,12 +4,12 @@ import { SelectedPlanetWrapper, SolarSystemWrapper } from '../../styles';
 import PropTypes from 'prop-types';
 
 const SelectBot= (props) => {
-	const { planetAndBotsData, dataToFetchFinalResult, onRadioChange } = props;
+	const { planetAndBotsData, dataToFetchFinalResult, onDropDownChange } = props;
 	return (
 		<SelectedPlanetWrapper justifyContent="center">
 			<SolarSystemWrapper height="75vh" justifyContent="space-evenly">
 				<SelectBotHeader/>
-				<PlanetAndTravelTime planetAndBotsData={planetAndBotsData} onRadioChange={onRadioChange}/>
+				<PlanetAndTravelTime planetAndBotsData={planetAndBotsData} onDropDownChange={onDropDownChange}/>
 			</SolarSystemWrapper>
 			<MissionFindFalconBtn dataToFetchFinalResult={dataToFetchFinalResult}/>
 		</SelectedPlanetWrapper>
@@ -18,8 +18,8 @@ const SelectBot= (props) => {
 export default SelectBot;
 
 SelectBot.propTypes = {
-	dataToFetchFinalResult: PropTypes.arrayOf(PropTypes.object),
+	dataToFetchFinalResult: PropTypes.object,
 	planetAndBotsData: PropTypes.arrayOf(PropTypes.object),
-	onRadioChange: PropTypes.func
+	onDropDownChange: PropTypes.func
 };
 

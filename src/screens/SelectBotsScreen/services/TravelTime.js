@@ -1,13 +1,23 @@
 export const calcBotsTravelTime = (...args) => {
-	const [planetAndBotsData, planetIndex, vehicleIndex,  remainingUnitsAndTravelTime,  setRemainingUnitsAndTravelTime,planetValue] = args;
+	const [
+		planetAndBotsData,
+		planetIndex,
+		vehicleIndex,
+		remainingUnitsAndTravelTime,
+		setRemainingUnitsAndTravelTime,
+		planetValue,
+		dataToFetchFinalResult,
+		setDataToFetchFinalResult,
+	] = args;
 	const planetDistance = planetAndBotsData[planetIndex].distance;
 	const { vehicleDataArray } = planetAndBotsData[planetIndex];
 	const vehicleMaxDistance = vehicleDataArray[vehicleIndex].distance;
 	const totalUnits = vehicleDataArray[vehicleIndex].totalUnits;
 	const vehicleSpeed = vehicleDataArray[vehicleIndex].speed;
+	let vehicleSelectedForInvasion = "";
 	if (planetDistance <= vehicleMaxDistance && totalUnits.current > 0) {
 		//  remainingUnitsAndTravelTime is array of 4. update all array.
-		const updatedLeftUnitsAndTravelTime =  remainingUnitsAndTravelTime.map((data, idx) => {
+		const updatedLeftUnitsAndTravelTime = remainingUnitsAndTravelTime.map((data, idx) => {
 			if (data.planetIndexArr.includes(planetIndex)) {
 				return {
 					...vehicleDataArray[idx],
@@ -29,6 +39,7 @@ export const calcBotsTravelTime = (...args) => {
 			} else {
 				if (idx === vehicleIndex) {
 					// 1st new entry is added below
+					vehicleSelectedForInvasion=planetValue;
 					return {
 						...vehicleDataArray[idx],
 						travelTime: Math.round(planetAndBotsData[planetIndex].distance / parseInt(vehicleSpeed)),
@@ -62,38 +73,44 @@ export const calcBotsTravelTime = (...args) => {
 				}
 			}
 		});
-		// console.log(`updatedLeftUnitsAndTravelTime ${planetIndex} :: ${planetValue} :: ${vehicleIndex}`);
+		console.log(`updatedLeftUnitsAndTravelTime ${vehicleSelectedForInvasion}`);
 
 		// console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(updatedLeftUnitsAndTravelTime, null, 4)}`);
-		 setRemainingUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
+		setRemainingUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
+		setDataToFetchFinalResult({
+			...dataToFetchFinalResult,
+			vehicle_names: [ ...dataToFetchFinalResult.vehicle_names, vehicleSelectedForInvasion ],
+		});
 	}
 };
 
-
 export const syncBotUnitsAndTravelTime = (...args) => {
-	const [planetAndBotsData, planetIndex, vehicleIndex,  remainingUnitsAndTravelTime,planetValue,setPlanetAndBotsData,dataToFetchFinalResult,setDataToFetchFinalResult] = args;
-	let vehicleName=[];
-	const planetName=planetAndBotsData.map((planetData)=>planetData.planetname);
+	const [
+		planetAndBotsData,
+		planetIndex,
+		vehicleIndex,
+		remainingUnitsAndTravelTime,
+		planetValue,
+		setPlanetAndBotsData,
+		dataToFetchFinalResult,
+		setDataToFetchFinalResult,
+	] = args;
+	const planetName = planetAndBotsData.map((planetData) => planetData.planetname);
 	const updatedPlanetAndBotsData = planetAndBotsData.map((planetData, idx) => {
-		
-		const _ =  remainingUnitsAndTravelTime.filter((data) => data.planetIndexArr.includes(idx));
-		vehicleName=[...vehicleName,idx === planetIndex ? planetValue : planetData.planetValue];
+		const _ = remainingUnitsAndTravelTime.filter((data) => data.planetIndexArr.includes(idx));
 		return {
 			...planetData,
 			planetIndexArr: [...planetData.planetIndexArr, planetIndex],
 			planetValue: idx === planetIndex ? planetValue : planetData.planetValue,
 			travelTime: _.length > 0 ? _[0].travelTime : planetData.travelTime,
 			vehicleDataArray: [...remainingUnitsAndTravelTime],
-			error: idx === planetIndex ?  remainingUnitsAndTravelTime[vehicleIndex].error : planetData.error,
+			error: idx === planetIndex ? remainingUnitsAndTravelTime[vehicleIndex].error : planetData.error,
 		};
 	});
 	setPlanetAndBotsData(updatedPlanetAndBotsData);
-	setDataToFetchFinalResult(updatedPlanetAndBotsData);
 	setDataToFetchFinalResult({
 		...dataToFetchFinalResult,
 		token: dataToFetchFinalResult?.token ? dataToFetchFinalResult.token : localStorage.getItem('token'),
 		planet_names: planetName,
-		vehicle_names:
-			vehicleName.length > 0 ? [...dataToFetchFinalResult.vehicle_names, vehicleName] : [...dataToFetchFinalResult.vehicle_names],
 	});
 };

@@ -1,31 +1,29 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {  Heading,SelectedPlanetWrapper } from './styles';
+import { Heading, SelectedPlanetWrapper } from './styles';
 import { PlanetDetailsContext } from '../../context/appContext';
 import { usePostDataToFetchResult } from '../../customHooks/usePostDataToFetchResult';
 
 const DisplayFinalResultScreen = () => {
-	const { dataToFetchFinalResult } = useContext(PlanetDetailsContext);
+	const { dataToFetchFinalResult, apiError, setApiError } = useContext(PlanetDetailsContext);
 	const [backendResponse, setBackendResponse] = useState({});
-	const [status, setStatus] = useState(false);
-	const [error, setError] = useState({});
 	const [displayMessage, setDisplayMessage] = useState('');
 
-	usePostDataToFetchResult(dataToFetchFinalResult, setBackendResponse, backendResponse, setError, error);
+	usePostDataToFetchResult(setBackendResponse, backendResponse, apiError, setApiError,dataToFetchFinalResult);
 
 	useEffect(() => {
 		if (Object.keys(backendResponse).length > 0) {
-			const { status, planet_name } = backendResponse;
+			console.log(`backendResponse ${JSON.stringify(backendResponse)}`);
+			const { planet_name } = backendResponse;
 			planet_name
 				? setDisplayMessage(`CONGRATULATIONS . YOU FOUND AL FALCONE ON ${planet_name.toUpperCase()}.`)
 				: setDisplayMessage('MISSION FAILED.. KEEP LOOKING FOR AL FALCONE');
-			setStatus(status);
-		} else if (Object.keys(error).length > 0) {
-			error.response.status === 400 && setDisplayMessage(`START THE MISSION ALL OVER AGAIN...`);
+		} else {
+			apiError.length > 0 && setDisplayMessage('BACKEND REQUEST ERROR.');
 		}
 		return () => {
 			localStorage.clear();
 		};
-	}, [backendResponse, error]);
+	}, [backendResponse]);
 
 	return (
 		<React.Fragment>

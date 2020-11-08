@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Wrapper, BadgeWrapper, ImageWrapper, SolarSystemWrapper, SmallHeading, BigHeading } from './styles';
 import { CustomButton } from '../../sharedComponents/CustomButton';
 import { PlanetDetailsContext } from '../../context/appContext';
+import uuid from 'react-uuid';
 
 const DisplayAllSpaceVehiclesScreen = () => {
 	const { planetCfg } = useContext(PlanetDetailsContext);
@@ -13,7 +14,7 @@ const DisplayAllSpaceVehiclesScreen = () => {
 				<BigHeading>Space Vehicles at King Shan's disposal</BigHeading>
 				<SolarSystemWrapper>
 					{vehicleData.map((data) => (
-						<BadgeWrapper>
+						<BadgeWrapper key={uuid()}>
 							<ImageWrapper src={data.imgName} />
 							<BigHeading>{data.name}</BigHeading>
 							<SmallHeading>Units = {data.totalUnits}</SmallHeading>

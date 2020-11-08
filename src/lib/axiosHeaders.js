@@ -8,4 +8,5 @@ export const defaultAxiosHeader = {
 
 export const postDataAxiosHeader = {
 	Accept: 'application/json',
+	'Content-Type': 'application/json',
 };

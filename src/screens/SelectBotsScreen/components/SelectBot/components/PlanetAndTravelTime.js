@@ -3,7 +3,7 @@ import { PlanetWrapper, BadgeWrapper, SelectedPlanetImg,Select, SmallHeading } f
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 
- const PlanetAndTravelTime= ({ planetAndBotsData, onRadioChange }) => {
+ const PlanetAndTravelTime= ({ planetAndBotsData, onDropDownChange }) => {
 	return (
 		<PlanetWrapper>
 			{planetAndBotsData.map(({ planetIndexArr, planetname, imgname, distance, vehicleDataArray }, idx) => (
@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 						value={
 							planetIndexArr.includes(idx) ? planetAndBotsData[idx].planetValue : 'Choose A Space Vehicle'
 						}
-						onChange={onRadioChange}
+						onChange={onDropDownChange}
 					>
 						{!planetIndexArr.includes(idx) && (
 							<option key={uuid()} defaultValue="Choose A Space Vehicle">
@@ -29,7 +29,6 @@ import PropTypes from 'prop-types';
 								key={uuid()}
 								data-planetidx={idx}
 								data-vehicleidx={vehicleidx}
-								data-vehiclename={vehicleData.name}
 								value={vehicleData.name}
 							>
 								{`${vehicleData.name} (${vehicleData.totalUnits.current})`}
@@ -51,6 +50,6 @@ export default PlanetAndTravelTime ;
 
 PlanetAndTravelTime.propTypes = {
 	planetAndBotsData: PropTypes.arrayOf(PropTypes.object),
-	onRadioChange: PropTypes.func
+	onDropDownChange: PropTypes.func
 };
 

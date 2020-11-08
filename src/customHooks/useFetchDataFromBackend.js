@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { TokenUrl, PlanetUrl, VehicleUrl } from '../lib/myenv';
-import { makeRequestToBackend } from '../lib/api';
+import { makePostRequestToBackend, makeGetRequestToBackend} from '../lib/api';
 import { SpaceBotImgArr } from '../customHooks/useDefineConstants';
 
 export const useFetchDataFromBackend = async (planetCfg, setPlanetCfg, apiError, setApiError) => {
@@ -9,9 +9,9 @@ export const useFetchDataFromBackend = async (planetCfg, setPlanetCfg, apiError,
 			if (Object.keys(planetCfg).length === 0 && Object.keys(apiError).length === 0) {
 				try {
 					const response = await Promise.all([
-						await makeRequestToBackend(PlanetUrl, 'GET', setApiError),
-						await makeRequestToBackend(VehicleUrl, 'GET', setApiError),
-						await makeRequestToBackend(TokenUrl, 'POST', setApiError),
+						await makeGetRequestToBackend(PlanetUrl, setApiError),
+						await makeGetRequestToBackend(VehicleUrl, setApiError),
+						await makePostRequestToBackend(TokenUrl, setApiError),
 					]);
 					if (response.length === 3) {
 						const vehicleData = response[1]?.data;

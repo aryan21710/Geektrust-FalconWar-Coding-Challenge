@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
 	return (
 		<CustomButton
 			redirectPath="/displayfinalresult"
-			disabled={dataToFetchFinalResult.planet_names.length === 4 ? false : true}
+			disabled={dataToFetchFinalResult.vehicle_names.length === 4 ? false : true}
 			leftpos="0vh"
 			width="15vw"
 			TextForButton="Mission Find Falcone"
-			opacity={dataToFetchFinalResult.planet_names.length === 4 ? 1 : 0.6}
+			opacity={dataToFetchFinalResult.vehicle_names.length === 4 ? 1 : 0.6}
 		/>
 	);
 };
@@ -18,6 +18,6 @@ import PropTypes from 'prop-types';
 export default MissionFindFalconBtn;
 
 MissionFindFalconBtn.propTypes = {
-	dataToFetchFinalResult: PropTypes.arrayOf(PropTypes.object),
+	dataToFetchFinalResult: PropTypes.object,
 };
 

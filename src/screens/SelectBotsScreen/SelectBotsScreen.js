@@ -11,10 +11,9 @@ const SelectBotsScreen = () => {
 		planetIndex: -1,
 		planetValue: '',
 		vehicleIndex: -1,
-		vehicleName: ""
 	});
 
-	const { planetIndex, planetValue, vehicleIndex,vehicleName } = selectedPlanet;
+	const { planetIndex, planetValue, vehicleIndex } = selectedPlanet;
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
 	const [remainingUnitsAndTravelTime, setRemainingUnitsAndTravelTime] = useState(UNITSANDTRAVELTIMEDATA);
 
@@ -30,14 +29,15 @@ const SelectBotsScreen = () => {
 				vehicleIndex,
 				remainingUnitsAndTravelTime,
 				setRemainingUnitsAndTravelTime,
-				planetValue
+				planetValue,
+				dataToFetchFinalResult,
+				setDataToFetchFinalResult,
 			);
 		} else {
 			setSelectedPlanet({
 				planetIndex: -1,
 				planetValue: '',
-				vehicleIndex: -1,
-				vehicleName:""
+				vehicleIndex: -1
 			});
 		}
 	}, [planetValue, planetIndex, vehicleIndex]);
@@ -68,7 +68,6 @@ const SelectBotsScreen = () => {
 			finalStatus: false,
 			planetValue: '',
 			error: false,
-			vehicleName,
 			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
 				name: data.name,
 				botImageName: 'data.imgName',
@@ -83,12 +82,11 @@ const SelectBotsScreen = () => {
 		}));
 	};
 
-	const onRadioChange = (e) =>
+	const onDropDownChange = (e) =>
 		setSelectedPlanet({
 			planetIndex: parseInt(e.target.options[e.target.selectedIndex].dataset.planetidx),
 			planetValue: e.target.value,
 			vehicleIndex: parseInt(e.target.options[e.target.selectedIndex].dataset.vehicleidx),
-			vehicleName: e.target.options[e.target.selectedIndex].dataset.vehiclename
 		});
 
 	return (
@@ -96,7 +94,7 @@ const SelectBotsScreen = () => {
 			<SelectBot
 				planetAndBotsData={planetAndBotsData}
 				dataToFetchFinalResult={dataToFetchFinalResult}
-				onRadioChange={onRadioChange}
+				onDropDownChange={onDropDownChange}
 				vehicleIndex={vehicleIndex}
 				planetIndex={planetIndex}
 				planetValue={planetValue}
