@@ -1,13 +1,9 @@
 export const updateSelectedPlanetDataForAnim = (...args) => {
-	// alert('updateSelectedPlanetDataForAnim ');
-
 	const [values, selectedPlanet, idxOfSelecPlanForSwap, setSelectedPlanet,setSelecPlanetCount] = args;
 	const { planetname, planetindex, imgname, distance, animPlanetCnt } = values;
 	if (planetindex > -1 && animPlanetCnt <= 4) {
 		const updatedSelectedPlanet = selectedPlanet.map((selecPlanData, idx) => {
 			if (idx === animPlanetCnt - 1) {
-				// alert('updateSelectedPlanetDataForAnim 1');
-
 				return {
 					isAnimated: true,
 					imgname,
@@ -33,8 +29,7 @@ export const updateSelectedPlanetDataForAnim = (...args) => {
 		setSelectedPlanet(updatedSelectedPlanet);
 		animPlanetCnt === 4 && setSelecPlanetCount(animPlanetCnt)
 	} else {
-		alert('updateSelectedPlanetDataForAnim 2');
-
+		alert('4 PLANETS ALREADY SELECTED. IF YOU WANT TO RESET THE SELECTION CLICK ON RESET PLANETS.');
 	}
 };
 

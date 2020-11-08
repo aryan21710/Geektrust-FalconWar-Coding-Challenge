@@ -114,7 +114,6 @@ const SelectedPlanetsScreen = () => {
 			alert('PLANET ALREADY SELECTED.. PLEASE SELECT SOME OTHER PLANET');
 		} else {
 			if (idxOfSelecPlanForSwap > -1) {
-				// alert(1)
 				planetAnimPostSwapForSelecPlan(
 					values,
 					setValues,
@@ -125,7 +124,6 @@ const SelectedPlanetsScreen = () => {
 					e.target.dataset
 				);
 			} else if (animPlanetCnt <= 4 && idxOfSelecPlanForSwap === -1) {
-				// alert(2)
 				setValues({
 					...values,
 					animPlanetCnt: animPlanetCnt + 1,
