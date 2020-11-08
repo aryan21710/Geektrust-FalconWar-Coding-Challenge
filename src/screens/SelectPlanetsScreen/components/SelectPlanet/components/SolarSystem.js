@@ -3,7 +3,7 @@ import { SolarSystemWrapper, BigHeading, SolarSystemImage, Planet } from '../../
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 
- const SolarSystem= ({ planetDataUsedForRender, animateSelectedPlanet }) => {
+ const SolarSystem= ({ planetDataUsedForRender, onClickSolarSysPlanet }) => {
 	return (
 		<SolarSystemWrapper width="85vw">
 			<BigHeading color="#FAD107">
@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 					return (
 						<Planet
 							key={uuid()}
-							onClick={animateSelectedPlanet}
+							onClick={onClickSolarSysPlanet}
 							toppos={_.topPos}
 							leftpos={_.leftpos}
 							data-imgname={_.imgName}
@@ -36,6 +36,6 @@ export default SolarSystem;
 
 SolarSystem.propTypes = {
 	planetDataUsedForRender: PropTypes.arrayOf(PropTypes.object),
-	animateSelectedPlanet: PropTypes.func,
+	onClickSolarSysPlanet: PropTypes.func,
 };
 

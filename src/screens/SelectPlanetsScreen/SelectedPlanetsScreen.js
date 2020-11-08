@@ -9,7 +9,7 @@ import {
 	updatePlanetSelectionData,
 	updateSelectedPlanetDataForAnim,
 	reduceOpacityOfPlanetInSolarSystem,
-	applyAnimForSelecPlanet,
+	planetAnimPostSwapForSelecPlan,
 	stopPlanetAnim,
 } from './services';
 import { DEFAULTDATATOANIMSELECTEDPLANET, DEFAULTPLANETANDBOTSDATA } from '../../constants';
@@ -33,12 +33,14 @@ const SelectedPlanetsScreen = () => {
 	useSelectedPlanetDataTOHandleAnim(setSelectedPlanet, selectedPlanet, planetData);
 
 	const [planetDataUsedForRender, setPlanetDataUsedForRender] = useState([]);
-	const [indexOfSelectedPlanet, setIndexOfSelectedPlanet] = useState(-1);
+
+	/* idxOfSelecPlanForSwap:-INDEX OF PLANET WHICH IS IN LOWER REGION . THIS ONLY GETS INCREMENTED WHEN PLANET IS
+	SELECTED OR CLICKED TO SWAP OTHERWISE STAYS AT -1.
+	*/
+	const [idxOfSelecPlanForSwap, setIdxOfSelecPlanForSwap] = useState(-1);
 	const [values, setValues] = useState(DEFAULTPLANETANDBOTSDATA);
-
-	const {  planetindex, animPlanetCnt, planetNameArr } = values;
+	const { animPlanetCnt, planetNameArr } = values;
 	 
-
 	useEffect(() => {
 		planetData &&
 			planetDataUsedForRender.length === 0 &&
@@ -46,27 +48,22 @@ const SelectedPlanetsScreen = () => {
 	}, [planetDataUsedForRender, planetData]);
 
 	useEffect(() => {
-		planetindex > -1 &&
-			updateSelectedPlanetDataForAnim(values, selectedPlanet, indexOfSelectedPlanet, setSelectedPlanet);
-	}, [planetindex]);
-
-	useEffect(() => {
-		indexOfSelectedPlanet > -1
+		idxOfSelecPlanForSwap > -1
 			? disableAnimPostPlanetSelection()
 			: reduceOpacityOfPlanetInSolarSystem(
 					planetDataUsedForRender,
 					planetNameArr,
-					indexOfSelectedPlanet,
+					idxOfSelecPlanForSwap,
 					setPlanetDataUsedForRender
 			  );
-	}, [indexOfSelectedPlanet]);
+	}, [idxOfSelecPlanForSwap]);
 
 	useEffect(() => {
 		if (animPlanetCnt === 0) {
 			setValues(DEFAULTPLANETANDBOTSDATA);
 			setSelectedPlanet(DEFAULTDATATOANIMSELECTEDPLANET);
-		} else if (animPlanetCnt === 4) {
-			setSelecPlanetCount(animPlanetCnt);
+		} else {
+			updateSelectedPlanetDataForAnim(values, selectedPlanet, idxOfSelecPlanForSwap, setSelectedPlanet,setSelecPlanetCount);
 		}
 	}, [animPlanetCnt]);
 
@@ -75,7 +72,7 @@ const SelectedPlanetsScreen = () => {
 			reduceOpacityOfPlanetInSolarSystem(
 				planetDataUsedForRender,
 				planetNameArr,
-				indexOfSelectedPlanet,
+				idxOfSelecPlanForSwap,
 				setPlanetDataUsedForRender
 			);
 	}, [planetNameArr]);
@@ -87,22 +84,22 @@ const SelectedPlanetsScreen = () => {
 					...planetData,
 					isAnimated: false,
 					imgname: planetData.imgname,
-					opacity: idx === indexOfSelectedPlanet ? 0.3 : 1,
+					opacity: idx === idxOfSelecPlanForSwap ? 0.3 : 1,
 				};
 			} else {
 				return {
 					...planetData,
 					isAnimated: false,
 					imgname: planetData.imgname,
-					opacity: indexOfSelectedPlanet > -1 && idx === indexOfSelectedPlanet ? 0.3 : 1,
+					opacity: idxOfSelecPlanForSwap > -1 && idx === idxOfSelecPlanForSwap ? 0.3 : 1,
 				};
 			}
 		});
-		indexOfSelectedPlanet > -1 &&
+		idxOfSelecPlanForSwap > -1 &&
 			reduceOpacityOfPlanetInSolarSystem(
 				planetDataUsedForRender,
 				planetNameArr,
-				indexOfSelectedPlanet,
+				idxOfSelecPlanForSwap,
 				setPlanetDataUsedForRender
 			);
 		setSelectedPlanet(_);
@@ -111,22 +108,24 @@ const SelectedPlanetsScreen = () => {
 	const isPlanetAlreadySelected = (planetname) =>
 		selectedPlanet.some((planetData) => planetData.planetname === planetname);
 
-	const animateSelectedPlanet = (e) => {
+	const onClickSolarSysPlanet = (e) => {
 		const { planetname, planetindex, imgname, distance } = e.target.dataset;
 		if (isPlanetAlreadySelected(planetname)) {
 			alert('PLANET ALREADY SELECTED.. PLEASE SELECT SOME OTHER PLANET');
 		} else {
-			if (indexOfSelectedPlanet > -1) {
-				applyAnimForSelecPlanet(
+			if (idxOfSelecPlanForSwap > -1) {
+				// alert(1)
+				planetAnimPostSwapForSelecPlan(
 					values,
 					setValues,
-					setIndexOfSelectedPlanet,
+					setIdxOfSelecPlanForSwap,
 					selectedPlanet,
-					indexOfSelectedPlanet,
+					idxOfSelecPlanForSwap,
 					setSelectedPlanet,
 					e.target.dataset
 				);
-			} else if (animPlanetCnt <= 3 && indexOfSelectedPlanet === -1) {
+			} else if (animPlanetCnt <= 4 && idxOfSelecPlanForSwap === -1) {
+				// alert(2)
 				setValues({
 					...values,
 					animPlanetCnt: animPlanetCnt + 1,
@@ -136,7 +135,7 @@ const SelectedPlanetsScreen = () => {
 					imgname,
 					planetNameArr: [...planetNameArr, planetname],
 				});
-			} else if (animPlanetCnt > 3 && indexOfSelectedPlanet === -1) {
+			} else if (animPlanetCnt > 4 && idxOfSelecPlanForSwap === -1) {
 				stopPlanetAnim();
 			}
 		}
@@ -149,14 +148,15 @@ const SelectedPlanetsScreen = () => {
 
 	const onResetPlanet = () => {
 		setValues({ ...values, animPlanetCnt: 0, planetNameArr: [], planetname: '' });
-		setIndexOfSelectedPlanet(-1);
+		setIdxOfSelecPlanForSwap(-1);
 	};
 
+	// onChangePlanetSelection:- PLANET CLICKED ON LOWER REGION OF ANIMATED PLANETS
 	const onChangePlanetSelection = (e) => {
 		if (!planetNameArr.includes(e.target.dataset.selectedplanetname)) {
 			setValues({ ...values, planetNameArr: [...planetNameArr, e.target.dataset.selectedplanetname] });
 		}
-		setIndexOfSelectedPlanet(parseInt(e.target.dataset.planetidx));
+		setIdxOfSelecPlanForSwap(parseInt(e.target.dataset.planetidx));
 	};
 
 	return (
@@ -164,7 +164,7 @@ const SelectedPlanetsScreen = () => {
 			<SelectPlanet
 				moveToDisplayVehiclePage={moveToDisplayVehiclePage}
 				planetDataUsedForRender={planetDataUsedForRender}
-				animateSelectedPlanet={animateSelectedPlanet}
+				onClickSolarSysPlanet={onClickSolarSysPlanet}
 				selectedPlanet={selectedPlanet}
 				onResetPlanet={onResetPlanet}
 				onChangePlanetSelection={onChangePlanetSelection}

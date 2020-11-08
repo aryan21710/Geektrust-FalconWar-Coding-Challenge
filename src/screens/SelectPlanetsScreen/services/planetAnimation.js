@@ -1,42 +1,50 @@
 export const updateSelectedPlanetDataForAnim = (...args) => {
-	const [values, selectedPlanet, indexOfSelectedPlanet, setSelectedPlanet] = args;
+	// alert('updateSelectedPlanetDataForAnim ');
+
+	const [values, selectedPlanet, idxOfSelecPlanForSwap, setSelectedPlanet,setSelecPlanetCount] = args;
 	const { planetname, planetindex, imgname, distance, animPlanetCnt } = values;
 	if (planetindex > -1 && animPlanetCnt <= 4) {
 		const updatedSelectedPlanet = selectedPlanet.map((selecPlanData, idx) => {
 			if (idx === animPlanetCnt - 1) {
+				// alert('updateSelectedPlanetDataForAnim 1');
+
 				return {
 					isAnimated: true,
 					imgname,
 					index: animPlanetCnt - 1,
 					planetname,
 					distance,
-					opacity: idx === indexOfSelectedPlanet ? 0.3 : 1,
+					opacity: idx === idxOfSelecPlanForSwap ? 0.3 : 1,
 				};
 			} else if (selecPlanData.isAnimated && idx !== animPlanetCnt - 1) {
 				return {
 					...selecPlanData,
 					isAnimated: false,
-					opacity: indexOfSelectedPlanet > -1 && idx === indexOfSelectedPlanet ? 0.3 : 1,
+					opacity: idxOfSelecPlanForSwap > -1 && idx === idxOfSelecPlanForSwap ? 0.3 : 1,
 				};
 			} else {
 				return {
 					...selecPlanData,
 					isAnimated: false,
-					opacity: indexOfSelectedPlanet > -1 && idx === indexOfSelectedPlanet ? 0.3 : 1,
+					opacity: idxOfSelecPlanForSwap > -1 && idx === idxOfSelecPlanForSwap ? 0.3 : 1,
 				};
 			}
 		});
 		setSelectedPlanet(updatedSelectedPlanet);
+		animPlanetCnt === 4 && setSelecPlanetCount(animPlanetCnt)
+	} else {
+		alert('updateSelectedPlanetDataForAnim 2');
+
 	}
 };
 
 export const reduceOpacityOfPlanetInSolarSystem = (...args) => {
-	const [planetDataUsedForRender, planetNameArr, indexOfSelectedPlanet, setPlanetDataUsedForRender] = args;
+	const [planetDataUsedForRender, planetNameArr, idxOfSelecPlanForSwap, setPlanetDataUsedForRender] = args;
 	const planetDataWithReducedOpacity = planetDataUsedForRender.map((planet) => {
 		return planetNameArr.includes(planet.planetname)
 			? {
 					...planet,
-					opacity: indexOfSelectedPlanet > -1 ? 0.3 : 1,
+					opacity: idxOfSelecPlanForSwap > -1 ? 0.3 : 1,
 			  }
 			: {
 					...planet,
@@ -46,13 +54,13 @@ export const reduceOpacityOfPlanetInSolarSystem = (...args) => {
 	setPlanetDataUsedForRender(planetDataWithReducedOpacity);
 };
 
-export const applyAnimForSelecPlanet = (...args) => {
+export const planetAnimPostSwapForSelecPlan = (...args) => {
 	const [
 		values,
 		setValues,
-		setIndexOfSelectedPlanet,
+		setIdxOfSelecPlanForSwap,
 		selectedPlanet,
-		indexOfSelectedPlanet,
+		idxOfSelecPlanForSwap,
 		setSelectedPlanet,
 		newData,
 	] = args;
@@ -65,12 +73,14 @@ export const applyAnimForSelecPlanet = (...args) => {
 		isAnimated: true,
 		opacity: 1,
 	};
-	selectedPlanet.splice(indexOfSelectedPlanet, 1, newPlanetData);
+	// SWAP THE SOLARSYS PLANET WITH SELECTED PLANET IN selectedPlanet STATE
+	selectedPlanet.splice(idxOfSelecPlanForSwap, 1, newPlanetData);
 	const updatedSelecPlanetNames = selectedPlanet
 		.filter((planet) => planet.planetname.length > 0)
 		.map((_) => _.planetname);
+		console.log(`updatedSelecPlanetNames ${updatedSelecPlanetNames}`);
 	setSelectedPlanet(selectedPlanet);
-	setIndexOfSelectedPlanet(-1);
+	setIdxOfSelecPlanForSwap(-1);
 	setValues({ ...values, planetNameArr: [...updatedSelecPlanetNames] });
 };
 

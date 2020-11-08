@@ -7,7 +7,7 @@ export const SelectPlanet= (props) => {
 	const {
 		moveToDisplayVehiclePage,
 		planetDataUsedForRender,
-		animateSelectedPlanet,
+		onClickSolarSysPlanet,
 		selectedPlanet,
 		onResetPlanet,
 		onChangePlanetSelection,
@@ -19,7 +19,7 @@ export const SelectPlanet= (props) => {
 				<AnimatedJet animPlanetCnt={animPlanetCnt} moveToDisplayVehiclePage={moveToDisplayVehiclePage} />
 				<SolarSystem
 					planetDataUsedForRender={planetDataUsedForRender}
-					animateSelectedPlanet={animateSelectedPlanet}
+					onClickSolarSysPlanet={onClickSolarSysPlanet}
 				/>
 				<PlanetSelectedToInvade selectedPlanet={selectedPlanet} onChangePlanetSelection={onChangePlanetSelection} />
 				<ResetPlanet onResetPlanet={onResetPlanet} />
@@ -31,7 +31,7 @@ export const SelectPlanet= (props) => {
 SelectPlanet.propTypes = {
 	moveToDisplayVehiclePage: PropTypes.func,
 	planetDataUsedForRender: PropTypes.arrayOf(PropTypes.object),
-	animateSelectedPlanet: PropTypes.func,
+	onClickSolarSysPlanet: PropTypes.func,
 	selectedPlanet: PropTypes.arrayOf(PropTypes.object),
 	onResetPlanet: PropTypes.func,
 	onChangePlanetSelection: PropTypes.func,

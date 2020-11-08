@@ -168,7 +168,7 @@ export const UnAnimatedWrapper = styled.div`
 	}
 `;
 
-const animateSelectedPlanet = keyframes`
+const onClickSolarSysPlanet = keyframes`
     from {
       transform: translate(0vw);
     }
@@ -179,7 +179,7 @@ const animateSelectedPlanet = keyframes`
   `;
 
 export const AnimatedWrapper = styled(UnAnimatedWrapper)`
-	animation: ${animateSelectedPlanet} 0.5s  ease-in-out forwards;
+	animation: ${onClickSolarSysPlanet} 0.5s  ease-in-out forwards;
 `;
 
 export const StaticWrapper = styled.div`
