@@ -2,18 +2,19 @@ import React, { useContext, useState, useEffect } from 'react';
 import { SelectBot } from './index';
 import { PlanetDetailsContext } from '../../context/appContext';
 import { calcBotsTravelTime, syncBotUnitsAndTravelTime } from './services';
-import {UNITSANDTRAVELTIMEDATA} from '../../constants'
+import { UNITSANDTRAVELTIMEDATA } from '../../constants';
 
 const SelectBotsScreen = () => {
-	const { dataToFetchFinalResult } = useContext(PlanetDetailsContext);
+	const { dataToFetchFinalResult,setDataToFetchFinalResult } = useContext(PlanetDetailsContext);
 
 	const [selectedPlanet, setSelectedPlanet] = useState({
 		planetIndex: -1,
 		planetValue: '',
 		vehicleIndex: -1,
+		vehicleName: ""
 	});
 
-	const { planetIndex, planetValue, vehicleIndex } = selectedPlanet;
+	const { planetIndex, planetValue, vehicleIndex,vehicleName } = selectedPlanet;
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
 	const [remainingUnitsAndTravelTime, setRemainingUnitsAndTravelTime] = useState(UNITSANDTRAVELTIMEDATA);
 
@@ -36,6 +37,7 @@ const SelectBotsScreen = () => {
 				planetIndex: -1,
 				planetValue: '',
 				vehicleIndex: -1,
+				vehicleName:""
 			});
 		}
 	}, [planetValue, planetIndex, vehicleIndex]);
@@ -50,7 +52,9 @@ const SelectBotsScreen = () => {
 				vehicleIndex,
 				remainingUnitsAndTravelTime,
 				planetValue,
-				setPlanetAndBotsData
+				setPlanetAndBotsData,
+				dataToFetchFinalResult,
+				setDataToFetchFinalResult
 			);
 	}, [remainingUnitsAndTravelTime]);
 
@@ -64,6 +68,7 @@ const SelectBotsScreen = () => {
 			finalStatus: false,
 			planetValue: '',
 			error: false,
+			vehicleName,
 			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
 				name: data.name,
 				botImageName: 'data.imgName',
@@ -83,6 +88,7 @@ const SelectBotsScreen = () => {
 			planetIndex: parseInt(e.target.options[e.target.selectedIndex].dataset.planetidx),
 			planetValue: e.target.value,
 			vehicleIndex: parseInt(e.target.options[e.target.selectedIndex].dataset.vehicleidx),
+			vehicleName: e.target.options[e.target.selectedIndex].dataset.vehiclename
 		});
 
 	return (

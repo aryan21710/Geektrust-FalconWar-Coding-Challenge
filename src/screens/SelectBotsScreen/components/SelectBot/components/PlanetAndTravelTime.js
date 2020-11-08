@@ -29,6 +29,7 @@ import PropTypes from 'prop-types';
 								key={uuid()}
 								data-planetidx={idx}
 								data-vehicleidx={vehicleidx}
+								data-vehiclename={vehicleData.name}
 								value={vehicleData.name}
 							>
 								{`${vehicleData.name} (${vehicleData.totalUnits.current})`}
@@ -36,7 +37,7 @@ import PropTypes from 'prop-types';
 						))}
 					</Select>
 					<SmallHeading>
-						{planetIndexArr.includes(idx)
+						{planetAndBotsData[idx].travelTime > 0
 							? `Time Taken:- ${planetAndBotsData[idx].travelTime}`
 							: `Time Taken:- 0`}
 					</SmallHeading>

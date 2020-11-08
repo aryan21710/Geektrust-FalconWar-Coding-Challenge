@@ -11,7 +11,7 @@ export const calcBotsTravelTime = (...args) => {
 			if (data.planetIndexArr.includes(planetIndex)) {
 				return {
 					...vehicleDataArray[idx],
-					travelTime: 0,
+					travelTime: data.travelTime,
 					totalUnits: {
 						original: vehicleDataArray[idx].totalUnits.original,
 						current: !data.planetIndexArr.includes(planetIndex)
@@ -46,7 +46,7 @@ export const calcBotsTravelTime = (...args) => {
 					// all old entry is overwritten
 					return {
 						...vehicleDataArray[idx],
-						travelTime: 0,
+						travelTime: data.travelTime,
 						totalUnits: {
 							original: vehicleDataArray[idx].totalUnits.original,
 							current: data.planetIndexArr.includes(planetIndex)
@@ -62,27 +62,38 @@ export const calcBotsTravelTime = (...args) => {
 				}
 			}
 		});
-		console.log(`updatedLeftUnitsAndTravelTime ${planetIndex} :: ${planetValue} :: ${vehicleIndex}`);
+		// console.log(`updatedLeftUnitsAndTravelTime ${planetIndex} :: ${planetValue} :: ${vehicleIndex}`);
 
-		console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(updatedLeftUnitsAndTravelTime, null, 4)}`);
+		// console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(updatedLeftUnitsAndTravelTime, null, 4)}`);
 		 setRemainingUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
 	}
 };
 
 
 export const syncBotUnitsAndTravelTime = (...args) => {
-	const [planetAndBotsData, planetIndex, vehicleIndex,  remainingUnitsAndTravelTime,planetValue,setPlanetAndBotsData] = args;
-
+	const [planetAndBotsData, planetIndex, vehicleIndex,  remainingUnitsAndTravelTime,planetValue,setPlanetAndBotsData,dataToFetchFinalResult,setDataToFetchFinalResult] = args;
+	let vehicleName=[];
+	const planetName=planetAndBotsData.map((planetData)=>planetData.planetname);
 	const updatedPlanetAndBotsData = planetAndBotsData.map((planetData, idx) => {
+		
 		const _ =  remainingUnitsAndTravelTime.filter((data) => data.planetIndexArr.includes(idx));
+		vehicleName=[...vehicleName,idx === planetIndex ? planetValue : planetData.planetValue];
 		return {
 			...planetData,
 			planetIndexArr: [...planetData.planetIndexArr, planetIndex],
 			planetValue: idx === planetIndex ? planetValue : planetData.planetValue,
 			travelTime: _.length > 0 ? _[0].travelTime : planetData.travelTime,
-			vehicleDataArray: [... remainingUnitsAndTravelTime],
+			vehicleDataArray: [...remainingUnitsAndTravelTime],
 			error: idx === planetIndex ?  remainingUnitsAndTravelTime[vehicleIndex].error : planetData.error,
 		};
 	});
 	setPlanetAndBotsData(updatedPlanetAndBotsData);
+	setDataToFetchFinalResult(updatedPlanetAndBotsData);
+	setDataToFetchFinalResult({
+		...dataToFetchFinalResult,
+		token: dataToFetchFinalResult?.token ? dataToFetchFinalResult.token : localStorage.getItem('token'),
+		planet_names: planetName,
+		vehicle_names:
+			vehicleName.length > 0 ? [...dataToFetchFinalResult.vehicle_names, vehicleName] : [...dataToFetchFinalResult.vehicle_names],
+	});
 };
