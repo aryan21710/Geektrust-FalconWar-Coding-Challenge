@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper, Heading, Button, ButtonText } from './styles';
+import { Wrapper, Heading, Button, ButtonText, BadgeWrapper } from './styles';
 import { CustomButton } from './CustomButton';
 import { withRouter } from 'react-router-dom';
 
@@ -23,11 +23,15 @@ class ErrorHandlerComp extends React.Component {
 					<Heading>OOPS Something went wrong.</Heading>
 					<br />
 					<br />
-					<Heading fontFamily="Arial" fontSize="1.2rem" width="100vw" style={{ whiteSpace: 'pre-wrap' }}>
-						{this.state.error && this.state.error.toString()}
+					<BadgeWrapper flex="0" flexDirection="column"  width="100vw" style={{ whiteSpace: 'pre-wrap' }}>
+						<Heading fontFamily="Arial" fontSize="1.2rem" >
+							{this.state.error && this.state.error.toString()}
+						</Heading>
 						<br />
-						{this.state.errorInfo.componentStack}
-					</Heading>
+						<Heading fontFamily="Arial" fontSize="1.2rem">
+							{this.state.errorInfo.componentStack}
+						</Heading>
+					</BadgeWrapper>
 					<Button
 						onClick={() => {
 							this.props.history.push('/');
