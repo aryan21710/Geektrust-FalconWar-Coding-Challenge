@@ -22,7 +22,7 @@ const LandingPageScreen = () => {
 			<Wrapper >
 				{Object.keys(ImageBadges).map((image) => (
 					<BadgeWrapper  key={uuid()}>
-						<ImageWrapper  id="images" src={ImageBadges[image]} />
+						<ImageWrapper id="images" src={ImageBadges[image]} />
 						<BigHeading>
 							{image}
 						</BigHeading>
@@ -30,7 +30,7 @@ const LandingPageScreen = () => {
 				))}
 
 				<ButtonWrapper>
-					<SmallHeading>
+					<SmallHeading id="heading">
 						Queen Al Falcone is now in hiding. But if King Shan can find her before the years are up, she
 						will be exiled for another 15 years…
 					</SmallHeading>

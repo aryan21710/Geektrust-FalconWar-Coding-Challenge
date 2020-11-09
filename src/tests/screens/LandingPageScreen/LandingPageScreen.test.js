@@ -32,8 +32,12 @@ describe('TESTING LandingPageScreen COMPONENT', () => {
 
 		const wrapper = mount(<TestComponent />);
 		const wrapperB = wrapper.find('img#images');
-		console.log('image:-', wrapperB.debug());
+		console.log('image:-', wrapper.debug());
 		expect(wrapper.find('img#images')).toHaveLength(Object.keys(ImageBadges).length);
-		expect(wrapper.find(LandingPageScreen).exists()).toBe(true);
+        expect(wrapper.find(LandingPageScreen).exists()).toBeTruthy();
+        expect(wrapper.find('h1#heading').exists()).toBeTruthy();
+        expect(wrapper.find('h1#heading').text()).toMatch(/Queen Al Falcone/);
+
+
 	});
 });

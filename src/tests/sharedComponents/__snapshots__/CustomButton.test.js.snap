@@ -32,7 +32,7 @@ exports[`TESTING CustomButton COMPONENT Snapshot 1`] = `
                 "payload": undefined,
                 "setValue": [Function],
                 "startPosition": 0,
-                "startTime": 1604894178919,
+                "startTime": 1604906383452,
                 "value": 0,
               },
             ],
@@ -54,7 +54,7 @@ exports[`TESTING CustomButton COMPONENT Snapshot 1`] = `
             "payload": undefined,
             "setValue": [Function],
             "startPosition": 1,
-            "startTime": 1604894178919,
+            "startTime": 1604906383452,
             "value": 1,
           },
         }
