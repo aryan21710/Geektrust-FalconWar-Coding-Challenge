@@ -19,10 +19,10 @@ const LandingPageScreen = () => {
 
 	return (
 		<React.Fragment>
-			<Wrapper>
+			<Wrapper >
 				{Object.keys(ImageBadges).map((image) => (
-					<BadgeWrapper key={uuid()}>
-						<ImageWrapper src={ImageBadges[image]} />
+					<BadgeWrapper  key={uuid()}>
+						<ImageWrapper  id="images" src={ImageBadges[image]} />
 						<BigHeading>
 							{image}
 						</BigHeading>

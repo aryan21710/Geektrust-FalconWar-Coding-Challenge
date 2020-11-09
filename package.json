@@ -9,8 +9,10 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-react-app": "^9.1.2",
     "bootstrap": "^4.5.0",
+    "chai": "^4.2.0",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-to-json": "^3.6.1",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.18.3",
     "font-awesome": "^4.7.0",
@@ -40,7 +42,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test  -- --config=jest.config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

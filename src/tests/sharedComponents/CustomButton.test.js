@@ -1,6 +1,8 @@
 import React from 'react';
 import { CustomButton } from '../../sharedComponents/CustomButton';
 import { shallow, mount, render } from '../../../enzyme';
+import toJSON from 'enzyme-to-json';
+
 
 describe('TESTING CustomButton COMPONENT', () => {
 	test('Snapshot', () => {
@@ -11,7 +13,8 @@ describe('TESTING CustomButton COMPONENT', () => {
 			'someText',
 			true,
 			1,
-		];
+        ];
+        
 		const wrapper = shallow(
 			<CustomButton
 				redirectPath={redirectPath}
@@ -22,7 +25,7 @@ describe('TESTING CustomButton COMPONENT', () => {
 				opacity={opacity}
 			/>
 		);
-		expect(wrapper).toMatchSnapshot();
+		expect(toJSON(wrapper)).toMatchSnapshot();
 	});
 
 	test('renders buttontext properly', () => {

@@ -1,3 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TESTING CustomButton COMPONENT Snapshot 1`] = `ShallowWrapper {}`;
+exports[`TESTING CustomButton COMPONENT Snapshot 1`] = `
+<Fragment>
+  <styled.div
+    disabled={true}
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    opacity={1}
+    width="someText"
+  >
+    <Styled(Component)
+      id="CustomButton-MiniJetImg"
+      leftpos="someText"
+      src="minijet.png"
+      style={
+        Object {
+          "transform": AnimatedInterpolation {
+            "attach": [Function],
+            "calc": [Function],
+            "children": Array [],
+            "detach": [Function],
+            "payload": Array [
+              AnimatedValue {
+                "animatedStyles": Set {},
+                "children": Array [],
+                "done": false,
+                "lastPosition": 0,
+                "lastTime": undefined,
+                "lastVelocity": undefined,
+                "payload": undefined,
+                "setValue": [Function],
+                "startPosition": 0,
+                "startTime": 1604894178919,
+                "value": 0,
+              },
+            ],
+          },
+        }
+      }
+    />
+    <Styled(Component)
+      data-testid="CustomButton-Text"
+      style={
+        Object {
+          "opacity": AnimatedValue {
+            "animatedStyles": Set {},
+            "children": Array [],
+            "done": false,
+            "lastPosition": 1,
+            "lastTime": undefined,
+            "lastVelocity": undefined,
+            "payload": undefined,
+            "setValue": [Function],
+            "startPosition": 1,
+            "startTime": 1604894178919,
+            "value": 1,
+          },
+        }
+      }
+    >
+      someText
+    </Styled(Component)>
+  </styled.div>
+</Fragment>
+`;

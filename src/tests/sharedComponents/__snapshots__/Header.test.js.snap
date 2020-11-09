@@ -1,3 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TESTING HEADER COMPONENT SNAPSHOT 1`] = `ShallowWrapper {}`;
+exports[`TESTING HEADER COMPONENT SNAPSHOT 1`] = `
+<styled.div>
+  <styled.h1
+    data-testid="Headerh1"
+  >
+    WELCOME TO THE BATTLE OF TARA B
+  </styled.h1>
+</styled.div>
+`;
