@@ -1,15 +1,17 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import Header from '../../sharedComponents/Header';
+import { shallow, mount, render } from '../../../enzyme';
 
 describe('TESTING HEADER COMPONENT', () => {
-	test('renders without crashing', () => {
-		render(<Header />);
+	test('SNAPSHOT', () => {
+		const wrapper = shallow(<Header />);
+		expect(wrapper).toMatchSnapshot();
 	});
 
 	test('renders text properly', () => {
-        render(<Header />);
-        screen.getByText('WELCOME TO THE BATTLE OF TARA B');
-        screen.getByTestId('Headerh1');
+        const wrapper = mount(<Header/>)
+        expect(wrapper.find('h1').length).toBe(1);
+        expect(wrapper.find('h1').text()).toBe('WELCOME TO THE BATTLE OF TARA B');
+
 	});
 });
