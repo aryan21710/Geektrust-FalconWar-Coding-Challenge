@@ -40,6 +40,7 @@ const LandingPageScreen = () => {
 						leftpos="0vh"
 						opacity={Object.keys(apiError).length === 0 ?  1 : 0.6}
 						TextForButton="Lets Find Falcone"
+						
 					/>
 				</ButtonWrapper>
 			</Wrapper>

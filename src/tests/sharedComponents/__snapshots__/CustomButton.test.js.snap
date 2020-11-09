@@ -4,6 +4,7 @@ exports[`TESTING CustomButton COMPONENT Snapshot 1`] = `
 <Fragment>
   <styled.div
     disabled={true}
+    id="redirectToNextPageBtn"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
@@ -32,7 +33,7 @@ exports[`TESTING CustomButton COMPONENT Snapshot 1`] = `
                 "payload": undefined,
                 "setValue": [Function],
                 "startPosition": 0,
-                "startTime": 1604906383452,
+                "startTime": 1604910331004,
                 "value": 0,
               },
             ],
@@ -41,7 +42,6 @@ exports[`TESTING CustomButton COMPONENT Snapshot 1`] = `
       }
     />
     <Styled(Component)
-      data-testid="CustomButton-Text"
       style={
         Object {
           "opacity": AnimatedValue {
@@ -54,7 +54,7 @@ exports[`TESTING CustomButton COMPONENT Snapshot 1`] = `
             "payload": undefined,
             "setValue": [Function],
             "startPosition": 1,
-            "startTime": 1604906383452,
+            "startTime": 1604910331004,
             "value": 1,
           },
         }

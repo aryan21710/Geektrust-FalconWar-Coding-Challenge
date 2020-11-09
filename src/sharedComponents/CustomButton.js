@@ -33,9 +33,10 @@ export const CustomButton = (props) => {
 				onMouseLeave={unAnimateJet}
 				onClick={changePageOnClick}
 				opacity={opacity}
+				id="redirectToNextPageBtn"
 			>
 				<AnimatedMiniJet id="CustomButton-MiniJetImg"leftpos={leftpos} style={jetAnimatedProp} src={Minijet} />
-				<ButtonText data-testid="CustomButton-Text"style={btnTextProp}>{TextForButton}</ButtonText>
+				<ButtonText style={btnTextProp}>{TextForButton}</ButtonText>
 			</Button>
 		</React.Fragment>
 	);
