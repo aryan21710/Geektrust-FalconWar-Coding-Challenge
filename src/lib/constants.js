@@ -35,7 +35,7 @@ export const UNITSANDTRAVELTIMEDATA = Array(4).fill({
 		current: -1,
 	},
 	error: false,
-	planetIndexArr: [],
+	planetToVehMapping: [],
 	vehicleIndexArr: [],
 });
 
@@ -57,3 +57,506 @@ export const DEFAULTPLANETANDBOTSDATA = {
 	animPlanetCnt: 0,
 	planetNameArr: [],
 };
+
+export const ARROFPLANOBJ = [
+	{
+		DONLON: [
+			{
+				botName: 'SPACE-POD',
+				travelTime: 50,
+				unit: 2,
+			},
+			{
+				botName: 'SPACE-ROCKET',
+				travelTime: 25,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHUTTLE',
+				travelTime: 20,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHIP',
+				travelTime: 10,
+				unit: 2,
+			},
+		],
+	},
+	{
+		JEBING: [
+			{
+				botName: 'SPACE-POD',
+				travelTime: -1,
+				unit: 2,
+			},
+			{
+				botName: 'SPACE-ROCKET',
+				travelTime: 75,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHUTTLE',
+				travelTime: 60,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHIP',
+				travelTime: 30,
+				unit: 2,
+			},
+		],
+	},
+	{
+		LERBIN: [
+			{
+				botName: 'SPACE-POD',
+				travelTime: -1,
+				unit: 2,
+			},
+			{
+				botName: 'SPACE-ROCKET',
+				travelTime: -1,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHUTTLE',
+				travelTime: -1,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHIP',
+				travelTime: 50,
+				unit: 2,
+			},
+		],
+	},
+	{
+		PINGASOR: [
+			{
+				botName: 'SPACE-POD',
+				travelTime: -1,
+				unit: 2,
+			},
+			{
+				botName: 'SPACE-ROCKET',
+				travelTime: -1,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHUTTLE',
+				travelTime: -1,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHIP',
+				travelTime: 60,
+				unit: 2,
+			},
+		],
+	},
+	{
+		SAPIR: [
+			{
+				botName: 'SPACE-POD',
+				travelTime: -1,
+				unit: 2,
+			},
+			{
+				botName: 'SPACE-ROCKET',
+				travelTime: -1,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHUTTLE',
+				travelTime: -1,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHIP',
+				travelTime: 40,
+				unit: 2,
+			},
+		],
+	},
+	{
+		ENCHAI: [
+			{
+				botName: 'SPACE-POD',
+				travelTime: 100,
+				unit: 2,
+			},
+			{
+				botName: 'SPACE-ROCKET',
+				travelTime: 50,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHUTTLE',
+				travelTime: 40,
+				unit: 1,
+			},
+			{
+				botName: 'SPACE-SHIP',
+				travelTime: 20,
+				unit: 2,
+			},
+		],
+	},
+];
+
+export const TEMP = {
+	DONLON: {
+		SPACEPOD: {
+			travelTime: 50,
+			unit: 2,
+		},
+		SPACEROCKET: {
+			travelTime: 25,
+			unit: 1,
+		},
+		SPACESHUTTLE: {
+			travelTime: 20,
+			unit: 1,
+		},
+		SPACESHIP: {
+			travelTime: 10,
+			unit: 2,
+		},
+	},
+	JEBING: {
+		SPACEPOD: {
+			travelTime: -1,
+			unit: 2,
+		},
+		SPACEROCKET: {
+			travelTime: 75,
+			unit: 1,
+		},
+		SPACESHUTTLE: {
+			travelTime: 75,
+			unit: 1,
+		},
+		SPACESHIP: {
+			travelTime: 30,
+			unit: 2,
+		},
+	},
+
+	LERBIN: {
+		SPACEPOD: {
+			travelTime: -1,
+			unit: 2,
+		},
+		SPACEROCKET: {
+			travelTime: -1,
+			unit: 1,
+		},
+		SPACESHUTTLE: {
+			travelTime: -1,
+			unit: 1,
+		},
+		SPACESHIP: {
+			travelTime: 50,
+			unit: 2,
+		},
+	},
+
+	PINGASOR: {
+		SPACEPOD: {
+			travelTime: -1,
+			unit: 2,
+		},
+		SPACEROCKET: {
+			travelTime: -1,
+			unit: 1,
+		},
+		SPACESHUTTLE: {
+			travelTime: -1,
+			unit: 1,
+		},
+		SPACESHIP: {
+			travelTime: 60,
+			unit: 2,
+		},
+	},
+	SAPIR: {
+		SPACEPOD: {
+			travelTime: -1,
+			unit: 2,
+		},
+		SPACEROCKET: {
+			travelTime: -1,
+			unit: 1,
+		},
+		SPACESHUTTLE: {
+			travelTime: -1,
+			unit: 1,
+		},
+		SPACESHIP: {
+			travelTime: 40,
+			unit: 2,
+		},
+	},
+	ENCHAI: {
+		SPACEPOD: {
+			travelTime: 100,
+			unit: 2,
+		},
+		SPACEROCKET: {
+			travelTime: 100,
+			unit: 2,
+		},
+		SPACESHUTTLE: {
+			travelTime: 40,
+			unit: 1,
+		},
+		SPACESHIP: {
+			travelTime: 20,
+			unit: 2,
+		},
+	},
+};
+
+export const MAPPINGBETNPLANETANDBOTSDATA = [
+	{
+		planetname: 'DONLON',
+		imgname: Planet1,
+		distance: 100,
+		planetToVehMapping: [],
+		vehicleDataArray: [
+			{
+				name: 'SPACEPOD',
+				botImageName: '',
+				travelTime: 50,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+			{
+				name: 'SPACEROCKET',
+				botImageName: '',
+				travelTime: 25,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHUTTLE',
+				botImageName: '',
+				travelTime: 20,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHIP',
+				botImageName: '',
+				travelTime: 10,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+		],
+	},
+	{
+		planetname: 'JEBING',
+		imgname: Planet3,
+		distance: 300,
+		planetToVehMapping: [],
+		vehicleDataArray: [
+			{
+				name: 'SPACEPOD',
+				botImageName: '',
+				travelTime: 0,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+			{
+				name: 'SPACEROCKET',
+				botImageName: '',
+				travelTime: 75,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHUTTLE',
+				botImageName: '',
+				travelTime: 60,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHIP',
+				botImageName: '',
+				travelTime: 30,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+		],
+	},
+	{
+		planetname: 'LERBIN',
+		imgname: Planet5,
+		distance: 500,
+		planetToVehMapping: [],
+		vehicleDataArray: [
+			{
+				name: 'SPACEPOD',
+				botImageName: '',
+				travelTime: 0,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+			{
+				name: 'SPACEROCKET',
+				botImageName: '',
+				travelTime: 0,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHUTTLE',
+				botImageName: '',
+				travelTime: 0,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHIP',
+				botImageName: '',
+				travelTime: 50,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+		],
+	},
+	{
+		planetname: 'PINGASOR',
+		imgname: Planet6,
+		distance: 600,
+		planetToVehMapping: [],
+		vehicleDataArray: [
+			{
+				name: 'SPACEPOD',
+				botImageName: '',
+				travelTime: 0,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+			{
+				name: 'SPACEROCKET',
+				botImageName: '',
+				travelTime: 0,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHUTTLE',
+				botImageName: '',
+				travelTime: 0,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHIP',
+				botImageName: '',
+				travelTime: 60,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+		],
+	},
+	{
+		planetname: 'SAPIR',
+		imgname: Planet2,
+		distance: 400,
+		planetToVehMapping: [],
+		vehicleDataArray: [
+			{
+				name: 'SPACEPOD',
+				botImageName: '',
+				travelTime: 0,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+			{
+				name: 'SPACEROCKET',
+				botImageName: '',
+				travelTime: 0,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHUTTLE',
+				botImageName: '',
+				travelTime: 80,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHIP',
+				botImageName: '',
+				travelTime: 40,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+		],
+	},
+	{
+		planetname: 'ENCHAI',
+		imgname: Planet4,
+		distance: 200,
+		planetToVehMapping: [],
+		vehicleDataArray: [
+			{
+				name: 'SPACEPOD',
+				botImageName: '',
+				travelTime: 100,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+			{
+				name: 'SPACEROCKET',
+				botImageName: '',
+				travelTime: 50,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHUTTLE',
+				botImageName: '',
+				travelTime: 40,
+				totalUnits: 1,
+				maxUnits: 1,
+
+			},
+			{
+				name: 'SPACESHIP',
+				botImageName: '',
+				travelTime: 20,
+				totalUnits: 2,
+				maxUnits: 2,
+
+			},
+		],
+	},
+];

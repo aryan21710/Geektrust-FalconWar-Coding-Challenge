@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PlanetDetailsContext } from '../context/appContext';
-import {PlanetImageArr} from '../lib/constants';
+import { PlanetImageArr,MAPPINGBETNPLANETANDBOTSDATA } from '../lib/constants';
 import { useUpdatedPlanetAndBotsData } from '../screens/services';
 import { StarGrid } from '../sharedComponents/StarGrid';
 
@@ -35,8 +35,10 @@ const Approutes = () => {
 		token: '',
 		planet_names: [],
 		vehicle_names: [],
-		vehicleToTravelTimeMapping: {}
+		vehicleToTravelTimeMapping: {},
 	});
+
+	const [mappingBetnPlanetAndBotsData, setMappingBetnPlanetAndBotsData] = useState(MAPPINGBETNPLANETANDBOTSDATA);
 
 	useEffect(() => {
 		if (Object.keys(planetCfg).length > 0 && Object.keys(apiError).length === 0) {
@@ -71,6 +73,8 @@ const Approutes = () => {
 								setDataToFetchFinalResult,
 								apiError,
 								setApiError,
+								mappingBetnPlanetAndBotsData,
+								setMappingBetnPlanetAndBotsData,
 							}}
 						>
 							<React.Fragment>

@@ -3,10 +3,12 @@ import { Wrapper, BadgeWrapper, ImageWrapper, SolarSystemWrapper, SmallHeading, 
 import { CustomButton } from '../../sharedComponents/CustomButton';
 import { PlanetDetailsContext } from '../../context/appContext';
 import uuid from 'react-uuid';
+import {useUpdateMappingBetnPlanAndBotsData} from './services/useUpdateMappingBetnPlanAndBotsData'
 
 const DisplayAllSpaceVehiclesScreen = () => {
-	const { planetCfg } = useContext(PlanetDetailsContext);
+	const { planetCfg,selectedPlanet,setMappingBetnPlanetAndBotsData } = useContext(PlanetDetailsContext);
 	const vehicleData  = planetCfg?.vehicleData || JSON.parse(localStorage.getItem('planetCf'));
+	useUpdateMappingBetnPlanAndBotsData(selectedPlanet,setMappingBetnPlanetAndBotsData);
 
 	return (
 		<React.Fragment>

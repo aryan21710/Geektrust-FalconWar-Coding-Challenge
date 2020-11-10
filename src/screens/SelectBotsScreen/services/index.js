@@ -1,1 +1,1 @@
-export {calcBotsTravelTime,syncBotUnitsAndTravelTime} from './travelTime'
+export { createMappingBetnPlanetAndBotsData } from './travelTime';
