@@ -1,63 +1,90 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { SelectBot } from './index';
 import { PlanetDetailsContext } from '../../context/appContext';
-import { createMappingBetnPlanetAndBotsData } from './services';
+import { calcBotsTravelTime, syncBotUnitsAndTravelTime } from './services';
+import { UNITSANDTRAVELTIMEDATA } from '../../lib/constants';
 
 const SelectBotsScreen = () => {
-	const {
-		dataToFetchFinalResult,
-		setDataToFetchFinalResult,
-		mappingBetnPlanetAndBotsData,
-		setMappingBetnPlanetAndBotsData,
-	} = useContext(PlanetDetailsContext);
+	const { dataToFetchFinalResult,setDataToFetchFinalResult } = useContext(PlanetDetailsContext);
 
 	const [selectedPlanet, setSelectedPlanet] = useState({
 		planetIndex: -1,
-		planetName: '',
+		planetValue: '',
 		vehicleIndex: -1,
-		planetIndexArr: [],
-		vehicleName: '',
 	});
 
-	const [planetAndBotsData, setPlanetAndBotsData] = useState(JSON.parse(localStorage.getItem('planetAndBotsData')));
-
-	const { vehicleName, planetIndex, planetName, vehicleIndex, planetIndexArr } = selectedPlanet;
+	const { planetIndex, planetValue, vehicleIndex } = selectedPlanet;
+	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
+	const [remainingUnitsAndTravelTime, setRemainingUnitsAndTravelTime] = useState(UNITSANDTRAVELTIMEDATA);
 
 	useEffect(() => {
-		if (planetName.length > 0 && planetIndex > -1 && vehicleIndex > -1) {
-			createMappingBetnPlanetAndBotsData(
-				vehicleName,
-				vehicleIndex,
-				planetName,
-				planetIndex,
+		setPlanetAndBotsData(populatePlanetAndBotsData());
+	}, []);
+
+	useEffect(() => {
+		if (planetValue.length > 0 && planetIndex > -1 && vehicleIndex > -1) {
+			calcBotsTravelTime(
 				planetAndBotsData,
-				setPlanetAndBotsData,
-				dataToFetchFinalResult,
-				setDataToFetchFinalResult
+				planetIndex,
+				vehicleIndex,
+				remainingUnitsAndTravelTime,
+				setRemainingUnitsAndTravelTime
 			);
 		} else {
 			setSelectedPlanet({
 				planetIndex: -1,
-				planetName: '',
-				vehicleIndex: -1,
-				planetIndexArr: [],
+				planetValue: '',
+				vehicleIndex: -1
 			});
 		}
-	}, [planetName, planetIndex, vehicleIndex]);
+	}, [planetValue, planetIndex, vehicleIndex]);
 
-	const onDropDownChange = (e) => {
+	useEffect(() => {
+		planetValue.length > 0 &&
+			planetIndex > -1 &&
+			vehicleIndex > -1 &&
+			syncBotUnitsAndTravelTime(
+				planetAndBotsData,
+				planetIndex,
+				vehicleIndex,
+				remainingUnitsAndTravelTime,
+				planetValue,
+				setPlanetAndBotsData,
+				dataToFetchFinalResult,
+				setDataToFetchFinalResult
+			);
+	}, [remainingUnitsAndTravelTime]);
+
+	const populatePlanetAndBotsData = () => {
+		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet'));
+		return filteredArrOfSelectedPlanet.map((data) => ({
+			...data,
+			planetIdx: -1,
+			planetIndexArr: [],
+			travelTime: 0,
+			finalStatus: false,
+			planetValue: '',
+			error: false,
+			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
+				name: data.name,
+				botImageName: 'data.imgName',
+				distance: data.distance,
+				speed: data.speed,
+				travelTime: 0,
+				totalUnits: {
+					original: data.totalUnits,
+					current: data.totalUnits,
+				},
+			})),
+		}));
+	};
+
+	const onDropDownChange = (e) =>
 		setSelectedPlanet({
 			planetIndex: parseInt(e.target.options[e.target.selectedIndex].dataset.planetidx),
-			vehicleName: e.target.value,
-			planetName: e.target.options[e.target.selectedIndex].dataset.planetname,
+			planetValue: e.target.value,
 			vehicleIndex: parseInt(e.target.options[e.target.selectedIndex].dataset.vehicleidx),
-			planetIndexArr: planetIndexArr.includes(
-				parseInt(e.target.options[e.target.selectedIndex].dataset.planetidx)
-			)
-				? [...planetIndexArr]
-				: [...planetIndexArr, parseInt(e.target.options[e.target.selectedIndex].dataset.planetidx)],
 		});
-	};
 
 	return (
 		<React.Fragment>
@@ -65,11 +92,9 @@ const SelectBotsScreen = () => {
 				planetAndBotsData={planetAndBotsData}
 				dataToFetchFinalResult={dataToFetchFinalResult}
 				onDropDownChange={onDropDownChange}
-				planetIndexArr={planetIndexArr}
 				vehicleIndex={vehicleIndex}
-				vehicleName={vehicleName}
 				planetIndex={planetIndex}
-				
+				planetValue={planetValue}
 			/>
 		</React.Fragment>
 	);

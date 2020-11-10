@@ -3,22 +3,23 @@ import { PlanetWrapper, BadgeWrapper, SelectedPlanetImg,Select, SmallHeading } f
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 
- const PlanetAndTravelTime= ({ planetAndBotsData, onDropDownChange, planetIndexArr,vehicleIndex,vehicleName,planetIndex }) => {
+ const PlanetAndTravelTime= ({ planetAndBotsData, onDropDownChange }) => {
 	return (
 		<PlanetWrapper>
-			{planetAndBotsData.map(({ planetname, imgname, distance, vehicleDataArray }, idx) => (
+			{planetAndBotsData.map(({ planetIndexArr, planetname, imgname, distance, vehicleDataArray }, idx) => (
 				<BadgeWrapper key={uuid()}>
 					<SelectedPlanetImg imgname={imgname} />
 					<SmallHeading fontSize="1.2rem">{planetname}</SmallHeading>
 					<SmallHeading>{`DISTANCE ${distance} megamiles`}</SmallHeading>
 					<Select
 						name="planetName"
+						// planetvalue is common to all that is why same value is getting reflected everywhere.
 						value={
-							planetIndexArr.includes(idx) ? planetAndBotsData[idx].vehicleName: 'Choose A Space Vehicle'
+							planetIndexArr.includes(idx) ? planetAndBotsData[idx].planetValue : 'Choose A Space Vehicle'
 						}
 						onChange={onDropDownChange}
 					>
-						{!planetIndexArr.includes(idx)  && (
+						{!planetIndexArr.includes(idx) && (
 							<option key={uuid()} defaultValue="Choose A Space Vehicle">
 								Choose A Space Vehicle
 							</option>
@@ -28,15 +29,14 @@ import PropTypes from 'prop-types';
 								key={uuid()}
 								data-planetidx={idx}
 								data-vehicleidx={vehicleidx}
-								data-planetname={planetname}
 								value={vehicleData.name}
 							>
-								{`${vehicleData.name} (${vehicleData.totalUnits})`}
+								{`${vehicleData.name} (${vehicleData.totalUnits.current})`}
 							</option>
 						))}
 					</Select>
 					<SmallHeading>
-						{planetIndexArr.includes(idx) 
+						{planetAndBotsData[idx].travelTime > 0
 							? `Time Taken:- ${planetAndBotsData[idx].travelTime}`
 							: `Time Taken:- 0`}
 					</SmallHeading>
@@ -52,4 +52,3 @@ PlanetAndTravelTime.propTypes = {
 	planetAndBotsData: PropTypes.arrayOf(PropTypes.object),
 	onDropDownChange: PropTypes.func
 };
-

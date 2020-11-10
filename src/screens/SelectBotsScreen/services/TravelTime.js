@@ -1,110 +1,115 @@
-
-export const createMappingBetnPlanetAndBotsData = (
-	vehicleName,
-	vehicleIndex,
-	planetValue,
-	planetIndex,
-	planetAndBotsData,
-	setPlanetAndBotsData,
-	dataToFetchFinalResult,
-	setDataToFetchFinalResult
-) => {
-	const formattedVehicleName = vehicleName.replace(' ', '');
-	console.log(`formattedVehicleName ${formattedVehicleName}`);
-	console.log(`planetIndex ${planetIndex}`);
-	console.log(`planetValue ${planetValue}`);
-	console.log(`vehicleName ${vehicleName}`);
-	console.log(`vehicleIndex ${vehicleIndex}`);
-
-	const currentVehicleData = planetAndBotsData[planetIndex].vehicleDataArray[vehicleIndex];
-	console.log(`currentVehicleData ${JSON.stringify(currentVehicleData, null, 4)}`);
-
-	const data = `${planetValue.toUpperCase()}-${vehicleName.toUpperCase()}`;
-
-	const currPlanetToVehMapping = planetAndBotsData[planetIndex].planetToVehMapping.includes(data)
-		? [...planetAndBotsData[planetIndex].planetToVehMapping]
-		: [...planetAndBotsData[planetIndex].planetToVehMapping, data];
-	// [DONLON-SPACEPOD]
-	// [DONLON-SPACEPOD,DONLON-SPACESHIP]
-
-	// [DONLON-SPACEPOD]
-	// [DONLON-SPACEPOD,JEBING-SPACEPOD]
-
-	// IF MAPPING WITH SAME PLANET KEEP IT IN currPlanetToVehMapping . same planet should have  only max 2 entries in the arr.
-	// OTHERWISE currPlanetToVehMapping.LENGTH && lastPlanetToVehMapping.length BOTH SHOLD BE 1
-	console.log(`currPlanetToVehMapping ${JSON.stringify(currPlanetToVehMapping, null, 4)}`);
-
-	let lastPlanetToVehMapping = 'PLNAME-VEHNAME';
-	if (currPlanetToVehMapping.length > 1) {
-		if (currPlanetToVehMapping[0].split('-')[0] !== planetValue.toUpperCase()) {
-			lastPlanetToVehMapping = currPlanetToVehMapping.shift();
-		} else {
-			const currPlanetToVehMappingIdx=currPlanetToVehMapping.indexOf(data)
-			lastPlanetToVehMapping = lastPlanetToVehMapping.length > 1 ? currPlanetToVehMapping[currPlanetToVehMappingIdx-1] : lastPlanetToVehMapping.join('');
-		}
-	}
-
-	let leftUnits;
-	if (currentVehicleData.travelTime > 0 && currentVehicleData.totalUnits > 0) {
-		if (planetAndBotsData[planetIndex].planetToVehMapping.includes(data)) {
-			leftUnits = currentVehicleData.totalUnits + 1 > currentVehicleData.maxUnits ? currentVehicleData.maxUnits:  currentVehicleData.totalUnits + 1;
-		} else {
-			leftUnits = currentVehicleData.totalUnits - 1 > 0 ? currentVehicleData.totalUnits - 1 :  0;
-		}
-	} else {
-		leftUnits = currentVehicleData.totalUnits;
-	}
-
-	console.log(`currPlanetToVehMapping ${JSON.stringify(currPlanetToVehMapping, null, 4)}`);
-	console.log(`lastPlanetToVehMapping ${JSON.stringify(lastPlanetToVehMapping, null, 4)}`);
-	console.log(`leftUnits ${leftUnits}`);
-
-	const updatedMappedDataForPlanetAndBots = planetAndBotsData.map((data, idx) => {
-		return {
-			...data,
-			vehicleName: idx === planetIndex ? vehicleName : data.vehicleName,
-			planetToVehMapping: [...currPlanetToVehMapping],
-			travelTime: idx === planetIndex ? currentVehicleData.travelTime : data.travelTime,
-			vehicleDataArray: data.vehicleDataArray.map((vehicleData, idx) => {
-				if (vehicleData.name === formattedVehicleName) {
+export const calcBotsTravelTime = (...args) => {
+	const [
+		planetAndBotsData,
+		planetIndex,
+		vehicleIndex,
+		remainingUnitsAndTravelTime,
+		setRemainingUnitsAndTravelTime,
+	] = args;
+	const planetDistance = planetAndBotsData[planetIndex].distance;
+	const { vehicleDataArray } = planetAndBotsData[planetIndex];
+	const vehicleMaxDistance = vehicleDataArray[vehicleIndex].distance;
+	const totalUnits = vehicleDataArray[vehicleIndex].totalUnits;
+	const vehicleSpeed = vehicleDataArray[vehicleIndex].speed;
+	if (planetDistance <= vehicleMaxDistance && totalUnits.current > 0) {
+		//  remainingUnitsAndTravelTime is array of 4. update all array.
+		const updatedLeftUnitsAndTravelTime = remainingUnitsAndTravelTime.map((data, idx) => {
+			if (data.planetIndexArr.includes(planetIndex)) {
+				return {
+					...vehicleDataArray[idx],
+					travelTime:
+						data.travelTime !== Math.round(planetAndBotsData[planetIndex].distance / parseInt(vehicleSpeed))
+							? Math.round(planetAndBotsData[planetIndex].distance / parseInt(vehicleSpeed))
+							: data.travelTime,
+					totalUnits: {
+						original: vehicleDataArray[idx].totalUnits.original,
+						current: !data.planetIndexArr.includes(planetIndex)
+							? vehicleDataArray[idx].totalUnits.current
+							: vehicleDataArray[idx].totalUnits.current + 1 <= vehicleDataArray[idx].totalUnits.original
+							? vehicleDataArray[idx].totalUnits.current + 1
+							: vehicleDataArray[idx].totalUnits.current,
+					},
+					planetIndexArr: data.planetIndexArr.includes(planetIndex)
+						? [planetIndex]
+						: [...data.planetIndexArr, planetIndex],
+					vehicleIndexArr: [],
+					error: true,
+				};
+			} else {
+				if (idx === vehicleIndex) {
+					// 1st new entry is added below
 					return {
-						...vehicleData,
-						totalUnits: leftUnits,
-						botImageName: '',
+						...vehicleDataArray[idx],
+						travelTime: Math.round(planetAndBotsData[planetIndex].distance / parseInt(vehicleSpeed)),
+						totalUnits: {
+							original: totalUnits.original,
+							current: totalUnits.current - 1,
+						},
+						planetIndexArr: data.planetIndexArr.includes(planetIndex)
+							? [planetIndex]
+							: [...data.planetIndexArr, planetIndex],
+						vehicleIndexArr: [vehicleIndex],
+						error: false,
 					};
 				} else {
-					if (
-						lastPlanetToVehMapping.split('-')[0] === planetValue.toUpperCase() &&
-						vehicleData.name.toUpperCase() === lastPlanetToVehMapping.split('-')[1]
-					) {
-						return {
-							...vehicleData,
-							totalUnits:  vehicleData.totalUnits + 1 > vehicleData.maxUnits ? vehicleData.maxUnits:  vehicleData.totalUnits + 1,
-							botImageName: '',
-						};
-					} else {
-						return {
-							...vehicleData,
-							botImageName: '',
-						};
-					}
+					// all old entry is overwritten
+					return {
+						...vehicleDataArray[idx],
+						travelTime: data.travelTime,
+						totalUnits: {
+							original: vehicleDataArray[idx].totalUnits.original,
+							current: data.planetIndexArr.includes(planetIndex)
+								? vehicleDataArray[idx].totalUnits.current + 1
+								: vehicleDataArray[idx].totalUnits.current,
+						},
+						planetIndexArr: data.planetIndexArr.includes(planetIndex)
+							? [planetIndex]
+							: [...data.planetIndexArr],
+						vehicleIndexArr: [],
+						error: false,
+					};
 				}
-			}),
+			}
+		});
+		console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(updatedLeftUnitsAndTravelTime, null, 4)}`);
+		setRemainingUnitsAndTravelTime([...updatedLeftUnitsAndTravelTime]);
+	}
+};
+
+export const syncBotUnitsAndTravelTime = (...args) => {
+	const [
+		planetAndBotsData,
+		planetIndex,
+		vehicleIndex,
+		remainingUnitsAndTravelTime,
+		planetValue,
+		setPlanetAndBotsData,
+		dataToFetchFinalResult,
+		setDataToFetchFinalResult,
+	] = args;
+	const planetName = planetAndBotsData.map((planetData) => planetData.planetname);
+	const updatedPlanetAndBotsData = planetAndBotsData.map((planetData, idx) => {
+		const _ = remainingUnitsAndTravelTime.filter((data) => data.planetIndexArr.includes(idx));
+		return {
+			...planetData,
+			planetIndexArr: [...planetData.planetIndexArr, planetIndex],
+			planetValue: idx === planetIndex ? planetValue : planetData.planetValue,
+			travelTime: _.length > 0 ? _[0].travelTime : planetData.travelTime,
+			vehicleDataArray: [...remainingUnitsAndTravelTime],
+			error: idx === planetIndex ? remainingUnitsAndTravelTime[vehicleIndex].error : planetData.error,
 		};
 	});
 
-	const planetName = planetAndBotsData.map((planetData) => planetData.planetname);
-	const vehicleSelectedForInvasionCnt = updatedMappedDataForPlanetAndBots.filter((data) => data.travelTime > 0);
+	const vehicleSelectedForInvasionCnt = updatedPlanetAndBotsData.filter((data) => data.travelTime > 0);
 	console.log(`updatedLeftUnitsAndTravelTime ${JSON.stringify(vehicleSelectedForInvasionCnt, null, 4)}`);
 
 	const vehicleToTravelTimeMapping = {};
-	updatedMappedDataForPlanetAndBots.forEach((data) => {
+	updatedPlanetAndBotsData.forEach((data) => {
 		if (data.travelTime > 0) {
 			vehicleToTravelTimeMapping[data.planetname] = data.travelTime;
 		}
 	});
 
-	console.log(`updatedMappedDataForPlanetAndBots ${JSON.stringify(updatedMappedDataForPlanetAndBots, null, 4)}`);
 	if (vehicleSelectedForInvasionCnt.length === 4) {
 		setDataToFetchFinalResult({
 			...dataToFetchFinalResult,
@@ -114,6 +119,5 @@ export const createMappingBetnPlanetAndBotsData = (
 			vehicleToTravelTimeMapping,
 		});
 	}
-
-	setPlanetAndBotsData([...updatedMappedDataForPlanetAndBots]);
+	setPlanetAndBotsData(updatedPlanetAndBotsData);
 };
